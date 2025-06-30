@@ -1,0 +1,30 @@
+[submodule "SpellcoreRenderer/libs/glfw"]
+	path = SpellcoreRenderer/libs/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "SpellcoreRenderer/libs/glad"]
+	path = SpellcoreRenderer/libs/glad
+	url = https://github.com/Dav1dde/glad.git
+[submodule "SpellcoreRenderer/libs/glm"]
+	path = SpellcoreRenderer/libs/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "SpellcoreRenderer/libs/imgui"]
+	path = SpellcoreRenderer/libs/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "libs/glfw"]
+	path = libs/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "ThirdPartyLibs/glfw"]
+	path = ThirdPartyLibs/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "ThirdPartyLibs/glm"]
+	path = ThirdPartyLibs/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "ThirdPartyLibs/imgui"]
+	path = ThirdPartyLibs/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "ThirdPartyLibs/spdlog"]
+	path = ThirdPartyLibs/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "ThirdPartyLibs/glad"]
+	path = ThirdPartyLibs/glad
+	url = https://github.com/Dav1dde/glad.git

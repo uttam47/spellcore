@@ -1,0 +1,35 @@
+# Ignore CMake build directory
+build/
+
+# Ignore Visual Studio Code workspace files (optional)
+.vscode/
+
+# Ignore generated CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore SpellcoreRenderer libs (e.g. submodules or vendored)
+ThirdPartyLibs/glfw/
+ThirdPartyLibs/glm/
+ThirdPartyLibs/spdlog/
+ThirdPartyLibs/imgui/
+
+
+# Ignore compiled binaries
+*.exe
+*.obj
+*.o
+*.pdb
+*.lib
+*.dll
+*.sln
+
+# Ignore logs or temporary files
+*.log
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
