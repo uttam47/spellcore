@@ -14,18 +14,19 @@ Spellcore is a work in progress towards a modular API-Agonistic and extensible r
 ---
 
 ## Structure / Organization
-
 Spellcore/
-├── SpellcoreRenderer/ 
-├────── core/ # Core rendering components (SpellcoreShaders, Materials, Meshes)
-├────── RHI/ # Rendering Hardware Interface Shader Factory(translator,compiler, and generators), GPU resources (Buffers, Textures, Shader Programs)
-├────── RHI Implementation/ # OpenGL for now. 
-├── SandboxApp/ # Sample app for running and testing Spellcore, later maybe will convert into an editor.
-├────── platform/ # Platform/window management (GLFW/GLAD) 
-├── RunesUI/ # A Customized UI library, plan to write on top of Spellcore. 
-├── ThirdPartyLibs/ # GLEW, Glfw, glm, imgui, spdlog
+├── SpellcoreRenderer/
+│ ├── core/ # Core rendering components (SpellcoreShaders, Materials, Meshes)
+│ ├── RHI/ # Rendering Hardware Interface: Shader Factory (translator, compiler, generators), GPU resources (Buffers, Textures, Shader Programs)
+│ └── RHI Implementation/ # Backend-specific implementations (OpenGL for now)
+│
+├── SandboxApp/ # Sample app for running and testing Spellcore (may evolve into an editor)
+│ └── platform/ # Platform/window management (GLFW/GLAD)
+│
+├── RunesUI/ # A customized UI library, planned to integrate on top of Spellcore
+├── ThirdPartyLibs/ # GLEW, GLFW, glm, ImGui, spdlog (managed via submodules)
 └── README.md # This file
-
+---
 ## Build Process
 
 ### Prerequisites
