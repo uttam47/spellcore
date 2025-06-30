@@ -1,5 +1,6 @@
 # Spellcore
-Spellcore is a work in progress towards a modular API-Agonistic and extensible renderer for real-time rendering. Scoped for personal research, it is currently being built from the ground up using OpenGL as a base, but with a proper RHI (Rendering Hardware Interaface) abstraction layer to focus on flexibility, shader experimentation, and modern graphics pipeline control. 
+Spellcore is a work in progress towards a modular API-Agonistic and extensible renderer for real-time rendering. Scoped for personal research, it is currently being built from the ground up using OpenGL as a base, but with a proper RHI (Rendering Hardware Interaface) abstraction layer to focus on flexibility, shader experimentation, and modern graphics pipeline control.
+
 ---
 
 ## Key Goals for Spellcore
