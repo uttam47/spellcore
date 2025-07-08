@@ -14,21 +14,12 @@ namespace AnalyticalApproach::Spellcore
         IndexBuffer *indexBuffer;
         Material *material;
         uint32_t indexCount;
-        void Draw();
     };
 
     class Mesh
     {
     public:
-        std::vector<Submesh *> submeshes;
-
-        void Draw()
-        {
-            for(const auto& submesh: submeshes)
-            {
-                submesh->Draw(); 
-            }
-        }
+        std::vector<Submesh*> submeshes;
     };
 
 }
