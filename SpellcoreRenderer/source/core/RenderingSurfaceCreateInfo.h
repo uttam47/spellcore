@@ -65,7 +65,7 @@ void Sumbesh::Draw()
 But I believe this is not something we want if we wanna save the dynamic overhead?
 
 Now the question comes, how to side step it, or do it better. 
-My general guess as of yet is to create a struct, which holds the handles for ShaderProgram, VertexArray(GPU state object for a geometry to be drawn), textures. 
+My general guess as of yet is to create a struct, which holds the handles for ShaderProgram, GeometryBuffer(GPU state object for a geometry to be drawn), textures. 
 And instead of defining a Draw method in vertexArray class, we culminate this data after initialization of the Mesh, into the said struct. And queue it?
 
 struct RenderTarget

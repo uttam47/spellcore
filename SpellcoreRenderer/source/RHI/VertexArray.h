@@ -5,7 +5,7 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    class VertexArray
+    class GeometryBuffer
     {
         public:
         virtual void Bind() const = 0;
@@ -13,5 +13,7 @@ namespace AnalyticalApproach::Spellcore
         virtual void AddVertexBuffer(VertexBuffer*) = 0;
         virtual void SetIndexBuffer(IndexBuffer*) = 0;
         virtual const IndexBuffer* GetIndexBuffer() const = 0;
+        virtual uint32_t GetId() = 0; 
+        virtual uint64_t GetElementCount() = 0; 
     };
 }

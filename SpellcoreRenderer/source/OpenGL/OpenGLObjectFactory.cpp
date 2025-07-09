@@ -18,7 +18,7 @@ namespace AnalyticalApproach::Spellcore
         return new OpenGLVertexBuffer(); 
     }
 
-    VertexArray *OpenGLObjectFactory::CreateVertexArray()
+    GeometryBuffer *OpenGLObjectFactory::CreateVertexArray()
     {
         return new OpenGLVertexArray(); 
     }

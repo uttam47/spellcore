@@ -45,7 +45,7 @@ Mesh is Composed of
     vector<Materials>
 
 Submesh is Composed
-    VertexArray
+    GeometryBuffer
     IndexArray
     VertexBuffer or vector<vertexBuffers>
 

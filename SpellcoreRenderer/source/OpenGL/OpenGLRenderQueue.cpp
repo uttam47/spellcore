@@ -26,19 +26,19 @@ namespace AnalyticalApproach::Spellcore
 
         for (const auto &cmd : commands)
         {
-            if (cmd.shaderID != lastShader)
+            if (cmd.pipelineID != lastShader)
             {
-                glUseProgram(cmd.shaderID);
-                lastShader = cmd.shaderID;
+                glUseProgram(cmd.pipelineID);
+                lastShader = cmd.pipelineID;
             }
 
-            if (cmd.vaoID != lastVAO)
+            if (cmd.geometryId != lastVAO)
             {
-                glBindVertexArray(cmd.vaoID);
-                lastVAO = cmd.vaoID;
+                glBindVertexArray(cmd.geometryId);
+                lastVAO = cmd.geometryId;
             }
 
-            glDrawElements(GL_TRIANGLES, cmd.indexCount, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, cmd.elementCount, GL_UNSIGNED_INT, nullptr);
         }
 
         commands.clear(); // Clear after execution

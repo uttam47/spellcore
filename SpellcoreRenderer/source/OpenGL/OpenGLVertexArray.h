@@ -7,7 +7,7 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    class OpenGLVertexArray: public VertexArray
+    class OpenGLVertexArray: public GeometryBuffer
     {
     public:
         OpenGLVertexArray();
@@ -20,8 +20,12 @@ namespace AnalyticalApproach::Spellcore
         void SetIndexBuffer(IndexBuffer* indexBuffer) override;
         const IndexBuffer* GetIndexBuffer() const override;
 
+        
+        uint32_t GetId() override; 
+        uint64_t GetElementCount() override; 
+
     private:
-        uint32_t m_RendererID;
+        uint32_t _meshId;
         std::vector<VertexBuffer*> _vertexBuffer;
         IndexBuffer* _indexBuffer; 
 

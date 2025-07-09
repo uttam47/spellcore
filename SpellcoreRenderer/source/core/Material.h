@@ -8,5 +8,10 @@ namespace AnalyticalApproach::Spellcore
     {
         SpellcoreShader* _shader;
         std::vector<ITexture *> textures;
+
+        public:
+
+        SpellcoreShader* GetShader(); 
+        std::vector<uint32_t> GetTextureIds(); 
     };
 }

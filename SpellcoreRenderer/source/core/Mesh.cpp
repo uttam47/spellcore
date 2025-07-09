@@ -8,5 +8,34 @@
 //2 Do I need dynamic Mesh(Resource) update if in future we load things from a Spellcore Specific editor?
 namespace AnalyticalApproach::Spellcore
 {
+    void Submesh::Refresh()
+    {
+        _renderCommand.pipelineID = material->GetShader()->GetShaderHandle(); 
+
+        int count = 0; 
+        for(const uint32_t tId:material->GetTextureIds() )
+        {
+            _renderCommand.textureIDs[count++] = tId; 
+        }
+
+        _renderCommand.geometryId = vertexArray->GetId(); 
+        _renderCommand.elementCount = vertexArray->GetElementCount(); 
+        _renderCommand.sortKey = GenerateSortKey(); 
+    }
+
+    const RenderCommand& Submesh::GetRenderCommand()
+    {
+        return _renderCommand; 
+    }
+
+    uint64_t Submesh::GenerateSortKey()
+    {
+        // Example layout (64-bit):
+        // [ 8 bits layer | 16 bits shader | 16 bits material | 24 bits depth ]
+
+        // Need to figure this out... 
+    
+        return 0; 
+    }
 
 }

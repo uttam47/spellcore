@@ -11,7 +11,7 @@ namespace AnalyticalApproach::Spellcore
         Some engines support custom render passes defined by materials or render graphs — you could extend the enum later to include UserDefined.
     */
 
-    // TODO: Remove this, we will go with bit masks for render pass.
+    // TODO: Remove this, we will go with bit masks for render pass. And this shouldn't be defined here, but inside core not in RHI. 
     enum class RenderPassType
     {
         // --- Depth & Shadow ---
@@ -42,11 +42,50 @@ namespace AnalyticalApproach::Spellcore
 
     struct RenderCommand
     {
-        uint64_t sortKey;  // Packed sorting key
-        uint32_t shaderID; // OpenGL program ID
-        uint32_t vaoID;    // OpenGL VAO
-        uint32_t indexCount;
-        uint32_t materialID;
+        enum class DrawType : uint8_t
+        {
+            INDEXED,
+            NON_INDEXED,
+            INSTANCED
+        };
+
+        enum class Primitive : uint8_t
+        {
+            TRIANGLES,
+            TRIANGLE_STRIP,
+            TRIANGLE_FAN, // Optional
+            LINES,
+            LINE_STRIP,
+            LINE_LOOP, // Optional
+            POINTS,
+            PATCHES
+        };
+
+        // Core draw info
+        DrawType drawType;
+        Primitive primitive;
+
+        uint64_t sortKey = 0;
+
+        // Resource handles (not API-specific)
+        uint32_t pipelineID = 0;       // Abstract shader + render state
+        uint32_t geometryId = 0;           // VAO/VBO abstraction
+        uint32_t materialID = 0;       // Optional (for shader resource sets)
+        uint32_t instanceBufferID = 0; // Optional (for instanced rendering)
+
+        // Draw range
+        uint32_t elementCount = 0; // Number of indices/vertices
+        uint32_t baseVertex = 0;
+        uint32_t firstIndex = 0; // Byte offset / element index
+        uint32_t instanceCount = 1;
+        uint32_t firstInstance = 0;
+
+        // Optional bindable texture set
+        uint32_t textureIDs[16] = {0}; // Fixed-size array for cache locality
+        uint8_t textureCount = 0;
+
+        // Optional metadata
+        uint32_t objectID = 0; // UBO offset / per-object buffer index
     };
 
     class RenderQueue
