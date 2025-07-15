@@ -10,4 +10,4 @@ namespace AnalyticalApproach::Spellcore
     {
         public: 
     }; 
-}
+}   

@@ -13,7 +13,7 @@ namespace AnalyticalApproach::Spellcore
     {
     private: 
         RenderCommand _renderCommand; 
-
+        
         uint64_t GenerateSortKey(); 
     public:
         GeometryBuffer *vertexArray;

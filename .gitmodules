@@ -28,3 +28,6 @@
 [submodule "ThirdPartyLibs/glad"]
 	path = ThirdPartyLibs/glad
 	url = https://github.com/Dav1dde/glad.git
+[submodule "ThirdPartyLibs/entt"]
+	path = ThirdPartyLibs/entt
+	url = https://github.com/skypjack/entt.git

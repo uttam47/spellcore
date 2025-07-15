@@ -4,6 +4,7 @@
 namespace AnalyticalApproach::Spellcore
 {
 
+    //NOTE: Does SpellcoreShader even need the path info, shouldn't it just get the created using shader content itself? 
     SpellcoreShader::SpellcoreShader(std::string shaderPath)
     {
         FileSystem::FileReader shaderFileReader(shaderPath); 
