@@ -38,6 +38,7 @@ target_link_libraries(SandboxApp
         RunesUI
         EventSystem
         Logger
+        entt
 )
 
 

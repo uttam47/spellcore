@@ -20,3 +20,5 @@ add_subdirectory(ThirdPartyLibs/spdlog)
 add_subdirectory(Logger)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_library(entt INTERFACE)
+target_include_directories(entt INTERFACE ThirdPartyLibs/entt/src)
