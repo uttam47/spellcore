@@ -2,7 +2,7 @@
 #include <OpenGL/OpenGLRenderingContext.h>
 #include <OpenGL/OpenGLSCShaderCompiler.h>
 #include <OpenGL/OpenGLShaderProgram.h>
-#include <OpenGL/OpenGLVertexBuffer.h>
+#include <OpenGL/OpenGLGpuBuffer.h>
 #include <OpenGL/OpenGLVertexArray.h>
 
 
@@ -15,7 +15,7 @@ namespace AnalyticalApproach::Spellcore
 
     GPUBuffer *OpenGLObjectFactory::CreateVertexBuffer()
     {
-        return new OpenGLVertexBuffer(); 
+        return new OpenGLGpuBuffer(); 
     }
 
     GeometryBuffer *OpenGLObjectFactory::CreateVertexArray()

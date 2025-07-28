@@ -37,5 +37,8 @@ namespace AnalyticalApproach::Spellcore
         }
     protected:
         virtual void SetBufferDataInternal(const void *data, uint32_t size, uint32_t offset = 0) = 0;
+        virtual void SetAsVertexBuffer(const void *data, uint32_t size, uint32_t offset = 0) = 0; 
+        virtual void SetAsUniformBuffer(const void *data, uint32_t size, uint32_t offset = 0) = 0; 
+        virtual void SetAsShaderStorageBuffer(const void *data, uint32_t size, uint32_t offset = 0) = 0; 
     };
 }
