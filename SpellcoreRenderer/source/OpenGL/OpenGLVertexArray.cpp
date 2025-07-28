@@ -1,7 +1,8 @@
-#include "OpenGL/OpenGLVertexArray.h"
-#include "core/BufferLayout.h"
 #include <GL/glew.h>
 #include <cassert>
+
+#include "OpenGL/OpenGLVertexArray.h"
+#include "core/GPUBufferLayout.h"
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -69,10 +70,10 @@ namespace AnalyticalApproach::Spellcore
         glBindVertexArray(0);
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(VertexBuffer *vertexBuffer)
+    void OpenGLVertexArray::AddVertexBuffer(GPUBuffer *vertexBuffer)
     {
-        assert(vertexBuffer && "VertexBuffer must not be null.");
-        assert(vertexBuffer->GetLayout().GetElements().size() && "VertexBuffer has no layout!");
+        assert(vertexBuffer && "GPUBuffer must not be null.");
+        assert(vertexBuffer->GetLayout().GetElements().size() && "GPUBuffer has no layout!");
 
         Bind();
         vertexBuffer->Bind();
@@ -94,20 +95,5 @@ namespace AnalyticalApproach::Spellcore
         }
 
         _vertexBuffer.push_back(vertexBuffer);
-    }
-
-    void OpenGLVertexArray::SetIndexBuffer(IndexBuffer *indexBuffer)
-    {
-        assert(indexBuffer && "IndexBuffer must not be null.");
-
-        Bind();
-        indexBuffer->Bind();
-
-        _indexBuffer = indexBuffer;
-    }
-
-    const IndexBuffer *OpenGLVertexArray::GetIndexBuffer() const
-    {
-        return _indexBuffer;
     }
 }

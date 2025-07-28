@@ -23,7 +23,7 @@ namespace AnalyticalApproach::Spellcore
     void RenderPipeline::LoadSCShader(SpellcoreShader *scShader)
     {
         IShaderProgram *shaderPipeline = _spellcoreShaderCompiler->CreateShaderProgram(scShader);
-        BufferLayout *bufferLayout = _spellcoreShaderCompiler->ExtractBufferLayout(scShader);
+        GPUBufferLayout *bufferLayout = _spellcoreShaderCompiler->ExtractBufferLayout(scShader);
         scShader->SetBufferLayout(*bufferLayout);
         _shaderRegistery[scShader] = shaderPipeline;
     }

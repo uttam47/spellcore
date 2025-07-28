@@ -1,10 +1,10 @@
 #pragma once
 
-#include "RHI/VertexBuffer.h"
+#include "RHI/GPUBuffer.h"
 
 namespace AnalyticalApproach::Spellcore
 {
-    class OpenGLVertexBuffer : public VertexBuffer
+    class OpenGLVertexBuffer : public GPUBuffer
     {
     public:
         //Sending a float pointer means that we are
@@ -14,12 +14,12 @@ namespace AnalyticalApproach::Spellcore
         virtual void Bind() const override;
         virtual void Unbind() const override;
 
-        virtual void SetLayout(const BufferLayout& layout) override;
-        virtual const BufferLayout& GetLayout() const override;
+        virtual void SetLayout(const GPUBufferLayout& layout) override;
+        virtual const GPUBufferLayout& GetLayout() const override;
         virtual void SetBufferData(float* data, uint32_t size) override;
 
     private:
         uint32_t _rendererID = 0;
-        BufferLayout _layout;
+        GPUBufferLayout _layout;
     };
 }

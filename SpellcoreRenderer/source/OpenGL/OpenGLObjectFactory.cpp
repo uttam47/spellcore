@@ -13,7 +13,7 @@ namespace AnalyticalApproach::Spellcore
         return new OpenGLRenderingContext(); 
     }
 
-    VertexBuffer *OpenGLObjectFactory::CreateVertexBuffer()
+    GPUBuffer *OpenGLObjectFactory::CreateVertexBuffer()
     {
         return new OpenGLVertexBuffer(); 
     }
@@ -21,11 +21,6 @@ namespace AnalyticalApproach::Spellcore
     GeometryBuffer *OpenGLObjectFactory::CreateVertexArray()
     {
         return new OpenGLVertexArray(); 
-    }
-
-    IndexBuffer *OpenGLObjectFactory::CreateIndexBuffer()
-    {
-        return nullptr; 
     }
 
     ITexture *OpenGLObjectFactory::CreateTexture()

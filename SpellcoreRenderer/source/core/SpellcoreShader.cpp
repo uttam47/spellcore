@@ -24,10 +24,10 @@ namespace AnalyticalApproach::Spellcore
         return _shaderSource; 
     }
 
-    void SpellcoreShader::SetBufferLayout(BufferLayout BufferLayout)
+    void SpellcoreShader::SetBufferLayout(GPUBufferLayout GPUBufferLayout)
     {
     }
-    const BufferLayout &SpellcoreShader::GetBufferLayout()
+    const GPUBufferLayout &SpellcoreShader::GetBufferLayout()
     {
     }
 

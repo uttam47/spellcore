@@ -37,9 +37,9 @@ namespace AnalyticalApproach::Spellcore
             {ShaderType::Geometry, GenerateGeometryShader},
             {ShaderType::Compute, GenerateComputeShader}};
 
-        BufferLayout *OpenGLSCShaderCompiler::ExtractBufferLayout(SpellcoreShader *spellcoreShader)
+        GPUBufferLayout *OpenGLSCShaderCompiler::ExtractBufferLayout(SpellcoreShader *spellcoreShader)
         {
-                return new BufferLayout();
+                return new GPUBufferLayout();
         }
 
         IShaderProgram *OpenGLSCShaderCompiler::CreateShaderProgram(SpellcoreShader *spelcoreShader)

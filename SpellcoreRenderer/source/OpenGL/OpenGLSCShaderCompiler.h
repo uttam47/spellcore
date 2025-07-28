@@ -29,7 +29,7 @@ namespace AnalyticalApproach::Spellcore
         static const std::unordered_map<ShaderType, GeneratorFunc> _generatorMap;
 
     public:
-        BufferLayout* ExtractBufferLayout(SpellcoreShader* spellcoreShader) override;
+        GPUBufferLayout* ExtractBufferLayout(SpellcoreShader* spellcoreShader) override;
         IShaderProgram* CreateShaderProgram(SpellcoreShader* spellcoreShader) override;
     };
 } 

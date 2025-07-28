@@ -1,11 +1,12 @@
 #pragma once 
 
-#include "core/BufferLayout.h"
+#include "core/GPUBufferLayout.h"
 #include <memory>
 
 namespace AnalyticalApproach::Spellcore
 {
-    class VertexBuffer
+    
+    class GPUBuffer
     {
         public: 
 
@@ -13,9 +14,9 @@ namespace AnalyticalApproach::Spellcore
         virtual void Unbind() const = 0; 
 
         virtual void SetBufferData(float* data, uint32_t size) =0; 
-        virtual void SetLayout(const BufferLayout& layout) =0; 
-        virtual const BufferLayout& GetLayout() const =0; 
+        virtual void SetLayout(const GPUBufferLayout& layout) =0; 
+        virtual const GPUBufferLayout& GetLayout() const =0; 
 
-        virtual ~VertexBuffer() = default; 
+        virtual ~GPUBuffer() = default; 
     };
 }

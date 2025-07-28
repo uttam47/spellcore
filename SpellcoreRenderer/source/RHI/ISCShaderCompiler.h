@@ -1,5 +1,5 @@
 #pragma once
-#include <core/BufferLayout.h>
+#include <core/GPUBufferLayout.h>
 #include <core/SpellcoreShader.h>
 #include <RHI/IShaderProgram.h>
 
@@ -13,7 +13,7 @@ namespace AnalyticalApproach::Spellcore
 
     public:
         virtual ~ISCShaderCompiler() = default;
-        virtual BufferLayout *ExtractBufferLayout(SpellcoreShader *spellcoreShader) = 0;
+        virtual GPUBufferLayout *ExtractBufferLayout(SpellcoreShader *spellcoreShader) = 0;
         virtual IShaderProgram *CreateShaderProgram(SpellcoreShader *spellcoreShader) = 0;
     };
 

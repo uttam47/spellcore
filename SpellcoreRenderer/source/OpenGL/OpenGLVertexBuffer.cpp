@@ -25,12 +25,12 @@ namespace AnalyticalApproach::Spellcore
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void OpenGLVertexBuffer::SetLayout(const BufferLayout& layout)
+    void OpenGLVertexBuffer::SetLayout(const GPUBufferLayout& layout)
     {
         _layout = layout;
     }
 
-    const BufferLayout& OpenGLVertexBuffer::GetLayout() const
+    const GPUBufferLayout& OpenGLVertexBuffer::GetLayout() const
     {
         return _layout;
     }
