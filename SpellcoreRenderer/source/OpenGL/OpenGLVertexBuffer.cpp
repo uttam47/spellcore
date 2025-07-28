@@ -3,8 +3,9 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    void OpenGLVertexBuffer::SetBufferData(float* data, uint32_t size)
+    void OpenGLVertexBuffer::SetBufferDataInternal(const void *data, uint32_t size, uint32_t offset)
     {
+        //TODO: Decide what to do with the offset
         glGenBuffers(1, &_rendererID);
         glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
         glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -15,7 +16,7 @@ namespace AnalyticalApproach::Spellcore
         glDeleteBuffers(1, &_rendererID);
     }
 
-    void OpenGLVertexBuffer::Bind() const
+    void OpenGLVertexBuffer::Bind(uint32_t bindingPoint) const
     {
         glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
     }
