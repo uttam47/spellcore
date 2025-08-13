@@ -17,6 +17,7 @@ namespace AnalyticalApproach::Spellcore
 
     const std::string &SpellcoreShader::GetSourcePath()
     {
+        return ""; 
     }
 
     const std::string& SpellcoreShader::GetShaderSource()
@@ -27,15 +28,19 @@ namespace AnalyticalApproach::Spellcore
     void SpellcoreShader::SetBufferLayout(GPUBufferLayout GPUBufferLayout)
     {
     }
-    const GPUBufferLayout &SpellcoreShader::GetBufferLayout()
+
+    const GPUBufferLayout& SpellcoreShader::GetBufferLayout()
     {
+        return _layout; 
     }
 
     void SpellcoreShader::SetShaderHandle(uint32_t shaderHandle)
     {
     }
+
     uint32_t SpellcoreShader::GetShaderHandle()
     {
+        return 0; 
     }
 
 }

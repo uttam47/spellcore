@@ -3,6 +3,7 @@
 #include <core/RenderPipeline.h>
 #include <core/SpellcoreShader.h>
 #include <core/RenderingBackend.h>
+#include <filesystem>
 
 /*
     Need a ShaderEventChannel to manage their creation and loading. 
@@ -35,9 +36,12 @@ namespace AnalyticalApproach::Spellcore
         //Temporary: hardcoded here, need better shader managment. 
 
         //Figure out how to embed these default shaders in the app but still keeping it part of the SpellcoreShader. 
-        SpellcoreShader* scSahder = new SpellcoreShader("C:/Users/uttam/OneDrive/Desktop/Development/Spellcore/SpellcoreRenderer/resources/DefaultShaders/BasicSpellcoreShader.scsh"); 
-        s_RenderPipeline->LoadSCShader(scSahder); 
 
+
+        std::filesystem::path cwd = std::filesystem::current_path();
+        std::string shaderPath = cwd.string() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh"; 
+        SpellcoreShader* scSahder = new SpellcoreShader(shaderPath);
+        s_RenderPipeline->LoadSCShader(scSahder); 
 
         return true;
     }
