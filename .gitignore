@@ -11,11 +11,8 @@ cmake_install.cmake
 Makefile
 
 # Ignore SpellcoreRenderer libs (e.g. submodules or vendored)
-ThirdPartyLibs/glfw/
-ThirdPartyLibs/glm/
-ThirdPartyLibs/spdlog/
-ThirdPartyLibs/imgui/
-
+ThirdPartyLibs/*
+!ThirdPartyLibs/*/.git
 
 # Ignore compiled binaries
 *.exe
