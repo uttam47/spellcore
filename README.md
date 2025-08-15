@@ -5,12 +5,12 @@ Spellcore is a work in progress towards a modular API-Agonistic Renderer for rea
 
 ## Key Goals for Spellcore
 
-- 🎯 **Shader-Centric Design**: At the core of Spellcore is a custom `SpellcoreShader` system that will enable shader abstraction.
-- 🧱 **Component-Based Render Architecture**: Separation of scene logic and render data through structured pools and registries.
-- 🧠 **ECS-Friendly Integration**: Designed to integrate cleanly with external ECS systems like `entt`.
-- 🎮 **Real-Time Rendering**: Suitable for interactive applications, visualization, and experimentation.
-- 🧪 **Research & Prototyping**: Acts as a rendering testbed for exploring advanced features like clipping planes, render queues, and per-object data pools.
-- 🚀 **Minimal External Dependencies**: Uses only essential libraries for OpenGL context, math, and asset loading.
+- **Shader-Centric Design**: At the core of Spellcore is a custom `SpellcoreShader` system that will enable shader abstraction.
+- **Component-Based Render Architecture**: Separation of Rendering Core in SpellcoreRenderer, and scene data through structured pools and registries in SandboxApp.
+- **ECS-Friendly Integration**: Utilizing `entt` for scene data organization.
+- **Real-Time Rendering**: Will be suitable for interactive applications, visualization, and experimentation.
+- **Research & Prototyping**: Acts as a rendering testbed for exploring advanced features like clipping planes, render queues, and per-object data pools.
+- **Minimal External Dependencies**: Uses only essential libraries for OpenGL context, math, and asset loading.
 
 ---
 
@@ -39,15 +39,22 @@ Spellcore is a work in progress towards a modular API-Agonistic Renderer for rea
 ### Clone and Build
 
 ```bash
-# Clone the repository with submodules
-git clone --recurse-submodules https://github.com/yourusername/spellcore.git
+# 1. Clone the repository
+git clone https://github.com/yourusername/spellcore.git
+
+# 2. Initialize and update submodules
 cd spellcore
+git submodule update --init --recursive
+
 
 # Create build directory
-mkdir build && cd build
+mkdir build 
+cd build
 
 # Generate project files
 cmake ..
-
-# Build
 cmake --build .
+
+# For Visual Studio
+cmake -G "Visual Studio 17 2022" -A x64
+#Then open the Spellcore.sln
