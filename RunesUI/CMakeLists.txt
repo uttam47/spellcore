@@ -13,12 +13,13 @@ file(GLOB_RECURSE RunesUI_SOURCES CONFIGURE_DEPENDS
 
 # Gather ImGui source files
 file(GLOB IMGUI_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/imgui.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/imgui_draw.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/imgui_tables.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/imgui_widgets.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/backends/imgui_impl_glfw.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/backends/imgui_impl_opengl3.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/imgui.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/imgui_demo.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/imgui_draw.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/imgui_tables.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/imgui_widgets.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/backends/imgui_impl_glfw.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 # Combine everything
@@ -33,8 +34,12 @@ add_library(RunesUI STATIC ${PROJECT_SOURCES})
 # Include directories
 target_include_directories(RunesUI PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/source
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdPartyLibs/imgui/backends
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/imgui/backends
+)
+target_include_directories(RunesUI PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/glfw/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ThirdPartyLibs/glad/include
 )
 
 target_compile_definitions(RunesUI PRIVATE LOG_TAG="RunesUI")

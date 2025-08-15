@@ -5,6 +5,7 @@
 #include "WindowSystem/GLFW/GLFWWindowSystem.h"
 #include "EventManager.h"
 #include "Logger.h"
+#include "ImguiTest.h"
 #include "core/SpellcoreRenderer.h"
 
 namespace AnalyticalApproach
@@ -25,5 +26,10 @@ namespace AnalyticalApproach
         WindowSystem::WindowEventChannel* _windowEventChannel = nullptr;
 
         std::string _executableDir; 
+
+        //Test only
+
+        ImguiTest _imguiTest;
+
     };
 }

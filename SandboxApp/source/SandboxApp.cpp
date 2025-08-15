@@ -30,6 +30,8 @@ namespace AnalyticalApproach
         }; 
         
         SpellcoreRenderer::Initialize(renderingSurfaceInfo); 
+        _imguiTest.Init(_windowHandle.glfwWindow);
+
 
         //TODO: Re-fix abuse of abstraction: 
         //Per se, SpellcoreShader is an internal object to the SpellcoreRenderer, so it shouldn't be exposed to the Application layer. 
@@ -66,6 +68,8 @@ namespace AnalyticalApproach
         {
             _windowSystem.PollEvents();
             SpellcoreRenderer::BeginFrame(); 
+            _imguiTest.Render();
+
             SpellcoreRenderer::EndFrame(); 
         }
 
