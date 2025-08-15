@@ -3,7 +3,7 @@ build/
 
 # Ignore Visual Studio Code workspace files (optional)
 .vscode/
-
+.vs/
 # Ignore generated CMake files
 CMakeFiles/
 CMakeCache.txt
