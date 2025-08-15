@@ -1,6 +1,7 @@
 #include "FileReader.h"
 #include <sstream>
 #include <fstream>
+#include "Logger.h"
 
 namespace AnalyticalApproach::FileSystem
 {
@@ -12,7 +13,11 @@ namespace AnalyticalApproach::FileSystem
     {
         std::ifstream file(_filePath);
         if (!file.is_open())
+        {
+            std::string errorMsg = "Can not open file at path: " + _filePath; 
+            LOG_ERROR(_filePath);
             return "";
+        }
 
         std::stringstream buffer;
         buffer << file.rdbuf();

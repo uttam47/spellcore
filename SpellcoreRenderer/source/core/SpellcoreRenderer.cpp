@@ -5,12 +5,6 @@
 #include <core/RenderingBackend.h>
 #include <filesystem>
 
-/*
-    Need a ShaderEventChannel to manage their creation and loading. 
-    Introduce SpellcoreShaderRegistery to achive the above.
-    To build a bridge between RenderingPipeline and SpellcoreShaderRegistery. 
-*/
-
 namespace AnalyticalApproach::Spellcore
 {
 
@@ -31,18 +25,8 @@ namespace AnalyticalApproach::Spellcore
             return false;
         }
 
-
         s_RenderPipeline = new RenderPipeline(); 
-        //Temporary: hardcoded here, need better shader managment. 
-
-        //Figure out how to embed these default shaders in the app but still keeping it part of the SpellcoreShader. 
-
-
-        std::filesystem::path cwd = std::filesystem::current_path();
-        std::string shaderPath = cwd.string() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh"; 
-        SpellcoreShader* scSahder = new SpellcoreShader(shaderPath);
-        s_RenderPipeline->LoadSCShader(scSahder); 
-
+     
         return true;
     }
 
@@ -56,11 +40,31 @@ namespace AnalyticalApproach::Spellcore
         }
     }
 
+    //TODO: Add a ShaderManager class to exclusively manage Shader Object's life span. 
+    //Consider the below as well. 
+
+    /*
+    Need a ShaderEventChannel to manage their creation and loading.
+    Introduce SpellcoreShaderRegistery to achive the above.
+    To build a bridge between RenderingPipeline and SpellcoreShaderRegistery.
+    */
+
+    SpellcoreShader* SpellcoreRenderer::LoadShader(std::string shaderPath)
+    {
+        return new SpellcoreShader(shaderPath);
+    }
+
+    void SpellcoreRenderer::UseShader(SpellcoreShader* scShader)
+    {
+        s_RenderPipeline->LoadSCShader(scShader); 
+    }
+
     void SpellcoreRenderer::BeginFrame()
     {
         if (s_RenderingContext)
             s_RenderingContext->BeginFrame();
     }
+
     void SpellcoreRenderer::EndFrame()
     {
         if (s_RenderingContext)

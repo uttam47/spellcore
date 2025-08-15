@@ -1,9 +1,9 @@
 #include "SandboxApp.h"
 #include "Logger.h"
-#include <filesystem> // for std::filesystem::path
 
 int main(int argc, char** argv)
 {
-    AnalyticalApproach::SandboxApp app;
+    std::vector<std::string> args(argv, argv + argc);
+    AnalyticalApproach::SandboxApp app(args);
     return app.Run();
 }

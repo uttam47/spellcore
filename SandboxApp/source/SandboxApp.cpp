@@ -1,6 +1,8 @@
 #include "SandboxApp.h"
 #include "core/RenderingSurfaceCreateInfo.h"
 
+#include <filesystem>
+
 namespace AnalyticalApproach
 {
     using namespace WindowSystem;
@@ -8,8 +10,12 @@ namespace AnalyticalApproach
     using namespace EventSystem;
     using namespace Spellcore; 
 
-    SandboxApp::SandboxApp()
+    SandboxApp::SandboxApp(std::vector<std::string> appParameters)
     {
+
+        _executableDir = std::filesystem::path(appParameters[0]).parent_path().string();
+
+
         _windowEventChannel = EventManager::GetInstance().GetEventChannel<WindowEventChannel>();
         
         _windowHandle = _windowSystem.CreateAppWindow(1280, 720, "Spellcore Engine Window");
@@ -24,6 +30,17 @@ namespace AnalyticalApproach
         }; 
         
         SpellcoreRenderer::Initialize(renderingSurfaceInfo); 
+
+        //TODO: Re-fix abuse of abstraction: 
+        //Per se, SpellcoreShader is an internal object to the SpellcoreRenderer, so it shouldn't be exposed to the Application layer. 
+        //Where as SpellcoreRenderer's UseShader and LoadShader should communicate with the App with just unqiue shader handle. 
+        //This way, shader object life time management will be responsiblilty of the SpellcoreRenderer not of Application. 
+        
+        //Then there's another concern relating to Resource management. 
+        std::string shaderPath = _executableDir + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh"; 
+        SpellcoreShader* scShader = SpellcoreRenderer::LoadShader(shaderPath);
+        SpellcoreRenderer::UseShader(scShader); 
+
         _windowEventChannel->on_window_closed.subscribe(&SandboxApp::CloseApp, this);
         
         if (!_windowHandle.IsValid())

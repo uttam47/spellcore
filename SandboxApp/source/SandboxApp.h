@@ -12,7 +12,7 @@ namespace AnalyticalApproach
     class SandboxApp
     {
     public:
-        SandboxApp();
+        SandboxApp(std::vector<std::string> appParameters);
         ~SandboxApp();
 
         void CloseApp(); 
@@ -23,5 +23,7 @@ namespace AnalyticalApproach
         WindowSystem::GLFWWindowSystem _windowSystem;
         WindowSystem::WindowHandle _windowHandle;
         WindowSystem::WindowEventChannel* _windowEventChannel = nullptr;
+
+        std::string _executableDir; 
     };
 }
