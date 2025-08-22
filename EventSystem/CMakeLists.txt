@@ -29,3 +29,5 @@ target_link_libraries(EventSystem
         Logger
 )
 target_compile_definitions(EventSystem PRIVATE LOG_TAG="EventManager")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${PROJECT_SOURCES})

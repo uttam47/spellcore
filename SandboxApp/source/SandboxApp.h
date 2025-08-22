@@ -28,7 +28,6 @@ namespace AnalyticalApproach
         std::string _executableDir; 
 
         //Test only
-
         ImguiTest _imguiTest;
 
     };

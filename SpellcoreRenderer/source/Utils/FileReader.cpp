@@ -5,7 +5,6 @@
 
 namespace AnalyticalApproach::FileSystem
 {
-
     FileReader::FileReader(const std::string &path)
         : _filePath(path) {}
 

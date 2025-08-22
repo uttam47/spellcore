@@ -39,3 +39,4 @@ endif()
 
 target_compile_definitions(SpellcoreRenderer PRIVATE GLEW_STATIC)
 target_compile_definitions(SpellcoreRenderer PRIVATE LOG_TAG="SpellcoreRenderer")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${PROJECT_SOURCES})

@@ -8,3 +8,5 @@ target_include_directories(Logger PUBLIC
 
 target_link_libraries(Logger PUBLIC spdlog)
 target_compile_definitions(Logger PRIVATE LOG_TAG="Logger")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${PROJECT_SOURCES})
