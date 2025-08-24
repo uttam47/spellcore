@@ -28,6 +28,7 @@ target_link_libraries(SandboxApp
         EventSystem
         Logger
         entt
+        CommonUtility
 )
 
 target_compile_definitions(SandboxApp PRIVATE LOG_TAG="SandboxApp")

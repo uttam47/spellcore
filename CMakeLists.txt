@@ -18,6 +18,7 @@ add_subdirectory(RunesUI)
 add_subdirectory(SandboxApp)
 add_subdirectory(ThirdPartyLibs/spdlog)
 add_subdirectory(Logger)
+add_subdirectory(CommonUtils)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(entt INTERFACE)

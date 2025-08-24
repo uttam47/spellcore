@@ -41,8 +41,7 @@ namespace AnalyticalApproach::Spellcore
         GPUBufferElement() = default;
         GPUBufferElement(ShaderDataType type, const std::string &name, bool normalized = false) : 
             name(name), type(type), size(ShaderDataTypeSize(type)), offset(0)
-        {
-        }
+        {}
 
         uint32_t GetComponentCount() const { return GetShaderDataTypeComponentCount(type); }
     };

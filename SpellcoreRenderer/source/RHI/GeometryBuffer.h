@@ -9,7 +9,7 @@ namespace AnalyticalApproach::Spellcore
         public:
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0; 
-        virtual void AddVertexBuffer(GPUBuffer*) = 0;
+        virtual void AddAttributeBuffer(GPUBuffer*) = 0;
         virtual uint32_t GetId() = 0; 
         virtual uint64_t GetElementCount() = 0; 
     };

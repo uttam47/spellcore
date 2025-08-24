@@ -18,8 +18,8 @@ namespace AnalyticalApproach::Spellcore
             _renderCommand.textureIDs[count++] = tId; 
         }
 
-        _renderCommand.geometryId = vertexArray->GetId(); 
-        _renderCommand.elementCount = vertexArray->GetElementCount(); 
+        _renderCommand.geometryId = geometryBuffer->GetId(); 
+        _renderCommand.elementCount = geometryBuffer->GetElementCount(); 
         _renderCommand.sortKey = GenerateSortKey(); 
     }
 

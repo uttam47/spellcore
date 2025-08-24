@@ -9,11 +9,10 @@ namespace AnalyticalApproach::Spellcore
     class Submesh
     {
     private: 
-        RenderCommand _renderCommand; 
-        
         uint64_t GenerateSortKey(); 
+        RenderCommand _renderCommand; 
     public:
-        GeometryBuffer *vertexArray;
+        GeometryBuffer *geometryBuffer;
         Material *material;
         uint32_t indexCount;
 

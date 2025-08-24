@@ -22,15 +22,14 @@ add_library(SpellcoreRenderer STATIC ${PROJECT_SOURCES})
 target_include_directories(SpellcoreRenderer PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/source
 )
-
-# Add the GLEW library
+    
 add_library(glew STATIC IMPORTED)
 set_target_properties(glew PROPERTIES
     IMPORTED_LOCATION "${THIRD_PARTY_LIBS_DIR}/glew/lib/Release/x64/glew32s.lib"
     INTERFACE_INCLUDE_DIRECTORIES "${THIRD_PARTY_LIBS_DIR}/glew/include"
 )
 
-target_link_libraries(SpellcoreRenderer PRIVATE Logger glew)
+target_link_libraries(SpellcoreRenderer PRIVATE Logger glew CommonUtility)
 
 # Link OpenGL on Windows
 if (WIN32)

@@ -70,7 +70,7 @@ namespace AnalyticalApproach::Spellcore
         glBindVertexArray(0);
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(GPUBuffer *vertexBuffer)
+    void OpenGLVertexArray::AddAttributeBuffer(GPUBuffer *vertexBuffer)
     {
         assert(vertexBuffer && "GPUBuffer must not be null.");
         assert(vertexBuffer->GetLayout().GetElements().size() && "GPUBuffer has no layout!");

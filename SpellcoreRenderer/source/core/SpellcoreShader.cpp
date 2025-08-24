@@ -1,5 +1,5 @@
 #include <core/SpellcoreShader.h>
-#include <Utils/FileReader.h>
+#include "FileUtils/FileReader.h"
 
 namespace AnalyticalApproach::Spellcore
 {
