@@ -14,7 +14,7 @@ namespace AnalyticalApproach::SpellcoreEditor
     enum class VertexPacking { Interleaved, Separate };
 
     // CPU-side mesh buffers (ready to upload)
-    struct LoadedMesh
+    struct MeshData
     {
         // ----- Common -----
         bool         isIndexed    = false;
@@ -59,7 +59,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 
         // forceIndexed: override heuristic
         // packing: Interleaved (default) or Separate buffers
-        LoadedMesh Load(const std::string& objPath,
+        MeshData Load(const std::string& objPath,
                         std::optional<bool> forceIndexed = std::nullopt,
                         VertexPacking packing = VertexPacking::Interleaved) const;
 

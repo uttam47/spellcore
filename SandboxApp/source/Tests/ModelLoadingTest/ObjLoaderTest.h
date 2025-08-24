@@ -6,18 +6,19 @@ namespace AnalyticalApproach::SpellcoreEditor
 	{
 		ObjLoader* _objLoader;
 
-		std::string CUBE_OBJ_PATH = ""; 
-		std::string CONE_OBJ_PATH = ""; 
+		std::string CUBE_OBJ_PATH = "/Resources/Models/ObjWavefront/Cube.obj"; 
+		std::string CONE_OBJ_PATH = "/Resources/Models/ObjWavefront/Cone.obj"; 
 
-		LoadedMesh cubeMesh; 
-		LoadedMesh coneMesh; 
+		MeshData cubeMesh; 
+		MeshData coneMesh; 
 
 	public: 
 		ObjLoaderTest(); 
+		~ObjLoaderTest(); 
 
-		void LoadDefautls(); 
+		void LoadDefaultMeshes(); 
 
-		LoadedMesh& GetCubeMesh(); 
-		LoadedMesh& GetConeMesh(); 
+		MeshData& GetCubeMesh(); 
+		MeshData& GetConeMesh(); 
 	};
 }

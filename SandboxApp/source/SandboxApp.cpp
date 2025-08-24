@@ -1,89 +1,97 @@
+#include <filesystem>
 #include "SandboxApp.h"
 #include "core/RenderingSurfaceCreateInfo.h"
 
-#include <filesystem>
-
-namespace AnalyticalApproach
+namespace AnalyticalApproach::SpellcoreEditor
 {
-    using namespace WindowSystem;
-    using namespace Spellcast;
-    using namespace EventSystem;
-    using namespace Spellcore; 
+	using namespace WindowSystem;
+	using namespace EventSystem;
 
+	SandboxApp::SandboxApp(std::vector<std::string> appParameters)
+	{
+		_resourceManager = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
+		InitAppWindow(); 
+		InitRenderer();		
+		TestingHelper(); 
+	}
 
-    SandboxApp::SandboxApp(std::vector<std::string> appParameters)
-    {
+	void SandboxApp::TestingHelper()
+	{
+		//Imgui Test object
+		_imguiTest.Init(_windowHandle.glfwWindow);
 
-        _resourceManager = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
+		_objLoaderTest = new ObjLoaderTest(); 
+		_objLoaderTest->LoadDefaultMeshes(); 
 
+		MeshData cubeMesh = _objLoaderTest->GetCubeMesh();
+		MeshData coneData = _objLoaderTest->GetConeMesh();
+	}
 
-        _windowEventChannel = EventManager::GetInstance().GetEventChannel<WindowEventChannel>();
-        
-        _windowHandle = _windowSystem.CreateAppWindow(1280, 720, "Spellcore Engine Window");
+	void SandboxApp::InitAppWindow()
+	{
+		_windowEventChannel = EventManager::GetInstance().GetEventChannel<WindowEventChannel>();
+		_windowHandle = _windowSystem.CreateAppWindow(1280, 720, "Spellcore Engine Window");
+		_windowEventChannel->on_window_closed.subscribe(&SandboxApp::CloseApp, this);
+		if (!_windowHandle.IsValid())
+		{
+			LOG_ERROR("Failed to create window");
+		}
+	}
 
-        glm::ivec2 windowSize = _windowSystem.GetWindowSize(); 
-        RenderingSurfaceCreateInfo renderingSurfaceInfo{
+	void SandboxApp::InitRenderer()
+	{
+		glm::ivec2 windowSize = _windowSystem.GetWindowSize();
+		RenderingSurfaceCreateInfo renderingSurfaceInfo
+		{
+			_windowHandle.nativeHandle,
+			windowSize.x,
+			windowSize.y,
+			false
+		};
 
-            _windowHandle.nativeHandle, 
-            windowSize.x,
-            windowSize.y,
-            false            
-        }; 
-        
-        SpellcoreRenderer::Initialize(renderingSurfaceInfo); 
-        _imguiTest.Init(_windowHandle.glfwWindow);
+		SpellcoreRenderer::Initialize(renderingSurfaceInfo);
 
+		//TODO: Re-fix abuse of abstraction: 
+		//Per se, SpellcoreShader is an internal object to the SpellcoreRenderer, so it shouldn't be exposed to the Application layer. 
+		//Where as SpellcoreRenderer's UseShader and LoadShader should communicate with the App with just unqiue shader handle. 
+		//This way, shader object life time management will be responsiblilty of the SpellcoreRenderer not of Application. 
 
-        //TODO: Re-fix abuse of abstraction: 
-        //Per se, SpellcoreShader is an internal object to the SpellcoreRenderer, so it shouldn't be exposed to the Application layer. 
-        //Where as SpellcoreRenderer's UseShader and LoadShader should communicate with the App with just unqiue shader handle. 
-        //This way, shader object life time management will be responsiblilty of the SpellcoreRenderer not of Application. 
-        
-        //Then there's another concern relating to Resource management. 
-        std::string shaderPath = _resourceManager->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
-        SpellcoreShader* scShader = SpellcoreRenderer::LoadShader(shaderPath);
-        SpellcoreRenderer::UseShader(scShader); 
+		//Then there's another concern relating to Resource management. 
+		std::string shaderPath = _resourceManager->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
+		SpellcoreShader* scShader = SpellcoreRenderer::LoadShader(shaderPath);
+		SpellcoreRenderer::UseShader(scShader);
+	}
 
-        _windowEventChannel->on_window_closed.subscribe(&SandboxApp::CloseApp, this);
-        
-        if (!_windowHandle.IsValid())
-        {
-            LOG_ERROR("Failed to create window");
-        }
-    }
-    
-    SandboxApp::~SandboxApp()
-    {
-        _windowEventChannel->on_window_closed.unsubscribe(&SandboxApp::CloseApp, this);
-        _windowSystem.DestroyAppWindow(_windowHandle);
-    }
-    
-    int SandboxApp::Run()
-    {
-        LOG_INFO("Starting the SandboxApp"); 
+	int SandboxApp::Run()
+	{
+		LOG_INFO("Starting the SandboxApp");
 
-        if (!_windowHandle.IsValid())
-            return -1;
-        
-        while (!_closeApp)
-        {
-            _windowSystem.PollEvents();
-            SpellcoreRenderer::BeginFrame(); 
-            _imguiTest.Render();
+		if (!_windowHandle.IsValid())
+			return -1;
 
-            SpellcoreRenderer::EndFrame(); 
-        }
+		while (!_closeApp)
+		{
+			_windowSystem.PollEvents();
+			SpellcoreRenderer::BeginFrame();
+			_imguiTest.Render();
+			SpellcoreRenderer::EndFrame();
+		}
 
-        LOG_INFO("Finished running the sandbox app"); 
+		LOG_INFO("Finished running the sandbox app");
 
-        return 0;
-    }
+		return 0;
+	}
 
-    void SandboxApp::CloseApp()
-    {
-        _closeApp = true; 
-    }
+	void SandboxApp::CloseApp()
+	{
+		_closeApp = true;
+	}
 
+	SandboxApp::~SandboxApp()
+	{
+		_windowEventChannel->on_window_closed.unsubscribe(&SandboxApp::CloseApp, this);
+		_windowSystem.DestroyAppWindow(_windowHandle);
 
-    
+		delete _objLoaderTest; 
+	}
 }

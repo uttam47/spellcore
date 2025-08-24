@@ -10,8 +10,10 @@
 #include "Tests/ModelLoadingTest/ObjLoaderTest.h"
 #include "Editor/Core/ResourceManager.h"
 
-namespace AnalyticalApproach::Spellcore
+namespace AnalyticalApproach::SpellcoreEditor
 {
+    using namespace Spellcore; 
+
     class SandboxApp
     {
     public:
@@ -19,8 +21,10 @@ namespace AnalyticalApproach::Spellcore
         ~SandboxApp();
 
         void CloseApp(); 
-        int Run();
 
+        void InitRenderer(); 
+        void InitAppWindow(); 
+        int Run();
 
     private:
         bool _closeApp = false; 
@@ -31,6 +35,9 @@ namespace AnalyticalApproach::Spellcore
 
         //Test only
         ImguiTest _imguiTest;
+        ObjLoaderTest* _objLoaderTest = nullptr; 
 
+        //TODO: Will available midst development for quick modular testing.
+        void TestingHelper(); 
     };
 }

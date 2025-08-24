@@ -146,11 +146,11 @@ namespace AnalyticalApproach::SpellcoreEditor
     // -----------
     // Main entry
     // -----------
-    LoadedMesh ObjLoader::Load(const std::string& objPath,
+    MeshData ObjLoader::Load(const std::string& objPath,
                                     std::optional<bool> forceIndexed,
                                     VertexPacking packing) const
     {
-        LoadedMesh out;
+        MeshData out;
         out.packing = packing;
 
         // Read file

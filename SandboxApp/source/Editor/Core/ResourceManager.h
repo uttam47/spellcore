@@ -10,7 +10,6 @@ namespace AnalyticalApproach::Spellcore
 	{
 		static std::string EXECUTABLE_DIR;
 
-
 	public:
 
 		static const std::string& GetExecutionDir();

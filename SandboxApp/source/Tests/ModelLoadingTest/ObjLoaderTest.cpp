@@ -11,19 +11,25 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_objLoader = new ObjLoader(); 
 	}
 
-	void ObjLoaderTest::LoadDefautls()
+	void ObjLoaderTest::LoadDefaultMeshes()
 	{
 		cubeMesh = _objLoader->Load(CUBE_OBJ_PATH, std::optional<bool>(true), VertexPacking::Interleaved);
 		coneMesh = _objLoader->Load(CONE_OBJ_PATH, std::optional<bool>(true), VertexPacking::Interleaved);
 	}
 
-	LoadedMesh& ObjLoaderTest::GetConeMesh()
+	MeshData& ObjLoaderTest::GetConeMesh()
 	{
 		return coneMesh; 
 	}
 
-	LoadedMesh& ObjLoaderTest::GetCubeMesh()
+	MeshData& ObjLoaderTest::GetCubeMesh()
 	{
 		return cubeMesh;
+	}
+
+	ObjLoaderTest::~ObjLoaderTest()
+	{
+		delete _objLoader; 
+		_objLoader = nullptr; 
 	}
 }
