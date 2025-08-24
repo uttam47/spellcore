@@ -1,14 +1,16 @@
 #pragma once
 
+#include "Logger.h"
 #include "Events/UserInputChannel.h"
 #include "Events/WindowEventChannel.h"
 #include "WindowSystem/GLFW/GLFWWindowSystem.h"
 #include "EventManager.h"
-#include "Logger.h"
-#include "ImguiTest.h"
 #include "core/SpellcoreRenderer.h"
+#include "Tests/IMGUITest/ImguiTest.h"
+#include "Tests/ModelLoadingTest/ObjLoaderTest.h"
+#include "Editor/Core/ResourceManager.h"
 
-namespace AnalyticalApproach
+namespace AnalyticalApproach::Spellcore
 {
     class SandboxApp
     {
@@ -19,13 +21,13 @@ namespace AnalyticalApproach
         void CloseApp(); 
         int Run();
 
+
     private:
         bool _closeApp = false; 
         WindowSystem::GLFWWindowSystem _windowSystem;
         WindowSystem::WindowHandle _windowHandle;
         WindowSystem::WindowEventChannel* _windowEventChannel = nullptr;
-
-        std::string _executableDir; 
+        ResourceManager* _resourceManager; 
 
         //Test only
         ImguiTest _imguiTest;

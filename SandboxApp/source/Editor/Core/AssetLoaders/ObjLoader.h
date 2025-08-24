@@ -50,11 +50,11 @@ namespace AnalyticalApproach::SpellcoreEditor
 
     // Lightweight OBJ loader (v/vt/vn; triangulates ngons; supports negative indices)
     // Deduplicates (pos,uv,norm) tuples to unify GPU indexing or expands to non-indexed.
-    class ObjAssetLoader
+    class ObjLoader
     {
     public:
         // If uniqueVertexCount <= indexifyThreshold * expandedVertexCount => keep indexed, else expand
-        explicit ObjAssetLoader(double indexifyThreshold = 0.9)
+        explicit ObjLoader(double indexifyThreshold = 0.9)
             : _indexifyThreshold(indexifyThreshold) {}
 
         // forceIndexed: override heuristic

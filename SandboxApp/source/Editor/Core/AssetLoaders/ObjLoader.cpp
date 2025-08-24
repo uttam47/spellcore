@@ -26,7 +26,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         return s.size() >= n && std::equal(prefix, prefix+n, s.begin());
     }
 
-    bool ObjAssetLoader::ParseFloat3(const std::string& line, std::array<float,3>& out)
+    bool ObjLoader::ParseFloat3(const std::string& line, std::array<float,3>& out)
     {
         std::istringstream iss(line);
         std::string tag; float x,y,z;
@@ -34,7 +34,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         out = {x,y,z};
         return true;
     }
-    bool ObjAssetLoader::ParseFloat2(const std::string& line, std::array<float,2>& out)
+    bool ObjLoader::ParseFloat2(const std::string& line, std::array<float,2>& out)
     {
         std::istringstream iss(line);
         std::string tag; float u,v;
@@ -43,7 +43,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         return true;
     }
 
-    void ObjAssetLoader::ParseFaceTriplet(const std::string& tok, int& p, int& t, int& n)
+    void ObjLoader::ParseFaceTriplet(const std::string& tok, int& p, int& t, int& n)
     {
         // OBJ 1-based; negative allowed; 0/empty means "not present"
         p = t = n = 0;
@@ -59,7 +59,7 @@ namespace AnalyticalApproach::SpellcoreEditor
     // -----------------------------------
     // Layout builders
     // -----------------------------------
-    GPUBufferLayout ObjAssetLoader::MakeLayoutAoS(bool hasTex, bool hasNorm) const
+    GPUBufferLayout ObjLoader::MakeLayoutAoS(bool hasTex, bool hasNorm) const
     {
         std::vector<GPUBufferElement> elems;
         elems.emplace_back(ShaderDataType::Float3, "a_Position", false);
@@ -73,7 +73,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         return layout;
     }
 
-    GPUBufferLayout ObjAssetLoader::MakePosLayout() const
+    GPUBufferLayout ObjLoader::MakePosLayout() const
     {
         std::vector<GPUBufferElement> elems;
         elems.emplace_back(ShaderDataType::Float3, "a_Position", false);
@@ -83,7 +83,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         layout.gpuBufferUsageType = GPUBufferUsageType::STATIC;
         return layout;
     }
-    GPUBufferLayout ObjAssetLoader::MakeNrmLayout() const
+    GPUBufferLayout ObjLoader::MakeNrmLayout() const
     {
         std::vector<GPUBufferElement> elems;
         elems.emplace_back(ShaderDataType::Float3, "a_Normal", false);
@@ -93,7 +93,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         layout.gpuBufferUsageType = GPUBufferUsageType::STATIC;
         return layout;
     }
-    GPUBufferLayout ObjAssetLoader::MakeUvLayout() const
+    GPUBufferLayout ObjLoader::MakeUvLayout() const
     {
         std::vector<GPUBufferElement> elems;
         elems.emplace_back(ShaderDataType::Float2, "a_TexCoord", false);
@@ -107,7 +107,7 @@ namespace AnalyticalApproach::SpellcoreEditor
     // -----------------------------------
     // AoS packing
     // -----------------------------------
-    void ObjAssetLoader::PackVertexAoS(std::vector<std::uint8_t>& dst,
+    void ObjLoader::PackVertexAoS(std::vector<std::uint8_t>& dst,
                                        std::uint32_t& strideCached,
                                        const std::array<float,3>& pos,
                                        const std::optional<std::array<float,2>>& tex,
@@ -146,7 +146,7 @@ namespace AnalyticalApproach::SpellcoreEditor
     // -----------
     // Main entry
     // -----------
-    LoadedMesh ObjAssetLoader::Load(const std::string& objPath,
+    LoadedMesh ObjLoader::Load(const std::string& objPath,
                                     std::optional<bool> forceIndexed,
                                     VertexPacking packing) const
     {

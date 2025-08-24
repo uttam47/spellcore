@@ -10,10 +10,11 @@ namespace AnalyticalApproach
     using namespace EventSystem;
     using namespace Spellcore; 
 
+
     SandboxApp::SandboxApp(std::vector<std::string> appParameters)
     {
 
-        _executableDir = std::filesystem::path(appParameters[0]).parent_path().string();
+        _resourceManager = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
 
 
         _windowEventChannel = EventManager::GetInstance().GetEventChannel<WindowEventChannel>();
@@ -39,7 +40,7 @@ namespace AnalyticalApproach
         //This way, shader object life time management will be responsiblilty of the SpellcoreRenderer not of Application. 
         
         //Then there's another concern relating to Resource management. 
-        std::string shaderPath = _executableDir + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh"; 
+        std::string shaderPath = _resourceManager->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
         SpellcoreShader* scShader = SpellcoreRenderer::LoadShader(shaderPath);
         SpellcoreRenderer::UseShader(scShader); 
 
@@ -82,5 +83,7 @@ namespace AnalyticalApproach
     {
         _closeApp = true; 
     }
+
+
     
 }
