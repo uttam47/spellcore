@@ -1,11 +1,14 @@
 #include <filesystem>
 #include "SandboxApp.h"
 #include "core/RenderingSurfaceCreateInfo.h"
+#include "core/MeshData.h"
+#include "core/Mesh.h"
 
 namespace AnalyticalApproach::SpellcoreEditor
 {
 	using namespace WindowSystem;
 	using namespace EventSystem;
+	using namespace Spellcore; 
 
 	SandboxApp::SandboxApp(std::vector<std::string> appParameters)
 	{
@@ -21,10 +24,12 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_imguiTest.Init(_windowHandle.glfwWindow);
 
 		_objLoaderTest = new ObjLoaderTest(); 
-		_objLoaderTest->LoadDefaultMeshes(); 
 
-		MeshData cubeMesh = _objLoaderTest->GetCubeMesh();
-		MeshData coneData = _objLoaderTest->GetConeMesh();
+		Mesh* mesh = new Mesh(); 
+		MeshData* meshData = _objLoaderTest->GetCubeMesh(); 
+		Submesh* submesh = new Submesh(meshData);
+		mesh->submeshes.push_back(submesh); 
+
 	}
 
 	void SandboxApp::InitAppWindow()

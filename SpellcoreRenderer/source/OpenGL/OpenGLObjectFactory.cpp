@@ -13,14 +13,14 @@ namespace AnalyticalApproach::Spellcore
         return new OpenGLRenderingContext(); 
     }
 
-    GPUBuffer *OpenGLObjectFactory::CreateVertexBuffer()
+    GPUBuffer *OpenGLObjectFactory::CreateGPUBuffer()
     {
         return new OpenGLGpuBuffer(); 
     }
 
-    GeometryBuffer *OpenGLObjectFactory::CreateVertexArray()
+    GeometryBuffer *OpenGLObjectFactory::CreateGeometryBuffer()
     {
-        return new OpenGLVertexArray(); 
+        return new OpenGLGeometryBuffer(); 
     }
 
     ITexture *OpenGLObjectFactory::CreateTexture()

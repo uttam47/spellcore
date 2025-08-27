@@ -1,5 +1,5 @@
 #include <core/Mesh.h>
-#include <GL/glew.h>
+#include <core/RenderingBackend.h>
 
 //TODO: Still figuring out how to design the Mesh class so that it can wrap a RenderCommand inside it. 
 //Question to be Answered:
@@ -8,6 +8,36 @@
 //2 Do I need dynamic Mesh(Resource) update if in future we load things from a Spellcore Specific editor?
 namespace AnalyticalApproach::Spellcore
 {
+    Submesh::Submesh(MeshData* meshData): _meshData(meshData)
+    {
+        _geometryBuffer = RenderingBackend::Get()->CreateGeometryBuffer();
+        const auto& vertexAttribBuffers = _meshData->GetMeshDataBuffers();
+
+        for (const auto& vaBuffer : vertexAttribBuffers)
+        {
+            GPUBuffer* gpuBuffer = RenderingBackend::Get()->CreateGPUBuffer(); 
+
+            gpuBuffer->SetBufferData<byte>(vaBuffer.bytes, 0);
+            gpuBuffer->SetLayout(vaBuffer.layout); 
+            _geometryBuffer->AddAttributeBuffer(gpuBuffer);
+        }
+    }
+
+    Submesh::~Submesh()
+    {
+        if (_geometryBuffer != nullptr)
+        {
+            delete _geometryBuffer;
+            _geometryBuffer = nullptr;
+        } 
+
+        if (_meshData != nullptr)
+        {
+            delete _meshData;
+            _meshData = nullptr;
+        }
+    }
+
     void Submesh::Refresh()
     {
         _renderCommand.pipelineID = material->GetShader()->GetShaderHandle(); 
@@ -18,8 +48,8 @@ namespace AnalyticalApproach::Spellcore
             _renderCommand.textureIDs[count++] = tId; 
         }
 
-        _renderCommand.geometryId = geometryBuffer->GetId(); 
-        _renderCommand.elementCount = geometryBuffer->GetElementCount(); 
+        _renderCommand.geometryId = _geometryBuffer->GetId();
+        _renderCommand.elementCount = _geometryBuffer->GetElementCount();
         _renderCommand.sortKey = GenerateSortKey(); 
     }
 

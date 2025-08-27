@@ -7,11 +7,11 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    class OpenGLVertexArray: public GeometryBuffer
+    class OpenGLGeometryBuffer: public GeometryBuffer
     {
     public:
-        OpenGLVertexArray();
-        ~OpenGLVertexArray();
+        OpenGLGeometryBuffer();
+        ~OpenGLGeometryBuffer();
 
         void Bind() const override; 
         void Unbind() const override;

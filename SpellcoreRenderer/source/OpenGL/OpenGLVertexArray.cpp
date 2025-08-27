@@ -38,39 +38,49 @@ namespace AnalyticalApproach::Spellcore
         return 0;
     }
 
-    uint32_t OpenGLVertexArray::GetId()
+    uint32_t OpenGLGeometryBuffer::GetId()
     {
         return _meshId;
     }
 
-    uint64_t OpenGLVertexArray::GetElementCount()
+    uint64_t OpenGLGeometryBuffer::GetElementCount()
     {
         //TODO: Fetch from vertex buffer and return. 
         return 0; 
     }
 
-    OpenGLVertexArray::OpenGLVertexArray()
+    OpenGLGeometryBuffer::OpenGLGeometryBuffer()
     {
         glGenVertexArrays(1, &_meshId);
         glBindVertexArray(_meshId);
     }
 
-    OpenGLVertexArray::~OpenGLVertexArray()
+    OpenGLGeometryBuffer::~OpenGLGeometryBuffer()
     {
         glDeleteVertexArrays(1, &_meshId);
+
+        for (auto& vertexBuffer : _vertexBuffer)
+        {
+            if (vertexBuffer != nullptr)
+            {
+                delete vertexBuffer; 
+                vertexBuffer = nullptr; 
+            }
+        }
+        _vertexBuffer.clear(); 
     }
 
-    void OpenGLVertexArray::Bind() const
+    void OpenGLGeometryBuffer::Bind() const
     {
         glBindVertexArray(_meshId);
     }
 
-    void OpenGLVertexArray::Unbind() const
+    void OpenGLGeometryBuffer::Unbind() const
     {
         glBindVertexArray(0);
     }
 
-    void OpenGLVertexArray::AddAttributeBuffer(GPUBuffer *vertexBuffer)
+    void OpenGLGeometryBuffer::AddAttributeBuffer(GPUBuffer *vertexBuffer)
     {
         assert(vertexBuffer && "GPUBuffer must not be null.");
         assert(vertexBuffer->GetLayout().GetElements().size() && "GPUBuffer has no layout!");

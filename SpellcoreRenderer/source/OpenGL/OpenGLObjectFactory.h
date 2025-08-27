@@ -9,8 +9,8 @@ namespace AnalyticalApproach::Spellcore
     public:
         ~OpenGLObjectFactory() = default;
         IRenderingContext *CreateRenderingContext() override;
-        GPUBuffer *CreateVertexBuffer() override;
-        GeometryBuffer *CreateVertexArray() override; 
+        GPUBuffer *CreateGPUBuffer() override;
+        GeometryBuffer *CreateGeometryBuffer() override; 
         ITexture *CreateTexture() override;
         ISCShaderCompiler *CreateSCShaderCompiler() override;
         IShaderProgram *CreateShaderProgram() override;

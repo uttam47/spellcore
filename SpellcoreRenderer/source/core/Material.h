@@ -11,7 +11,13 @@ namespace AnalyticalApproach::Spellcore
 
         public:
 
-        SpellcoreShader* GetShader(); 
-        std::vector<uint32_t> GetTextureIds(); 
+            SpellcoreShader* GetShader()
+            {
+                return nullptr; 
+            }
+            std::vector<uint32_t> GetTextureIds()
+            {
+                return {  }; 
+            }
     };
 }

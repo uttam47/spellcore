@@ -14,8 +14,8 @@ namespace AnalyticalApproach::Spellcore
     public:
         virtual ~IRendererBackendFactory() = default;
         virtual IRenderingContext *CreateRenderingContext() = 0;
-        virtual GPUBuffer *CreateVertexBuffer() = 0;
-        virtual GeometryBuffer *CreateVertexArray() = 0; 
+        virtual GPUBuffer *CreateGPUBuffer() = 0;
+        virtual GeometryBuffer *CreateGeometryBuffer() = 0; 
         virtual ITexture *CreateTexture() = 0;
         virtual ISCShaderCompiler *CreateSCShaderCompiler() = 0; 
         virtual IShaderProgram *CreateShaderProgram() = 0; 
