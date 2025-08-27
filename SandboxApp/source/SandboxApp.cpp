@@ -25,10 +25,10 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		_objLoaderTest = new ObjLoaderTest(); 
 
-		Mesh* mesh = new Mesh(); 
+		_testMesh = new Mesh(); 
 		MeshData* meshData = _objLoaderTest->GetCubeMesh(); 
 		Submesh* submesh = new Submesh(meshData);
-		mesh->submeshes.push_back(submesh); 
+		_testMesh->submeshes.push_back(submesh);
 
 	}
 
@@ -79,6 +79,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 			_windowSystem.PollEvents();
 			SpellcoreRenderer::BeginFrame();
 			_imguiTest.Render();
+			SpellcoreRenderer::SubmitMesh(_testMesh); 
 			SpellcoreRenderer::EndFrame();
 		}
 
@@ -98,5 +99,6 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_windowSystem.DestroyAppWindow(_windowHandle);
 
 		delete _objLoaderTest; 
+		delete _testMesh; 
 	}
 }

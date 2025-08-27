@@ -36,6 +36,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         //Test only
         ImguiTest _imguiTest;
         ObjLoaderTest* _objLoaderTest = nullptr; 
+        Mesh* _testMesh;
 
         //TODO: Will available midst development for quick modular testing.
         void TestingHelper(); 

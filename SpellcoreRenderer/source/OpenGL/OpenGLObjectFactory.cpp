@@ -4,6 +4,7 @@
 #include <OpenGL/OpenGLShaderProgram.h>
 #include <OpenGL/OpenGLGpuBuffer.h>
 #include <OpenGL/OpenGLVertexArray.h>
+#include <OpenGL/OpenGLRenderQueue.h>
 
 
 namespace AnalyticalApproach::Spellcore
@@ -36,5 +37,10 @@ namespace AnalyticalApproach::Spellcore
     IShaderProgram *OpenGLObjectFactory::CreateShaderProgram()
     {
         return new OpenGLShaderProgram(); 
+    }
+
+    RenderQueue* OpenGLObjectFactory::CreateRenderQueue()
+    {
+        return new OpenGLRenderQueue(); 
     }
 }

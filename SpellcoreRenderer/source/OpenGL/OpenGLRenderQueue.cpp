@@ -10,6 +10,7 @@ namespace AnalyticalApproach::Spellcore
         _renderPassBuckets[pass].push_back(cmd);
     }
 
+    //TODO: This need to be further expanded for each type of drawing possibility. 
     void OpenGLRenderQueue::Execute(RenderPassType pass)
     {
         auto &commands = _renderPassBuckets[pass];

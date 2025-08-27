@@ -5,7 +5,7 @@
 #include <RHI/ITexture.h>
 #include <RHI/IShaderProgram.h>
 #include <RHI/ISCShaderCompiler.h>
-
+#include <RHI/RendereQueue.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -19,5 +19,6 @@ namespace AnalyticalApproach::Spellcore
         virtual ITexture *CreateTexture() = 0;
         virtual ISCShaderCompiler *CreateSCShaderCompiler() = 0; 
         virtual IShaderProgram *CreateShaderProgram() = 0; 
+        virtual RenderQueue *CreateRenderQueue() = 0;
     };
 }

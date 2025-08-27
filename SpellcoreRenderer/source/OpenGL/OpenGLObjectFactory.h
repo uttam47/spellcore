@@ -1,6 +1,7 @@
 #pragma once
 
 #include <RHI/IRendererBackendFactory.h>
+#include <RHI/RendereQueue.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -14,5 +15,6 @@ namespace AnalyticalApproach::Spellcore
         ITexture *CreateTexture() override;
         ISCShaderCompiler *CreateSCShaderCompiler() override;
         IShaderProgram *CreateShaderProgram() override;
+        RenderQueue* CreateRenderQueue() override;
     };
 }
