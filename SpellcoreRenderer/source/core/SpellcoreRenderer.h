@@ -69,6 +69,9 @@ namespace AnalyticalApproach::Spellcore
 		/// 
 		/// </summary>
 		static void Shutdown();
+
+		static void RenderFrame(); 
+		static void RenderPass(RenderPassType renderPass); 
 	};
 
 }

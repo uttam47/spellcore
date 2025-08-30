@@ -75,15 +75,31 @@ namespace AnalyticalApproach::Spellcore
 
     void SpellcoreRenderer::EndFrame()
     {
+     
+        if (s_RenderingContext)
+        {
+            s_RenderingContext->EndFrame();
+        }
+    }
+
+    void SpellcoreRenderer::RenderFrame()
+    {
         if (s_RenderQueue)
         {
             //TODO: Instead of executing just one type of Render pass, execute them all as per their priority. 
             // Or give the option to do so individually, so that it has the flexibility to Render to any bound target. 
-            s_RenderQueue->Execute(RenderPassType::ForwardLighting); 
+            s_RenderQueue->Execute(RenderPassType::ForwardLighting);
         }
-        if (s_RenderingContext)
+    }
+
+    void SpellcoreRenderer::RenderPass(RenderPassType renderPassType)
+    {
+
+        if (s_RenderQueue)
         {
-            s_RenderingContext->EndFrame();
+            //TODO: Instead of executing just one type of Render pass, execute them all as per their priority. 
+            // Or give the option to do so individually, so that it has the flexibility to Render to any bound target. 
+            s_RenderQueue->Execute(RenderPassType::ForwardLighting);
         }
     }
 
