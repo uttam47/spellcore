@@ -9,13 +9,13 @@ namespace AnalyticalApproach::Spellcore
 
         switch (_layout.gpuBufferType)
         {
-        case GPUBufferType::VERTEX_BUFFER:
+        case GPUBufferType::VERTEX_DATA_BUFFER:
             SetAsVertexBuffer(data, size, offset);
             break;
-        case GPUBufferType::UNIFORM_BUFFER:
+        case GPUBufferType::UNIFORM_DATA_BUFFER:
             SetAsUniformBuffer(data, size, offset);
             break;
-        case GPUBufferType::SHADER_STORAGE_BUFFER:
+        case GPUBufferType::SHADER_STORAGE_DATA_BUFFER:
             SetAsShaderStorageBuffer(data, size, offset);
             break;
         default:
@@ -30,6 +30,11 @@ namespace AnalyticalApproach::Spellcore
 
         glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
         glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+    }
+    
+    uint32_t OpenGLGpuBuffer::GetBufferID()
+    {
+        return _bufferId; 
     }
 
     void OpenGLGpuBuffer::SetAsUniformBuffer(const void *data, uint32_t size, uint32_t offset)
@@ -59,17 +64,31 @@ namespace AnalyticalApproach::Spellcore
     {
         switch (_layout.gpuBufferType)
         {
-        case GPUBufferType::VERTEX_BUFFER:
-            glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
+        case GPUBufferType::VERTEX_DATA_BUFFER:
+            // NOTE: For INDEX_DATA this *must* be called with the target VAO already bound.
+            if (_layout.gpuBufferSubType == GPUBufferSubType::INDEX_DATA)
+            {
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _bufferId);
+            }
+            else if (_layout.gpuBufferSubType == GPUBufferSubType::VERTEX_DATA)
+            {
+                glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
+            }
             break;
-        case GPUBufferType::UNIFORM_BUFFER:
+
+        case GPUBufferType::UNIFORM_DATA_BUFFER:
             glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, _bufferId);
             break;
-        case GPUBufferType::SHADER_STORAGE_BUFFER:
+
+        case GPUBufferType::SHADER_STORAGE_DATA_BUFFER:
             glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingPoint, _bufferId);
+            break;
+
+        default:
             break;
         }
     }
+
 
     void OpenGLGpuBuffer::Unbind() const
     {

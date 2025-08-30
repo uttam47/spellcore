@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include <core/ShaderDataType.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -40,6 +41,18 @@ namespace AnalyticalApproach::Spellcore
         FinalBlit     // Final screen blit or swapchain present
     };
 
+    enum class Primitive : uint8_t
+    {
+        TRIANGLES,
+        TRIANGLE_STRIP,
+        TRIANGLE_FAN, // Optional
+        LINES,
+        LINE_STRIP,
+        LINE_LOOP, // Optional
+        POINTS,
+        PATCHES
+    };
+
     struct RenderCommand
     {
         enum class DrawType : uint8_t
@@ -49,18 +62,7 @@ namespace AnalyticalApproach::Spellcore
             INSTANCED
         };
 
-        enum class Primitive : uint8_t
-        {
-            TRIANGLES,
-            TRIANGLE_STRIP,
-            TRIANGLE_FAN, // Optional
-            LINES,
-            LINE_STRIP,
-            LINE_LOOP, // Optional
-            POINTS,
-            PATCHES
-        };
-
+        ShaderDataType indexType;
         // Core draw info
         DrawType drawType;
         Primitive primitive;
@@ -72,6 +74,7 @@ namespace AnalyticalApproach::Spellcore
         uint32_t geometryId = 0;           // VAO/VBO abstraction
         uint32_t materialID = 0;       // Optional (for shader resource sets)
         uint32_t instanceBufferID = 0; // Optional (for instanced rendering)
+        uint32_t indexBufferID = 0; // For index Buffer
 
         // Draw range
         uint32_t elementCount = 0; // Number of indices/vertices

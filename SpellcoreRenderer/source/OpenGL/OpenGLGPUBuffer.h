@@ -17,6 +17,8 @@ namespace AnalyticalApproach::Spellcore
         virtual void SetLayout(const GPUBufferLayout& layout) override;
         virtual const GPUBufferLayout& GetLayout() const override;
 
+        virtual uint32_t GetBufferID() override; 
+
     protected:
     
         virtual void SetBufferDataInternal(const void *data, uint32_t size, uint32_t offset = 0) override;

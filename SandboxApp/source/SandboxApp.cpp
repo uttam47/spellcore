@@ -27,7 +27,8 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		_testMesh = new Mesh(); 
 		MeshData* meshData = _objLoaderTest->GetCubeMesh(); 
-		Submesh* submesh = new Submesh(meshData);
+		Material* material = new Material(_testShader);
+		Submesh* submesh = new Submesh(meshData, material);
 		_testMesh->submeshes.push_back(submesh);
 
 	}
@@ -63,8 +64,8 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		//Then there's another concern relating to Resource management. 
 		std::string shaderPath = _resourceManager->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
-		SpellcoreShader* scShader = SpellcoreRenderer::LoadShader(shaderPath);
-		SpellcoreRenderer::UseShader(scShader);
+		_testShader = SpellcoreRenderer::LoadShader(shaderPath);
+		SpellcoreRenderer::UseShader(_testShader);
 	}
 
 	int SandboxApp::Run()

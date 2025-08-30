@@ -20,6 +20,8 @@ namespace AnalyticalApproach::Spellcore
         virtual void SetLayout(const GPUBufferLayout &layout) = 0;
         virtual const GPUBufferLayout &GetLayout() const = 0;
 
+        virtual uint32_t GetBufferID() = 0; 
+
         // virtual uint32_t GetSize() const = 0;
         // virtual GPUBufferType GetBufferType() const = 0;
         // virtual GPUBufferUsageType GetUsageType() const = 0;

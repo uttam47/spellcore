@@ -1,6 +1,7 @@
 #include <RHI/RendereQueue.h>
 #include <unordered_map>
 #include <vector>
+#include <GL/glew.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -11,6 +12,10 @@ namespace AnalyticalApproach::Spellcore
     public:
         void Submit(RenderPassType renderPass, const RenderCommand &renderCommand) override;
         void Execute(RenderPassType renderPass) override;
-        void Clear() override;
+        void Clear() override; 
+
+        GLenum ToGLPrimitiveType(Primitive primitive);
+        GLenum ToGLIndexType(ShaderDataType shaderIndexType); 
+
     };
 }

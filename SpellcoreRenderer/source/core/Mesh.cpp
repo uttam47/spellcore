@@ -8,19 +8,55 @@
 //2 Do I need dynamic Mesh(Resource) update if in future we load things from a Spellcore Specific editor?
 namespace AnalyticalApproach::Spellcore
 {
-    Submesh::Submesh(MeshData* meshData): _meshData(meshData)
+    Submesh::Submesh(MeshData* meshData, Material* material) : _meshData(meshData), _material(material)
     {
         _geometryBuffer = RenderingBackend::Get()->CreateGeometryBuffer();
         const auto& vertexAttribBuffers = _meshData->GetMeshDataBuffers();
 
         for (const auto& vaBuffer : vertexAttribBuffers)
         {
-            GPUBuffer* gpuBuffer = RenderingBackend::Get()->CreateGPUBuffer(); 
+            GPUBuffer* gpuBuffer = RenderingBackend::Get()->CreateGPUBuffer();
 
             gpuBuffer->SetBufferData<byte>(vaBuffer.bytes, 0);
-            gpuBuffer->SetLayout(vaBuffer.layout); 
+            gpuBuffer->SetLayout(vaBuffer.layout);
             _geometryBuffer->AddAttributeBuffer(gpuBuffer);
         }
+
+        GPUBuffer* indexBuffer = RenderingBackend::Get()->CreateGPUBuffer();
+
+        GPUBufferElement gpuBufferElement; 
+        gpuBufferElement.name = "Vertex_Index"; 
+
+        if (_meshData->GetIndexType() == IndexType::UInt16)
+        {
+            gpuBufferElement.type = ShaderDataType::UShort; 
+            gpuBufferElement.size = ShaderDataTypeSize(ShaderDataType::UShort); // 2
+            indexBuffer->SetBufferData<uint16_t>(_meshData->IndicesU16());
+        }
+        else if (_meshData->GetIndexType() == IndexType::UInt32)
+        {
+            gpuBufferElement.type = ShaderDataType::UInt;   
+            gpuBufferElement.size = ShaderDataTypeSize(ShaderDataType::UInt);   // 4
+            indexBuffer->SetBufferData<uint32_t>(_meshData->IndicesU32());
+        }
+
+        GPUBufferLayout bufferLayout({gpuBufferElement});
+        bufferLayout.gpuBufferSubType = GPUBufferSubType::INDEX_DATA; 
+        bufferLayout.gpuBufferType = GPUBufferType::VERTEX_DATA_BUFFER; 
+        bufferLayout.GetElements(); 
+        indexBuffer->SetLayout(bufferLayout);
+
+        _renderCommand.indexBufferID = indexBuffer->GetBufferID();
+
+        _geometryBuffer->AddIndexBuffer(indexBuffer); 
+
+        Refresh();  
+    }
+
+    void Submesh::SetMaterial(Material* material)
+    {
+        _material = material;
+        _renderCommand.pipelineID = material->GetShaderHandle();
     }
 
     Submesh::~Submesh()
@@ -40,17 +76,23 @@ namespace AnalyticalApproach::Spellcore
 
     void Submesh::Refresh()
     {
-        _renderCommand.pipelineID = material->GetShader()->GetShaderHandle(); 
+        _renderCommand.pipelineID = _material->GetShader()->GetShaderHandle(); 
 
         int count = 0; 
-        for(const uint32_t tId:material->GetTextureIds() )
+        for(const uint32_t tId:_material->GetTextureIds() )
         {
             _renderCommand.textureIDs[count++] = tId; 
         }
 
         _renderCommand.geometryId = _geometryBuffer->GetId();
-        _renderCommand.elementCount = _geometryBuffer->GetElementCount();
+
+        if (IndexType::None != _meshData->GetIndexType())
+        {
+            _renderCommand.elementCount = _meshData->IndexCount(); 
+        }
+
         _renderCommand.sortKey = GenerateSortKey(); 
+
     }
 
     const RenderCommand& Submesh::GetRenderCommand()

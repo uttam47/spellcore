@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <cassert>
 
-#include "OpenGL/OpenGLVertexArray.h"
+#include "OpenGL/OpenGLGeometryBuffer.h"
 #include "core/GPUBufferLayout.h"
 
 namespace AnalyticalApproach::Spellcore
@@ -41,12 +41,6 @@ namespace AnalyticalApproach::Spellcore
     uint32_t OpenGLGeometryBuffer::GetId()
     {
         return _meshId;
-    }
-
-    uint64_t OpenGLGeometryBuffer::GetElementCount()
-    {
-        //TODO: Fetch from vertex buffer and return. 
-        return 0; 
     }
 
     OpenGLGeometryBuffer::OpenGLGeometryBuffer()
@@ -106,4 +100,16 @@ namespace AnalyticalApproach::Spellcore
 
         _vertexBuffer.push_back(vertexBuffer);
     }
+
+    void OpenGLGeometryBuffer::AddIndexBuffer(GPUBuffer* indexBuffer)
+    {
+        assert(indexBuffer && "GPUBuffer (index) must not be null.");
+        
+        const auto& layout = indexBuffer->GetLayout();
+        assert(layout.gpuBufferSubType == GPUBufferSubType::INDEX_DATA && "AddIndexBuffer expects a buffer with GPUBufferSubType::INDEX_DATA");
+
+        Bind();      
+        indexBuffer->Bind();            
+    }
+
 }

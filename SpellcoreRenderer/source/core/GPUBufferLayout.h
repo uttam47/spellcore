@@ -10,9 +10,9 @@ namespace AnalyticalApproach::Spellcore
 
     enum class GPUBufferType
     {
-        VERTEX_BUFFER = 0, 
-        UNIFORM_BUFFER,
-        SHADER_STORAGE_BUFFER
+        VERTEX_DATA_BUFFER = 0, 
+        UNIFORM_DATA_BUFFER,
+        SHADER_STORAGE_DATA_BUFFER, 
     }; 
 
     enum class GPUBufferSubType

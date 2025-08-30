@@ -3,7 +3,7 @@
 #include <OpenGL/OpenGLSCShaderCompiler.h>
 #include <OpenGL/OpenGLShaderProgram.h>
 #include <OpenGL/OpenGLGpuBuffer.h>
-#include <OpenGL/OpenGLVertexArray.h>
+#include <OpenGL/OpenGLGeometryBuffer.h>
 #include <OpenGL/OpenGLRenderQueue.h>
 
 

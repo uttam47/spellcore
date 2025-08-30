@@ -74,7 +74,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         if (hasNorm) elems.emplace_back(ShaderDataType::Float3, "a_Normal",   false);
 
         GPUBufferLayout layout(elems);
-        layout.gpuBufferType       = GPUBufferType::VERTEX_BUFFER;
+        layout.gpuBufferType       = GPUBufferType::VERTEX_DATA_BUFFER;
         layout.gpuBufferSubType    = GPUBufferSubType::VERTEX_DATA;
         layout.gpuBufferUsageType  = GPUBufferUsageType::STATIC;
         return layout;

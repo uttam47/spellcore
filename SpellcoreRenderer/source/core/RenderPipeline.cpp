@@ -26,6 +26,7 @@ namespace AnalyticalApproach::Spellcore
         GPUBufferLayout *bufferLayout = _spellcoreShaderCompiler->ExtractBufferLayout(scShader);
         scShader->SetBufferLayout(*bufferLayout);
         _shaderRegistery[scShader] = shaderPipeline;
+        scShader->SetShaderHandle(shaderPipeline->GetShaderProgramHandle()); 
     }
 
     void RenderPipeline::UnloadSCShader(SpellcoreShader *scShader)

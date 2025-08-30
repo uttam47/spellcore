@@ -66,6 +66,11 @@ namespace AnalyticalApproach::Spellcore
         {
             s_RenderingContext->BeginFrame();
         }
+
+        if (s_RenderQueue)
+        {
+            s_RenderQueue->Clear(); 
+        }
     }
 
     void SpellcoreRenderer::EndFrame()

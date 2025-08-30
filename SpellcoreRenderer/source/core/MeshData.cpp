@@ -85,7 +85,7 @@ namespace AnalyticalApproach::Spellcore
 	{
 		MeshDataBuffer vb;
 		vb.packing = VertexPacking::Interleaved;
-		vb.layout.gpuBufferType = GPUBufferType::VERTEX_BUFFER;
+		vb.layout.gpuBufferType = GPUBufferType::VERTEX_DATA_BUFFER;
 		vb.layout.gpuBufferSubType = GPUBufferSubType::VERTEX_DATA;
 		vb.layout.gpuBufferUsageType = usageHint;
 		m_vbuffers.push_back(std::move(vb));
@@ -132,7 +132,7 @@ namespace AnalyticalApproach::Spellcore
 	{
 		MeshDataBuffer vb;
 		vb.packing = VertexPacking::Separate;
-		vb.layout.gpuBufferType = GPUBufferType::VERTEX_BUFFER;
+		vb.layout.gpuBufferType = GPUBufferType::VERTEX_DATA_BUFFER;
 		vb.layout.gpuBufferSubType = GPUBufferSubType::VERTEX_DATA;
 		vb.layout.gpuBufferUsageType = usageHint;
 

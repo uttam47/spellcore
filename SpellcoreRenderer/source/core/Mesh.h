@@ -14,13 +14,14 @@ namespace AnalyticalApproach::Spellcore
         uint64_t GenerateSortKey(); 
         RenderCommand _renderCommand; 
         GeometryBuffer *_geometryBuffer = nullptr;
+        Material *_material;
     public:
-        Submesh(MeshData* meshData); 
-        Material *material;
+        Submesh(MeshData* meshData, Material* material); 
         uint32_t indexCount;
+        const RenderCommand& GetRenderCommand(); 
 
         void Refresh(); 
-        const RenderCommand& GetRenderCommand(); 
+        void SetMaterial(Material* material); 
 
         ~Submesh(); 
     };

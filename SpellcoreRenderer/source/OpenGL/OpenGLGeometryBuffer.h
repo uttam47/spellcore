@@ -16,10 +16,10 @@ namespace AnalyticalApproach::Spellcore
         void Bind() const override; 
         void Unbind() const override;
         
-        void AddAttributeBuffer(GPUBuffer* vertexBuffer) override;         
+        void AddAttributeBuffer(GPUBuffer* vertexBuffer) override; 
+        void AddIndexBuffer(GPUBuffer* indexBuffer) override; 
         uint32_t GetId() override; 
-        uint64_t GetElementCount() override; 
-
+        
     private:
         uint32_t _meshId;
         std::vector<GPUBuffer*> _vertexBuffer;

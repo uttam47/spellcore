@@ -36,11 +36,12 @@ namespace AnalyticalApproach::Spellcore
 
     void SpellcoreShader::SetShaderHandle(uint32_t shaderHandle)
     {
+        _shaderHandle = shaderHandle; 
     }
 
     uint32_t SpellcoreShader::GetShaderHandle()
     {
-        return 0; 
+        return _shaderHandle; 
     }
 
 }
