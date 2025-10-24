@@ -1,2 +1,2 @@
 # ThirdPartyLibs/CMakeLists.txt
-add_subdirectory(glfw)
+#add_subdirectory(glfw)
