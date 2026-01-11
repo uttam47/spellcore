@@ -12,9 +12,9 @@ namespace AnalyticalApproach::Spellcore
         IRenderingContext *CreateRenderingContext() override;
         GPUBuffer *CreateGPUBuffer() override;
         GeometryBuffer *CreateGeometryBuffer() override; 
-        ITexture *CreateTexture() override;
         ISCShaderCompiler *CreateSCShaderCompiler() override;
         IShaderProgram *CreateShaderProgram() override;
         RenderQueue* CreateRenderQueue() override;
+        IRenderTargetManager* CreateRenderTargetManager() override;
     };
 }

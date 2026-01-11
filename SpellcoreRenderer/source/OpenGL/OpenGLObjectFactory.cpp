@@ -5,7 +5,7 @@
 #include <OpenGL/OpenGLGpuBuffer.h>
 #include <OpenGL/OpenGLGeometryBuffer.h>
 #include <OpenGL/OpenGLRenderQueue.h>
-
+#include <OpenGL/OpenGLRenderTargetManager.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -24,14 +24,9 @@ namespace AnalyticalApproach::Spellcore
         return new OpenGLGeometryBuffer(); 
     }
 
-    ITexture *OpenGLObjectFactory::CreateTexture()
-    {
-        return nullptr; 
-    }
-
     ISCShaderCompiler *OpenGLObjectFactory::CreateSCShaderCompiler()
     {
-        return new OpenGLSCShaderCompiler(); 
+        return new OpenGLSCShaderCompiler();    
     }
 
     IShaderProgram *OpenGLObjectFactory::CreateShaderProgram()
@@ -42,5 +37,10 @@ namespace AnalyticalApproach::Spellcore
     RenderQueue* OpenGLObjectFactory::CreateRenderQueue()
     {
         return new OpenGLRenderQueue(); 
+    }
+
+    IRenderTargetManager* OpenGLObjectFactory::CreateRenderTargetManager()
+    {
+        return new OpenGLRenderTargetManager(); 
     }
 }

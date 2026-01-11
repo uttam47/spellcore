@@ -67,14 +67,6 @@ namespace AnalyticalApproach::Spellcore
         SCDepthAttachmentDesc depth = {};
     };
 
-    class SpellcoreRenderTargetManager
-    {
-        std::unordered_map<SCRenderTargetHandle, SCRenderTargetDesc> _renderTargets; 
-    public:
-        SCRenderTargetHandle Create(const SCRenderTargetDesc &desc);
-        void Destroy(SCRenderTargetHandle h);
-        const SCRenderTargetDesc &GetDesc(SCRenderTargetHandle h) const;
-    };
 
     struct SCRenderPassNode
     {
