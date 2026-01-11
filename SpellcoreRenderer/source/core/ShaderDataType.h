@@ -5,6 +5,17 @@
 
 namespace AnalyticalApproach::Spellcore
 {
+    using SCRenderTargetHandle = std::uint32_t; 
+    using RenderPassHandle = std::uint32_t; 
+    
+    enum class RenderTargetBindings
+    {
+        DEPTH, 
+        COLOR_RGBA, 
+        COLOR_RGB, 
+        STENCIL 
+    }; 
+
     enum class ShaderDataType
     {
         None = 0,
