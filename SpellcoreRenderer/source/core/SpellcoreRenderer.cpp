@@ -88,29 +88,29 @@ namespace AnalyticalApproach::Spellcore
         {
             //TODO: Instead of executing just one type of Render pass, execute them all as per their priority. 
             // Or give the option to do so individually, so that it has the flexibility to Render to any bound target. 
-            s_RenderQueue->Execute(RenderPassType::ForwardLighting);
+           // s_RenderQueue->Execute(RenderPassType::ForwardLighting);
         }
     }
 
-    void SpellcoreRenderer::RenderPass(RenderPassType renderPassType)
+    void SpellcoreRenderer::AddRenderPass(const std::string& renderPassName)
     {
 
         if (s_RenderQueue)
         {
             //TODO: Instead of executing just one type of Render pass, execute them all as per their priority. 
             // Or give the option to do so individually, so that it has the flexibility to Render to any bound target. 
-            s_RenderQueue->Execute(RenderPassType::ForwardLighting);
+            //s_RenderQueue->Execute(RenderPassType::ForwardLighting);
         }
     }
 
-    void SpellcoreRenderer::SubmitMesh(Mesh* mesh)
+    void SpellcoreRenderer::SubmitMesh(const std::string& renderPassName, Mesh* mesh)
     {
         if (s_RenderQueue)
         {
             for (Submesh* submesh: mesh->submeshes)
             {
                 //TODO: Render Pass type should also be present in the Mesh as an parameter. 
-                s_RenderQueue->Submit(RenderPassType::ForwardLighting, submesh->GetRenderCommand()); 
+               // s_RenderQueue->Submit(RenderPassType::ForwardLighting, submesh->GetRenderCommand()); 
             }
         }
     }

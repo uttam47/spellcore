@@ -7,6 +7,14 @@ namespace AnalyticalApproach::Spellcore
 		_backendRenderTargetManager = RenderingBackend::Get()->CreateRenderTargetManager(); 
 	}
 
+	SpellcoreRenderTargetManager::~SpellcoreRenderTargetManager()
+	{
+		if (_backendRenderTargetManager)
+		{
+			delete _backendRenderTargetManager; 
+		}
+	}
+
 	SCRenderTargetHandle SpellcoreRenderTargetManager::CreateRenderTarget(const SCRenderTargetDesc& renderTargetDesc)
 	{
 		auto scrtHandle = _backendRenderTargetManager->CreateRenderTarget(renderTargetDesc); 

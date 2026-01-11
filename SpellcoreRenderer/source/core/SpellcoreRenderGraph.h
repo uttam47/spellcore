@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "ShaderDataType.h"
+#include <core/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -81,7 +81,12 @@ namespace AnalyticalApproach::Spellcore
 
     class SpellcoreRenderGraph
     {
+        std::vector<SCRenderPassNode> _exectionOrder; 
+    
     public:
-        // later: AddPass(...), Compile(), Execute()
+        
+        bool AddPass(const SCRenderPassNode& scrpNode); 
+        bool Resolve(); 
+        bool Execute(); 
     };
 }

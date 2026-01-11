@@ -6,8 +6,8 @@
 #include <utility>
 #include <algorithm>
 #include <cstring> // std::memcpy
-#include "ShaderDataType.h"
-#include "GPUBufferLayout.h"
+#include <core/SpellcoreRenderDataTypes.h>
+#include <core/GPUBufferLayout.h>
 
 namespace AnalyticalApproach::Spellcore
 {

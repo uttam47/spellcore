@@ -6,7 +6,7 @@
 namespace AnalyticalApproach::Spellcore
 {
     using SCRenderTargetHandle = std::uint32_t; 
-    using RenderPassHandle = std::uint32_t; 
+    using SCRenderPassHandle = std::uint32_t; 
     
     enum class RenderTargetBindings
     {
@@ -15,6 +15,19 @@ namespace AnalyticalApproach::Spellcore
         COLOR_RGB, 
         STENCIL 
     }; 
+
+    enum class Primitive : uint8_t
+    {
+        TRIANGLES,
+        TRIANGLE_STRIP,
+        TRIANGLE_FAN, // Optional
+        LINES,
+        LINE_STRIP,
+        LINE_LOOP, // Optional
+        POINTS,
+        PATCHES
+    };
+
 
     enum class ShaderDataType
     {

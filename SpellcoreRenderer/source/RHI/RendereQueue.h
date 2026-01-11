@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
-#include <core/ShaderDataType.h>
+#include <core/SpellcoreRenderDataTypes.h>
+#include <core/SpellcoreRenderGraph.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -13,45 +14,35 @@ namespace AnalyticalApproach::Spellcore
     */
 
     // TODO: Remove this, we will go with bit masks for render pass. And this shouldn't be defined here, but inside core not in RHI. 
-    enum class RenderPassType
-    {
-        // --- Depth & Shadow ---
-        DepthPrepass,      // Early-Z or pre-depth-only pass (optional, used in AAA engines)
-        ShadowDirectional, // Shadow map rendering for directional lights (e.g., sun)
-        ShadowPoint,       // Cube map rendering for point light shadows
-        ShadowSpot,        // Spot light shadow maps
+    //enum class RenderPassType
+    //{
+    //    // --- Depth & Shadow ---
+    //    DepthPrepass,      // Early-Z or pre-depth-only pass (optional, used in AAA engines)
+    //    ShadowDirectional, // Shadow map rendering for directional lights (e.g., sun)
+    //    ShadowPoint,       // Cube map rendering for point light shadows
+    //    ShadowSpot,        // Spot light shadow maps
 
-        // --- G-buffer (Deferred shading) ---
-        GBuffer, // Geometry pass: outputs albedo, normals, depth, etc.
-        SSAO,    // Screen-space ambient occlusion (optional)
+    //    // --- G-buffer (Deferred shading) ---
+    //    GBuffer, // Geometry pass: outputs albedo, normals, depth, etc.
+    //    SSAO,    // Screen-space ambient occlusion (optional)
 
-        // --- Lighting ---
-        DeferredLighting, // Deferred shading lighting pass
-        ForwardLighting,  // Forward shading pass (transparent/alpha objects)
-        Transparent,      // Alpha blended geometry rendered after opaque
+    //    // --- Lighting ---
+    //    DeferredLighting, // Deferred shading lighting pass
+    //    ForwardLighting,  // Forward shading pass (transparent/alpha objects)
+    //    Transparent,      // Alpha blended geometry rendered after opaque
 
-        // --- Post-processing ---
-        ToneMapping, // Convert HDR to LDR and apply exposure curve
-        Bloom,       // Light bleeding/glow
-        MotionBlur,
-        DepthOfField,
-        FXAA,         // Anti-aliasing
-        ColorGrading, // LUT / post color adjustments
-        UIOverlay,    // ImGui, HUD, etc.
-        FinalBlit     // Final screen blit or swapchain present
-    };
+    //    // --- Post-processing ---
+    //    ToneMapping, // Convert HDR to LDR and apply exposure curve
+    //    Bloom,       // Light bleeding/glow
+    //    MotionBlur,
+    //    DepthOfField,
+    //    FXAA,         // Anti-aliasing
+    //    ColorGrading, // LUT / post color adjustments
+    //    UIOverlay,    // ImGui, HUD, etc.
+    //    FinalBlit     // Final screen blit or swapchain present
+    //};
 
-    enum class Primitive : uint8_t
-    {
-        TRIANGLES,
-        TRIANGLE_STRIP,
-        TRIANGLE_FAN, // Optional
-        LINES,
-        LINE_STRIP,
-        LINE_LOOP, // Optional
-        POINTS,
-        PATCHES
-    };
+    
 
     struct RenderCommand
     {
@@ -94,8 +85,8 @@ namespace AnalyticalApproach::Spellcore
     class RenderQueue
     {
     public:
-        virtual void Submit(RenderPassType renderPass, const RenderCommand &renderCommand) = 0;
-        virtual void Execute(RenderPassType renderPass) = 0;
+        virtual void Submit(const SCRenderPassHandle& scrtHandle, const RenderCommand &renderCommand) = 0;
+        virtual void Execute(const SCRenderPassHandle& scrtHandle) = 0;
         virtual void Clear() = 0;
         virtual ~RenderQueue() = default;
     };

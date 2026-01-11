@@ -1,18 +1,17 @@
-#include <OpenGL/OpenGLRenderQueue.h>
-#include <core/ShaderDataType.h>
-
 #include <algorithm>
+#include <OpenGL/OpenGLRenderQueue.h>
+
 
 namespace AnalyticalApproach::Spellcore
 {
-	void OpenGLRenderQueue::Submit(RenderPassType pass, const RenderCommand& cmd)
+	void OpenGLRenderQueue::Submit(const SCRenderPassHandle& scrpHandle, const RenderCommand& cmd)
 	{
-		_renderPassBuckets[pass].push_back(cmd);
+		_renderPassBuckets[scrpHandle].push_back(cmd);
 	}
 
-	void OpenGLRenderQueue::Execute(RenderPassType pass)
+	void OpenGLRenderQueue::Execute(const SCRenderPassHandle& scrpHandle)
 	{
-		auto& commands = _renderPassBuckets[pass];
+		auto& commands = _renderPassBuckets[scrpHandle];
 
 		std::sort(commands.begin(), commands.end(),
 			[](const RenderCommand& a, const RenderCommand& b)

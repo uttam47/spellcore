@@ -79,7 +79,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		{
 			_windowSystem.PollEvents();
 			SpellcoreRenderer::BeginFrame();
-			SpellcoreRenderer::SubmitMesh(_testMesh); 
+			SpellcoreRenderer::SubmitMesh("",_testMesh);
 			SpellcoreRenderer::RenderFrame(); 
 			_imguiTest.Render();
 			SpellcoreRenderer::EndFrame();
