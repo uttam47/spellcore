@@ -39,6 +39,15 @@ namespace AnalyticalApproach::Spellcore
 	bool SpellcoreRenderTargetManager::UseRenderTarget(const SCRTHandle& scrtHandle)
 	{
 
+		auto it = _renderTargets.find(scrtHandle);
+
+		if (it != _renderTargets.end())
+		{
+			_backendRenderTargetManager->UseRenderTarget(scrtHandle); 
+			return true; 
+		}
+
+		return false; 
 	}
 
 	const SCRTDescription& SpellcoreRenderTargetManager::GetRenderTargetDesc(const SCRTHandle& handle) const

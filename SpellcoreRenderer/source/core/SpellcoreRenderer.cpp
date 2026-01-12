@@ -8,7 +8,7 @@
 namespace AnalyticalApproach::Spellcore
 {
     IRenderingContext* SpellcoreRenderer::s_RenderingContext = nullptr;
-    RenderPipeline* SpellcoreRenderer::s_RenderPipeline = nullptr; 
+    SpellcoreRenderPipeline* SpellcoreRenderer::s_RenderPipeline = nullptr; 
     RenderQueue* SpellcoreRenderer::s_RenderQueue = nullptr;
 
     bool SpellcoreRenderer::Initialize(const RenderingSurfaceCreateInfo &surfaceInfo)
@@ -26,7 +26,7 @@ namespace AnalyticalApproach::Spellcore
             return false;
         }
 
-        s_RenderPipeline = new RenderPipeline(); 
+        s_RenderPipeline = new SpellcoreRenderPipeline(); 
      
         return true;
     }
