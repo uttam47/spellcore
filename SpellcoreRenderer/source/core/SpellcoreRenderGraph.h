@@ -16,77 +16,51 @@ namespace AnalyticalApproach::Spellcore
         D32F
     };
 
-    enum class SCRTSampleCount : uint8_t
+    enum class SCRTAttachmentType : uint8_t
     {
-        _1 = 1,
-        _2 = 2,
-        _4 = 4,
-        _8 = 8
+        Color = 0, 
+        Depth, 
+        Stencil
     };
 
-    enum class SCRTAccess : uint8_t
+    struct SpellcoreRenderImage
     {
-        None = 0,
-        SampledByShader, // implies texture-backed for GL
+        bool shaderReadBack = false; 
+        SCRTAttachmentType attachmentType = SCRTAttachmentType::Color; 
+        SCRTFormat  renderFormat = SCRTFormat::RGBA16F;
+
+        //Only used for colors
+        uint8_t attachmentIndex = 0; 
     };
 
-    inline bool IsColorFormat(SCRTFormat f)
+    struct SCRTDescription
     {
-        return (f == SCRTFormat::RGBA8 || f == SCRTFormat::RGBA16F);
-    }
-
-    inline bool IsDepthFormat(SCRTFormat f)
-    {
-        return (f == SCRTFormat::D24S8 || f == SCRTFormat::D32F);
-    }
-
-    struct SCColorAttachmentDesc
-    {
-        SCRTFormat format = SCRTFormat::RGBA8;
-        SCRTAccess access = SCRTAccess::None;
-    };
-
-    struct SCDepthAttachmentDesc
-    {
-        SCRTFormat format = SCRTFormat::D24S8;
-    };
-
-    struct SCRenderTargetDesc
-    {
-        const char *debugName = "RenderTarget";
-
         uint32_t width = 0;
         uint32_t height = 0;
 
-        SCRTSampleCount samples = SCRTSampleCount::_1;
-
-        bool hasColor = true;
-        SCColorAttachmentDesc color = {};
-
-        bool hasDepth = true;
-        SCDepthAttachmentDesc depth = {};
+        std::string name = "RenderTarget";
+        std::vector<SpellcoreRenderImage> scImages; 
     };
-
 
     struct SCRenderPassNode
     {
         std::string name;
 
         // "reads" means sampled input of RT color (v0 rule)
-        std::vector<SCRenderTargetHandle> reads;
+        std::vector<SCRTHandle> reads;
 
         // "writes" means this pass binds RT as framebuffer output
-        std::vector<SCRenderTargetHandle> writes;
+        std::vector<SCRTHandle> writes;
     };
 
     class SpellcoreRenderGraph
     {
-        std::vector<SCRenderPassNode> _exectionOrder; 
+        std::vector<SCRenderPassHandle> _exectionOrder;
     
     public:
         
         bool AddPass(const SCRenderPassNode& scrpNode); 
         bool Resolve(); 
-        bool Execute(); 
+        const std::vector<SCRenderPassHandle> GetRenderPassExecutionOrder() const; 
     };
 }

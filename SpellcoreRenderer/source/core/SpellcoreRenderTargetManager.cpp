@@ -15,14 +15,14 @@ namespace AnalyticalApproach::Spellcore
 		}
 	}
 
-	SCRenderTargetHandle SpellcoreRenderTargetManager::CreateRenderTarget(const SCRenderTargetDesc& renderTargetDesc)
+	SCRTHandle SpellcoreRenderTargetManager::CreateRenderTarget(const SCRTDescription& renderTargetDesc)
 	{
 		auto scrtHandle = _backendRenderTargetManager->CreateRenderTarget(renderTargetDesc); 
 		_renderTargets[scrtHandle] = renderTargetDesc; 
 		return scrtHandle; 
 	}
 
-	bool SpellcoreRenderTargetManager::DestroyRenderTarget(SCRenderTargetHandle handle)
+	bool SpellcoreRenderTargetManager::DestroyRenderTarget(SCRTHandle handle)
 	{
 		auto it = _renderTargets.find(handle);
 		
@@ -36,7 +36,12 @@ namespace AnalyticalApproach::Spellcore
 		return false; 
 	}
 
-	const SCRenderTargetDesc& SpellcoreRenderTargetManager::GetRenderTargetDesc(const SCRenderTargetHandle& handle) const
+	bool SpellcoreRenderTargetManager::UseRenderTarget(const SCRTHandle& scrtHandle)
+	{
+
+	}
+
+	const SCRTDescription& SpellcoreRenderTargetManager::GetRenderTargetDesc(const SCRTHandle& handle) const
 	{
 		auto it = _renderTargets.find(handle); 
 		if (it != _renderTargets.end())

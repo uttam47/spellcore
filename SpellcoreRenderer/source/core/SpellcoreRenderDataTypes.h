@@ -5,7 +5,7 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    using SCRenderTargetHandle = std::uint32_t; 
+    using SCRTHandle = std::uint32_t; 
     using SCRenderPassHandle = std::uint32_t; 
     
     enum class RenderTargetBindings

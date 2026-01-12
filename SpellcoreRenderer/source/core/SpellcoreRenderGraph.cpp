@@ -13,8 +13,8 @@ namespace AnalyticalApproach::Spellcore
 
     }
 
-    bool SpellcoreRenderGraph::Execute()
+    const std::vector<SCRenderPassHandle> SpellcoreRenderGraph::GetRenderPassExecutionOrder() const
     {
-        return false; 
+        return _exectionOrder; 
     }
 }

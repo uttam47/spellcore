@@ -2,17 +2,17 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    void RenderPipeline::Bind(SpellcoreShader *scShader)
+    void SpellcoreRenderPipeline::Bind(SpellcoreShader *scShader)
     {
         IShaderProgram *shaderPipeline = _shaderRegistery[scShader];
         shaderPipeline->Attach();
     }
 
-    void RenderPipeline::SetRenderPass()
+    void SpellcoreRenderPipeline::SetRenderPass()
     {
     }
 
-    void RenderPipeline::Unbind(SpellcoreShader *scShader)
+    void SpellcoreRenderPipeline::Unbind(SpellcoreShader *scShader)
     {
         IShaderProgram *shaderPipeline = _shaderRegistery[scShader];
         shaderPipeline->Detach();
@@ -20,7 +20,7 @@ namespace AnalyticalApproach::Spellcore
 
     // This below two fucntion should be part of the SpellcoreShaderRegistery
 
-    void RenderPipeline::LoadSCShader(SpellcoreShader *scShader)
+    void SpellcoreRenderPipeline::LoadSCShader(SpellcoreShader *scShader)
     {
         IShaderProgram *shaderPipeline = _spellcoreShaderCompiler->CreateShaderProgram(scShader);
         GPUBufferLayout *bufferLayout = _spellcoreShaderCompiler->ExtractBufferLayout(scShader);
@@ -29,7 +29,7 @@ namespace AnalyticalApproach::Spellcore
         scShader->SetShaderHandle(shaderPipeline->GetShaderProgramHandle()); 
     }
 
-    void RenderPipeline::UnloadSCShader(SpellcoreShader *scShader)
+    void SpellcoreRenderPipeline::UnloadSCShader(SpellcoreShader *scShader)
     {
     }
 }

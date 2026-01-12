@@ -7,13 +7,15 @@ namespace AnalyticalApproach::Spellcore
 {
     class SpellcoreRenderTargetManager
     {
-        std::unordered_map<SCRenderTargetHandle, SCRenderTargetDesc> _renderTargets;
+        std::unordered_map<SCRTHandle, SCRTDescription> _renderTargets;
         IRenderTargetManager* _backendRenderTargetManager; 
     public:
         SpellcoreRenderTargetManager();
         ~SpellcoreRenderTargetManager(); 
-        SCRenderTargetHandle CreateRenderTarget(const SCRenderTargetDesc& renderTargetDesc);
-        bool DestroyRenderTarget(SCRenderTargetHandle h);
-        const SCRenderTargetDesc& GetRenderTargetDesc(const SCRenderTargetHandle& handle) const;
+
+        SCRTHandle CreateRenderTarget(const SCRTDescription& renderTargetDesc);
+        const SCRTDescription& GetRenderTargetDesc(const SCRTHandle& handle) const;
+        bool DestroyRenderTarget(SCRTHandle h);
+        bool UseRenderTarget(const SCRTHandle& h); 
     };
 }
