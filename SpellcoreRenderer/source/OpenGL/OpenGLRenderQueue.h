@@ -1,8 +1,8 @@
-#include <RHI/RendereQueue.h>
-#include <unordered_map>
 #include <vector>
+#include <unordered_map>
 #include <GL/glew.h>
-#include <core/SpellcoreRenderDataTypes.h>
+#include <RHI/RendereQueue.h>
+#include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {

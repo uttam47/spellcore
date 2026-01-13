@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/GPUBufferLayout.h>
+#include <core/components/GPUBufferLayout.h>
 
 namespace AnalyticalApproach::Spellcore
 {

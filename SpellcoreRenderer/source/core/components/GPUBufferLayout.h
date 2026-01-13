@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstdint>
-#include <core/SpellcoreRenderDataTypes.h>
+#include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {

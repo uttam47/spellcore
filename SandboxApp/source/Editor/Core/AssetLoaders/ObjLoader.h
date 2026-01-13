@@ -7,8 +7,8 @@
 #include <array>
 #include <limits>
 
-#include "core/MeshData.h"           
-#include "core/GPUBufferLayout.h"     
+#include <core/components/MeshData.h>         
+#include <core/components/GPUBufferLayout.h>     
 
 namespace AnalyticalApproach::SpellcoreEditor
 {

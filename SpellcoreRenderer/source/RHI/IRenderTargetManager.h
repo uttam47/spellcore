@@ -1,5 +1,5 @@
 #pragma once
-#include <core/SpellcoreRenderGraph.h>
+#include <core/systems/SpellcoreRenderGraph.h>
 
 namespace AnalyticalApproach::Spellcore
 {

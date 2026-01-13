@@ -1,23 +1,23 @@
 #pragma once
 #include <unordered_map>
 
-#include <core/SpellcoreShader.h>
 #include <RHI/IShaderProgram.h>
 #include <RHI/ISCShaderCompiler.h>
-#include <core/RenderingBackend.h>
+#include <core/SpellcoreShader.h>
+#include <core/SpellcoreRenderingBackend.h>
 
 namespace AnalyticalApproach::Spellcore
 {
-    class RenderPipeline
+    class SpellcoreRenderPipeline
     {
     private:
         ISCShaderCompiler *_spellcoreShaderCompiler;
         std::unordered_map<SpellcoreShader *, IShaderProgram *> _shaderRegistery;
 
     public:
-        RenderPipeline()
+        SpellcoreRenderPipeline()
         {
-            _spellcoreShaderCompiler = RenderingBackend::Get()->CreateSCShaderCompiler(); 
+            _spellcoreShaderCompiler = SpellcoreRenderingBackend::Get()->CreateSCShaderCompiler(); 
         }
 
         void Bind(SpellcoreShader *scShader);

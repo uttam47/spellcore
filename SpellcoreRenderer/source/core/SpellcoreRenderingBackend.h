@@ -12,7 +12,7 @@ namespace AnalyticalApproach::Spellcore
         DirectX12
     };
 
-    class RenderingBackend
+    class SpellcoreRenderingBackend
     {
         inline static IRendererBackendFactory *_instance = nullptr;
 

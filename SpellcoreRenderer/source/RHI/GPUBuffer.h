@@ -1,11 +1,9 @@
 #pragma once
 
-#include "core/GPUBufferLayout.h"
 #include <memory>
-#include "core/GPUBufferLayout.h"
 #include <cstdint>
 #include <vector>
-#include <memory>
+#include <core/components/GPUBufferLayout.h>
 
 namespace AnalyticalApproach::Spellcore
 {

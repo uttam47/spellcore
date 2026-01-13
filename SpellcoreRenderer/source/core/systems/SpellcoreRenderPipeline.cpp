@@ -1,4 +1,4 @@
-#include <core/RenderPipeline.h>
+#include <core/systems/SpellcoreRenderPipeline.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -6,10 +6,6 @@ namespace AnalyticalApproach::Spellcore
     {
         IShaderProgram *shaderPipeline = _shaderRegistery[scShader];
         shaderPipeline->Attach();
-    }
-
-    void SpellcoreRenderPipeline::SetRenderPass()
-    {
     }
 
     void SpellcoreRenderPipeline::Unbind(SpellcoreShader *scShader)

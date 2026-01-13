@@ -1,8 +1,8 @@
 #include <GL/glew.h>
 #include <cassert>
 
-#include "OpenGL/OpenGLGeometryBuffer.h"
-#include "core/GPUBufferLayout.h"
+#include <OpenGL/OpenGLGeometryBuffer.h>
+#include <core/components/GPUBufferLayout.h>
 
 namespace AnalyticalApproach::Spellcore
 {

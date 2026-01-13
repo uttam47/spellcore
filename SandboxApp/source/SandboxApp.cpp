@@ -1,8 +1,9 @@
 #include <filesystem>
-#include "SandboxApp.h"
-#include "core/RenderingSurfaceCreateInfo.h"
-#include "core/MeshData.h"
-#include "core/Mesh.h"
+#include <core/components/RenderingSurfaceCreateInfo.h>
+#include <core/components/MeshData.h>
+#include <core/components/Mesh.h>
+
+#include <SandboxApp.h>
 
 namespace AnalyticalApproach::SpellcoreEditor
 {

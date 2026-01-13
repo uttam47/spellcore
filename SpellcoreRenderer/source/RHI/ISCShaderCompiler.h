@@ -1,5 +1,5 @@
 #pragma once
-#include <core/GPUBufferLayout.h>
+#include <core/components/GPUBufferLayout.h>
 #include <core/SpellcoreShader.h>
 #include <RHI/IShaderProgram.h>
 

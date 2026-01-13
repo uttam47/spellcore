@@ -4,7 +4,7 @@ namespace AnalyticalApproach::Spellcore
 {
 	SpellcoreRenderTargetManager::SpellcoreRenderTargetManager()
 	{
-		_backendRenderTargetManager = RenderingBackend::Get()->CreateRenderTargetManager(); 
+		_backendRenderTargetManager = SpellcoreRenderingBackend::Get()->CreateRenderTargetManager(); 
 	}
 
 	SpellcoreRenderTargetManager::~SpellcoreRenderTargetManager()

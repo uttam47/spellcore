@@ -1,8 +1,8 @@
 #include <Logger.h>
 #include <core/SpellcoreRenderer.h>
-#include <core/RenderPipeline.h>
+#include <core/systems/SpellcoreRenderPipeline.h>
 #include <core/SpellcoreShader.h>
-#include <core/RenderingBackend.h>
+#include <core/SpellcoreRenderingBackend.h>
 #include <filesystem>
 
 namespace AnalyticalApproach::Spellcore
@@ -13,10 +13,10 @@ namespace AnalyticalApproach::Spellcore
 
     bool SpellcoreRenderer::Initialize(const RenderingSurfaceCreateInfo &surfaceInfo)
     {
-        RenderingBackend::Initialize(GraphicsApi::OpenGL); 
+        SpellcoreRenderingBackend::Initialize(GraphicsApi::OpenGL); 
         
-        s_RenderingContext = RenderingBackend::Get()->CreateRenderingContext(); 
-        s_RenderQueue = RenderingBackend::Get()->CreateRenderQueue(); 
+        s_RenderingContext = SpellcoreRenderingBackend::Get()->CreateRenderingContext();
+        s_RenderQueue = SpellcoreRenderingBackend::Get()->CreateRenderQueue();
 
         if (!s_RenderingContext->Initialize(surfaceInfo))
         {

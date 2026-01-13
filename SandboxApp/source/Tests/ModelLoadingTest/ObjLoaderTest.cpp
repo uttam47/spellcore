@@ -1,6 +1,6 @@
-#include "ObjLoaderTest.h" 
-#include "Editor/Core/ResourceManager.h"
-#include "core/MeshData.h"
+#include <core/components/MeshData.h>
+#include "ObjLoaderTest.h"
+#include <Editor/Core/ResourceManager.h>
 
 namespace AnalyticalApproach::SpellcoreEditor
 {

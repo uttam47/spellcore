@@ -1,7 +1,7 @@
-#include <core/SpellcoreRenderDataTypes.h>
-#include <core/SpellcoreRenderGraph.h>
-#include <core/RenderingBackend.h>
 #include <RHI/IRenderTargetmanager.h>
+#include <core/components/SpellcoreRenderDataTypes.h>
+#include <core/systems/SpellcoreRenderGraph.h>
+#include <core/SpellcoreRenderingBackend.h>
 
 namespace AnalyticalApproach::Spellcore
 {

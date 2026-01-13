@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
-#include <core/SpellcoreRenderDataTypes.h>
-#include <core/SpellcoreRenderGraph.h>
+#include <core/components/SpellcoreRenderDataTypes.h>
+#include <core/systems/SpellcoreRenderGraph.h>
 
 namespace AnalyticalApproach::Spellcore
 {

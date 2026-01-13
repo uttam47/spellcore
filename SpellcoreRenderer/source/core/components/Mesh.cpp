@@ -1,5 +1,5 @@
-#include <core/Mesh.h>
-#include <core/RenderingBackend.h>
+#include <core/components/Mesh.h>
+#include <core/SpellcoreRenderingBackend.h>
 
 //TODO: Still figuring out how to design the Mesh class so that it can wrap a RenderCommand inside it. 
 //Question to be Answered:
@@ -10,19 +10,19 @@ namespace AnalyticalApproach::Spellcore
 {
     Submesh::Submesh(MeshData* meshData, Material* material) : _meshData(meshData), _material(material)
     {
-        _geometryBuffer = RenderingBackend::Get()->CreateGeometryBuffer();
+        _geometryBuffer = SpellcoreRenderingBackend::Get()->CreateGeometryBuffer();
         const auto& vertexAttribBuffers = _meshData->GetMeshDataBuffers();
 
         for (const auto& vaBuffer : vertexAttribBuffers)
         {
-            GPUBuffer* gpuBuffer = RenderingBackend::Get()->CreateGPUBuffer();
+            GPUBuffer* gpuBuffer = SpellcoreRenderingBackend::Get()->CreateGPUBuffer();
 
             gpuBuffer->SetBufferData<byte>(vaBuffer.bytes, 0);
             gpuBuffer->SetLayout(vaBuffer.layout);
             _geometryBuffer->AddAttributeBuffer(gpuBuffer);
         }
 
-        GPUBuffer* indexBuffer = RenderingBackend::Get()->CreateGPUBuffer();
+        GPUBuffer* indexBuffer = SpellcoreRenderingBackend::Get()->CreateGPUBuffer();
 
         GPUBufferElement gpuBufferElement; 
         gpuBufferElement.name = "Vertex_Index"; 

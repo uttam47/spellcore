@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
-#include <core/Material.h>
+#include <core/components/Material.h>
 #include <RHI/GeometryBuffer.h>
 #include <RHI/RendereQueue.h>
-#include <core/MeshData.h>
+#include <core/components/MeshData.h>
 
 namespace AnalyticalApproach::Spellcore
 {

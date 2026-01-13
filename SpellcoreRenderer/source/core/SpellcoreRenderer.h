@@ -1,11 +1,11 @@
 #pragma once
 
-#include <core/RenderingSurfaceCreateInfo.h>
-#include <core/RenderPipeline.h>
+#include <core/components/RenderingSurfaceCreateInfo.h>
+#include <core/systems/SpellcoreRenderPipeline.h>
 #include <RHI/IRenderingContext.h>
-#include <core/Mesh.h>
+#include <core/components/Mesh.h>
 #include <core/SpellcoreShader.h>
-#include <core/SpellcoreRenderGraph.h> 
+#include <core/systems/SpellcoreRenderGraph.h> 
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -13,7 +13,7 @@ namespace AnalyticalApproach::Spellcore
 	{
 	private:
 		static IRenderingContext* s_RenderingContext;
-		static RenderPipeline* s_RenderPipeline;
+		static SpellcoreRenderPipeline* s_RenderPipeline;
 		static RenderQueue* s_RenderQueue; 
 
 	public:

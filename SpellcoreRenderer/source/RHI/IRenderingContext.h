@@ -1,6 +1,6 @@
 #pragma once
 #include <windows.h>
-#include "core/RenderingSurfaceCreateInfo.h"
+#include <core/components/RenderingSurfaceCreateInfo.h>
 
 namespace AnalyticalApproach::Spellcore
 {
