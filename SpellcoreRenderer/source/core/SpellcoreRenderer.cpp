@@ -103,11 +103,11 @@ namespace AnalyticalApproach::Spellcore
         }
     }
 
-    void SpellcoreRenderer::SubmitMesh(const std::string& renderPassName, Mesh* mesh)
+    void SpellcoreRenderer::SubmitMesh(const std::string& renderPassName, MeshArr* mesh)
     {
         if (s_RenderQueue)
         {
-            for (Submesh* submesh: mesh->submeshes)
+            for (Mesh* submesh: mesh->submeshes)
             {
                 //TODO: Render Pass type should also be present in the Mesh as an parameter. 
                // s_RenderQueue->Submit(RenderPassType::ForwardLighting, submesh->GetRenderCommand()); 
@@ -115,11 +115,11 @@ namespace AnalyticalApproach::Spellcore
         }
     }
 
-    void SpellcoreRenderer::RemoveMesh(Mesh* mesh)
+    void SpellcoreRenderer::RemoveMesh(MeshArr* mesh)
     {
         if (s_RenderQueue)
         {
-            for (Submesh* submesh : mesh->submeshes)
+            for (Mesh* submesh : mesh->submeshes)
             {
                 //TODO: to remove all traversed Submesh's rendercommand from the current s_RenderQueue.
             }

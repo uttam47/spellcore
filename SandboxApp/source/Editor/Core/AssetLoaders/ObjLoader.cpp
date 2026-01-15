@@ -69,9 +69,9 @@ namespace AnalyticalApproach::SpellcoreEditor
         // Build an interleaved layout that matches the attributes we actually have:
         //   position (always present) + optional texcoord + optional normal
         std::vector<GPUBufferElement> elems;
-        elems.emplace_back(ShaderDataType::Float3, "a_Position", false);
-        if (hasTex)  elems.emplace_back(ShaderDataType::Float2, "a_TexCoord", false);
-        if (hasNorm) elems.emplace_back(ShaderDataType::Float3, "a_Normal",   false);
+        elems.emplace_back(SCDataType::Float3, "a_Position", false);
+        if (hasTex)  elems.emplace_back(SCDataType::Float2, "a_TexCoord", false);
+        if (hasNorm) elems.emplace_back(SCDataType::Float3, "a_Normal",   false);
 
         GPUBufferLayout layout(elems);
         layout.gpuBufferType       = GPUBufferType::VERTEX_DATA_BUFFER;
@@ -123,11 +123,11 @@ namespace AnalyticalApproach::SpellcoreEditor
     // ------------------------------
     //              Load
     // ------------------------------
-    MeshData* ObjLoader::Load(const std::string& objPath,
+    GeometryData* ObjLoader::Load(const std::string& objPath,
                              std::optional<bool> forceIndexed,
                              VertexPacking packing) const
     {
-        MeshData* out = new MeshData();                    // final product (move-only, big buffers adopted)
+        GeometryData* out = new GeometryData();                    // final product (move-only, big buffers adopted)
         out->SetUsage(GPUBufferUsageType::STATIC);
 
         // ---- 1) Slurp file into memory (simple text read) ----
@@ -353,21 +353,21 @@ namespace AnalyticalApproach::SpellcoreEditor
                 // Convert float vector -> raw bytes (no extra copy: we move the underlying storage)
                 std::vector<std::uint8_t> bytes(sizeof(float) * posSoA.size());
                 std::memcpy(bytes.data(), posSoA.data(), bytes.size());
-                out->AddSeparateAttributeMove(ShaderDataType::Float3, "a_Position",
+                out->AddSeparateAttributeMove(SCDataType::Float3, "a_Position",
                                              std::move(bytes), uniqueCount);
             }
             if (hasNorm)
             {
                 std::vector<std::uint8_t> bytes(sizeof(float) * nrmSoA.size());
                 std::memcpy(bytes.data(), nrmSoA.data(), bytes.size());
-                out->AddSeparateAttributeMove(ShaderDataType::Float3, "a_Normal",
+                out->AddSeparateAttributeMove(SCDataType::Float3, "a_Normal",
                                              std::move(bytes), uniqueCount);
             }
             if (hasTex)
             {
                 std::vector<std::uint8_t> bytes(sizeof(float) * uvSoA.size());
                 std::memcpy(bytes.data(), uvSoA.data(), bytes.size());
-                out->AddSeparateAttributeMove(ShaderDataType::Float2, "a_TexCoord",
+                out->AddSeparateAttributeMove(SCDataType::Float2, "a_TexCoord",
                                              std::move(bytes), uniqueCount);
             }
 
@@ -423,22 +423,22 @@ namespace AnalyticalApproach::SpellcoreEditor
                     // Simple way: create a new MeshData and swap… but to keep it direct:
                     // Add another binding and ignore the previous one (or rebuild a new MeshData).
                     // Here, for simplicity, we rebuild a fresh MeshData:
-                    MeshData* expanded = new MeshData(); 
+                    GeometryData* expanded = new GeometryData(); 
                     expanded->SetUsage(out->Usage());
-                    expanded->AddSeparateAttributeMove(ShaderDataType::Float3, "a_Position",
+                    expanded->AddSeparateAttributeMove(SCDataType::Float3, "a_Position",
                                                       std::move(bytes), expandedCount);
                     if (hasNorm)
                     {
                         std::vector<std::uint8_t> b(sizeof(float) * nrmExp.size());
                         std::memcpy(b.data(), nrmExp.data(), b.size());
-                        expanded->AddSeparateAttributeMove(ShaderDataType::Float3, "a_Normal",
+                        expanded->AddSeparateAttributeMove(SCDataType::Float3, "a_Normal",
                                                           std::move(b), expandedCount);
                     }
                     if (hasTex)
                     {
                         std::vector<std::uint8_t> b(sizeof(float) * uvExp.size());
                         std::memcpy(b.data(), uvExp.data(), b.size());
-                        expanded->AddSeparateAttributeMove(ShaderDataType::Float2, "a_TexCoord",
+                        expanded->AddSeparateAttributeMove(SCDataType::Float2, "a_TexCoord",
                                                           std::move(b), expandedCount);
                     }
                     // Move the freshly built expanded mesh into 'out'

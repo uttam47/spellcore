@@ -6,31 +6,31 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+    static GLenum ShaderDataTypeToOpenGLBaseType(SCDataType type)
     {
         switch (type)
         {
-        case ShaderDataType::Float:
+        case SCDataType::Float:
             return GL_FLOAT;
-        case ShaderDataType::Float2:
+        case SCDataType::Float2:
             return GL_FLOAT;
-        case ShaderDataType::Float3:
+        case SCDataType::Float3:
             return GL_FLOAT;
-        case ShaderDataType::Float4:
+        case SCDataType::Float4:
             return GL_FLOAT;
-        case ShaderDataType::Mat3:
+        case SCDataType::Mat3:
             return GL_FLOAT;
-        case ShaderDataType::Mat4:
+        case SCDataType::Mat4:
             return GL_FLOAT;
-        case ShaderDataType::Int:
+        case SCDataType::Int:
             return GL_INT;
-        case ShaderDataType::Int2:
+        case SCDataType::Int2:
             return GL_INT;
-        case ShaderDataType::Int3:
+        case SCDataType::Int3:
             return GL_INT;
-        case ShaderDataType::Int4:
+        case SCDataType::Int4:
             return GL_INT;
-        case ShaderDataType::Bool:
+        case SCDataType::Bool:
             return GL_BOOL;
         }
 
@@ -38,20 +38,21 @@ namespace AnalyticalApproach::Spellcore
         return 0;
     }
 
-    uint32_t OpenGLGeometryBuffer::GetId()
+    SCGeometryHandle OpenGLGeometryBuffer::GetId()
     {
-        return _meshId;
+        return _geometryHandle;
     }
 
     OpenGLGeometryBuffer::OpenGLGeometryBuffer()
     {
-        glGenVertexArrays(1, &_meshId);
-        glBindVertexArray(_meshId);
+        glGenVertexArrays(1, &_geometryHandle);
+        glBindVertexArray(_geometryHandle);
     }
 
     OpenGLGeometryBuffer::~OpenGLGeometryBuffer()
     {
-        glDeleteVertexArrays(1, &_meshId);
+
+        glDeleteVertexArrays(1, &_geometryHandle);
 
         for (auto& vertexBuffer : _vertexBuffer)
         {
@@ -66,7 +67,7 @@ namespace AnalyticalApproach::Spellcore
 
     void OpenGLGeometryBuffer::Bind() const
     {
-        glBindVertexArray(_meshId);
+        glBindVertexArray(_geometryHandle);
     }
 
     void OpenGLGeometryBuffer::Unbind() const

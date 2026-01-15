@@ -26,10 +26,10 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		_objLoaderTest = new ObjLoaderTest(); 
 
-		_testMesh = new Mesh(); 
-		MeshData* meshData = _objLoaderTest->GetCubeMesh(); 
+		_testMesh = new MeshArr(); 
+		GeometryData* meshData = _objLoaderTest->GetCubeMesh(); 
 		Material* material = new Material(_testShader);
-		Submesh* submesh = new Submesh(meshData, material);
+		Mesh* submesh = new Mesh(meshData, material);
 		_testMesh->submeshes.push_back(submesh);
 
 	}

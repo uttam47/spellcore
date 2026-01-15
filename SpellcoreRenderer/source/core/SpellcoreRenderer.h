@@ -42,7 +42,7 @@ namespace AnalyticalApproach::Spellcore
 		/// <param name="mesh">
 		/// Pointer to the mesh object to be submitted. Must remain valid the rendering pass consumes it.
 		/// </param>
-		static void SubmitMesh(const std::string& renderPassName, Mesh* mesh);
+		static void SubmitMesh(const std::string& renderPassName, MeshArr* mesh);
 
 		/// <summary>
 		/// To excluded a Mesh from the current rendering pass, without clearing the whole Render Command.  
@@ -50,7 +50,7 @@ namespace AnalyticalApproach::Spellcore
 		/// <param name="mesh">
 		/// Pointer to the mesh object to be submitted. Must remain valid the rendering pass consumes it.
 		/// </param>
-		static void RemoveMesh(Mesh* mesh);
+		static void RemoveMesh(MeshArr* mesh);
 
 		/// <devnote>
 		/// Clear states set for last Rendering pass?!

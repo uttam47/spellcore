@@ -2,17 +2,17 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-	SCRTHandle OpenGLRenderTargetManager::CreateRenderTarget(const SCRTDescription& scrtDescription)
+	SCRenderTargetHandle OpenGLRenderTargetManager::CreateRenderTarget(const SCRTDescription& scrtDescription)
 	{
 		return 0; 
 	}
 
-	bool OpenGLRenderTargetManager::DestroyRenderTarget(SCRTHandle& scrtHandle)
+	bool OpenGLRenderTargetManager::DestroyRenderTarget(SCRenderTargetHandle& scrtHandle)
 	{
 		return false; 
 	}
 
-	bool OpenGLRenderTargetManager::UseRenderTarget(const SCRTHandle& scrtHandle)
+	bool OpenGLRenderTargetManager::UseRenderTarget(const SCRenderTargetHandle& scrtHandle)
 	{
 		return false; 
 	}

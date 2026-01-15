@@ -17,7 +17,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		void LoadDefaultMeshes(); 
 
-		MeshData* GetCubeMesh(); 
-		MeshData* GetConeMesh(); 
+		GeometryData* GetCubeMesh(); 
+		GeometryData* GetConeMesh(); 
 	};
 }

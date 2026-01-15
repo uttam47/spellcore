@@ -20,7 +20,7 @@ namespace AnalyticalApproach::Spellcore
     // Optional shader-contract check (name+type must exist)
     struct MeshContract
     {
-        struct RequiredAttr { std::string name; ShaderDataType type; };
+        struct RequiredAttr { std::string name; SCDataType type; };
         std::vector<RequiredAttr> required;
     };
 
@@ -40,15 +40,15 @@ namespace AnalyticalApproach::Spellcore
         void     AdoptBytes(std::vector<uint8_t>&& src) noexcept { bytes = std::move(src); }
     };
 
-    class MeshData final
+    class SCGeometryData final
     {
     public:
         // ---------------- Ctors / Moves (copy disabled) ----------------
-        MeshData() = default;
-        MeshData(const MeshData&) = delete;
-        MeshData& operator=(const MeshData&) = delete;
-        MeshData(MeshData&&) noexcept;
-        MeshData& operator=(MeshData&&) noexcept;
+        SCGeometryData() = default;
+        SCGeometryData(const SCGeometryData&) = delete;
+        SCGeometryData& operator=(const SCGeometryData&) = delete;
+        SCGeometryData(SCGeometryData&&) noexcept;
+        SCGeometryData& operator=(SCGeometryData&&) noexcept;
 
         // ------------------------ Queries ------------------------------
         bool        IsIndexed() const;
@@ -73,7 +73,7 @@ namespace AnalyticalApproach::Spellcore
         uint32_t BeginInterleavedBinding(GPUBufferUsageType usageHint = GPUBufferUsageType::STATIC);
 
         // Add an attribute to the interleaved binding BEFORE supplying bytes
-        void AddInterleavedAttribute(uint32_t binding, ShaderDataType type,
+        void AddInterleavedAttribute(uint32_t binding, SCDataType type,
                                      const std::string& name, bool normalized = false);
 
         // Adopt a fully built interleaved byte buffer (zero copy)
@@ -88,7 +88,7 @@ namespace AnalyticalApproach::Spellcore
                                            GPUBufferUsageType usageHint = GPUBufferUsageType::STATIC);
 
         // Separate attribute: adopt bytes (one attribute per binding)
-        uint32_t AddSeparateAttributeMove(ShaderDataType type, const std::string& name,
+        uint32_t AddSeparateAttributeMove(SCDataType type, const std::string& name,
                                           std::vector<uint8_t>&& bytesMove,
                                           uint32_t inVertexCount,
                                           GPUBufferUsageType usageHint = GPUBufferUsageType::STATIC);

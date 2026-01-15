@@ -21,7 +21,6 @@ namespace AnalyticalApproach::Spellcore
         }
 
         void Bind(SpellcoreShader *scShader);
-        void SetRenderPass();
         void Unbind(SpellcoreShader *scShader);
 
         void LoadSCShader(SpellcoreShader *scShader);

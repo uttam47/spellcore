@@ -6,8 +6,8 @@ namespace AnalyticalApproach::Spellcore
 	class IRenderTargetManager
 	{
 	public: 
-		virtual SCRTHandle CreateRenderTarget(const SCRTDescription& scrtDescription) = 0;
-		virtual bool DestroyRenderTarget(SCRTHandle& scrtHandle) = 0;
-		virtual bool UseRenderTarget(const SCRTHandle& scrtHandle) = 0; 
+		virtual SCRenderTargetHandle CreateRenderTarget(const SCRTDescription& scrtDescription) = 0;
+		virtual bool DestroyRenderTarget(SCRenderTargetHandle& scrtHandle) = 0;
+		virtual bool UseRenderTarget(const SCRenderTargetHandle& scrtHandle) = 0; 
 	};
 }

@@ -28,7 +28,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         // Load from path into MeshData.
         //  - packing: Interleaved (single AoS binding) or Separate (one SoA binding per attribute).
         //  - forceIndexed: override heuristic. true=force indexed, false=force expanded, nullopt=use heuristic.
-        AnalyticalApproach::Spellcore::MeshData*
+        AnalyticalApproach::Spellcore::GeometryData*
         Load(const std::string& objPath,
             std::optional<bool> forceIndexed = std::nullopt,
             AnalyticalApproach::Spellcore::VertexPacking packing =

@@ -33,13 +33,13 @@ namespace AnalyticalApproach::Spellcore
     struct GPUBufferElement
     {
         bool normalized;
-        ShaderDataType type;
+        SCDataType type;
         uint32_t size;
         uint32_t offset;
         std::string name;
 
         GPUBufferElement() = default;
-        GPUBufferElement(ShaderDataType type, const std::string &name, bool normalized = false) : 
+        GPUBufferElement(SCDataType type, const std::string &name, bool normalized = false) : 
             name(name), type(type), size(ShaderDataTypeSize(type)), offset(0)
         {}
 

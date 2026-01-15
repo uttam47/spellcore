@@ -53,10 +53,10 @@ namespace AnalyticalApproach::Spellcore
             INSTANCED
         };
 
-        ShaderDataType indexType;
+        SCDataType indexType;
         // Core draw info
         DrawType drawType;
-        Primitive primitive;
+        SCPrimitive primitive;
 
         uint64_t sortKey = 0;
 

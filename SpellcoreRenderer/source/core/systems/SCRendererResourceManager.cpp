@@ -1,0 +1,86 @@
+#include <core/components/GPUBufferLayout.h>
+#include <core/SpellcoreRenderingBackend.h>
+#include <core/systems/SCRendererResourceManager.h>
+#include <core/components/SCGeometryData.h>
+#include <core/components/SpellcoreRenderDataTypes.h>
+
+namespace AnalyticalApproach::Spellcore
+{
+    SCRendererResourceManager::SCRendererResourceManager()
+    {
+        _renderingBackend = SpellcoreRenderingBackend::Get(); 
+    }
+
+    SCGeometryHandle SCRendererResourceManager::CreateSpellcoreGeometry(const SCGeometryData& meshData)
+    {
+        auto geometryBuffer = _renderingBackend->CreateGeometryBuffer();
+        const auto& vertexAttribBuffers = meshData.GetMeshDataBuffers();
+
+        for (const auto& vaBuffer : vertexAttribBuffers)
+        {
+            GPUBuffer* gpuBuffer = _renderingBackend->CreateGPUBuffer();
+
+            gpuBuffer->SetBufferData<byte>(vaBuffer.bytes, 0);
+            gpuBuffer->SetLayout(vaBuffer.layout);
+            geometryBuffer->AddAttributeBuffer(gpuBuffer);
+        }
+
+        GPUBuffer* indexBuffer = _renderingBackend->CreateGPUBuffer();
+
+        GPUBufferElement gpuBufferElement;
+        gpuBufferElement.name = "Vertex_Index";
+
+        if (meshData.GetIndexType() == IndexType::UInt16)
+        {
+            gpuBufferElement.type = SCDataType::UShort;
+            gpuBufferElement.size = ShaderDataTypeSize(SCDataType::UShort); // 2
+            indexBuffer->SetBufferData<uint16_t>(meshData.IndicesU16());
+        }
+        else if (meshData.GetIndexType() == IndexType::UInt32)
+        {
+            gpuBufferElement.type = SCDataType::UInt;
+            gpuBufferElement.size = ShaderDataTypeSize(SCDataType::UInt);   // 4
+            indexBuffer->SetBufferData<uint32_t>(meshData.IndicesU32());
+        }
+
+        GPUBufferLayout bufferLayout({ gpuBufferElement });
+        bufferLayout.gpuBufferSubType = GPUBufferSubType::INDEX_DATA;
+        bufferLayout.gpuBufferType = GPUBufferType::VERTEX_DATA_BUFFER;
+        bufferLayout.GetElements();
+        indexBuffer->SetLayout(bufferLayout);
+
+        geometryBuffer->AddIndexBuffer(indexBuffer);
+
+        _geometryBuffers[geometryBuffer->GetId()] = geometryBuffer; 
+    }
+
+
+    bool SCRendererResourceManager::UpdateSpellcoreGeometry(const SCGeometryData& meshData)
+    {
+
+    }
+
+    bool SCRendererResourceManager::DestroySpellcoreGeometry(SCGeometryHandle& scGeometryHandle)
+    {
+
+    }
+
+	SCImageHandle    SCRendererResourceManager::CreateSpellcoreImage()
+	{
+	}
+
+	SCTextureHandle  SCRendererResourceManager::CreateSpellcoreTexture()
+	{
+	}
+
+	SCMaterialHandle SCRendererResourceManager::CreateSpellcoreMaterial()
+	{
+
+	}
+
+    //TODO: Pull Bifurcate Render Pipeline and Shader Manager into two different entities. 
+	SCShaderHandle   SCRendererResourceManager::CreateSpellcoreShader()
+	{
+	}
+
+}

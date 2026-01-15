@@ -15,8 +15,8 @@ namespace AnalyticalApproach::Spellcore
         void Execute(const SCRenderPassHandle& scrpHandle) override;
         void Clear() override; 
 
-        GLenum ToGLPrimitiveType(Primitive primitive);
-        GLenum ToGLIndexType(ShaderDataType shaderIndexType); 
+        GLenum ToGLPrimitiveType(SCPrimitive primitive);
+        GLenum ToGLIndexType(SCDataType shaderIndexType); 
 
     };
 }

@@ -5,6 +5,8 @@
 #include "RHI/GPUBuffer.h"
 #include "RHI/GeometryBuffer.h"
 
+#include <core/components/SpellcoreRenderDataTypes.h>
+
 namespace AnalyticalApproach::Spellcore
 {
     class OpenGLGeometryBuffer: public GeometryBuffer
@@ -18,10 +20,10 @@ namespace AnalyticalApproach::Spellcore
         
         void AddAttributeBuffer(GPUBuffer* vertexBuffer) override; 
         void AddIndexBuffer(GPUBuffer* indexBuffer) override; 
-        uint32_t GetId() override; 
+        SCGeometryHandle GetId() override;
         
     private:
-        uint32_t _meshId;
+        SCGeometryHandle _geometryHandle;
         std::vector<GPUBuffer*> _vertexBuffer;
     };
 }

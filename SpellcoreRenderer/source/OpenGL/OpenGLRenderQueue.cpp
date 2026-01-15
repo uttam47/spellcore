@@ -60,27 +60,27 @@ namespace AnalyticalApproach::Spellcore
 			commands.clear();
 	}
 
-	GLenum OpenGLRenderQueue::ToGLIndexType(ShaderDataType t)
+	GLenum OpenGLRenderQueue::ToGLIndexType(SCDataType t)
 	{
 		switch (t)
 		{
-		case ShaderDataType::UShort: return GL_UNSIGNED_SHORT;
-		case ShaderDataType::UInt:   return GL_UNSIGNED_INT;
+		case SCDataType::UShort: return GL_UNSIGNED_SHORT;
+		case SCDataType::UInt:   return GL_UNSIGNED_INT;
 		default:                     return 0;
 		}
 	}
-	GLenum OpenGLRenderQueue::ToGLPrimitiveType(Primitive primitive)
+	GLenum OpenGLRenderQueue::ToGLPrimitiveType(SCPrimitive primitive)
 	{
 		switch (primitive)
 		{
-		case Primitive::TRIANGLES: return GL_TRIANGLES;
-		case Primitive::TRIANGLE_STRIP: return GL_TRIANGLE_STRIP;
-		case Primitive::TRIANGLE_FAN: return GL_TRIANGLE_FAN;
-		case Primitive::LINES: return GL_LINES;
-		case Primitive::LINE_STRIP: return GL_LINE_STRIP;
-		case Primitive::LINE_LOOP: return GL_LINE_LOOP;
-		case Primitive::POINTS: return GL_POINTS;
-		case Primitive::PATCHES: return GL_PATCHES;
+		case SCPrimitive::TRIANGLES: return GL_TRIANGLES;
+		case SCPrimitive::TRIANGLE_STRIP: return GL_TRIANGLE_STRIP;
+		case SCPrimitive::TRIANGLE_FAN: return GL_TRIANGLE_FAN;
+		case SCPrimitive::LINES: return GL_LINES;
+		case SCPrimitive::LINE_STRIP: return GL_LINE_STRIP;
+		case SCPrimitive::LINE_LOOP: return GL_LINE_LOOP;
+		case SCPrimitive::POINTS: return GL_POINTS;
+		case SCPrimitive::PATCHES: return GL_PATCHES;
 		}
 		return GL_TRIANGLES;
 	}

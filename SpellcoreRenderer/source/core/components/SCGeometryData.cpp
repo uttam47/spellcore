@@ -1,10 +1,10 @@
-#include "MeshData.h"
+#include "SCGeometryData.h"
 #include <cassert>
 #include <utility> // std::move
 
 namespace AnalyticalApproach::Spellcore
 {
-	MeshData::MeshData(MeshData&& other) noexcept
+	SCGeometryData::SCGeometryData(SCGeometryData&& other) noexcept
 		: m_indexType(other.m_indexType)
 		, m_vbuffers(std::move(other.m_vbuffers))
 		, m_indexCount(other.m_indexCount)
@@ -22,7 +22,7 @@ namespace AnalyticalApproach::Spellcore
 		other.m_vbuffers.clear();
 	}
 
-	MeshData& MeshData::operator=(MeshData&& other) noexcept
+	SCGeometryData& SCGeometryData::operator=(SCGeometryData&& other) noexcept
 	{
 		if (this != &other)
 		{
@@ -45,14 +45,14 @@ namespace AnalyticalApproach::Spellcore
 		return *this;
 	}
 
-	bool MeshData::IsIndexed() const
+	bool SCGeometryData::IsIndexed() const
 	{
 		return (m_indexType == IndexType::UInt16 && !m_indices16.empty()) ||
 			(m_indexType == IndexType::UInt32 && !m_indices32.empty());
 	}
 
 	std::optional<std::pair<uint32_t, uint32_t>>
-		MeshData::FindAttribute(const std::string& name) const
+		SCGeometryData::FindAttribute(const std::string& name) const
 	{
 		for (uint32_t b = 0; b < m_vbuffers.size(); ++b)
 		{
@@ -64,12 +64,12 @@ namespace AnalyticalApproach::Spellcore
 		return std::nullopt;
 	}
 
-	bool MeshData::HasAttribute(const std::string& name) const
+	bool SCGeometryData::HasAttribute(const std::string& name) const
 	{
 		return FindAttribute(name).has_value();
 	}
 
-	bool MeshData::Satisfies(const MeshContract& contract) const
+	bool SCGeometryData::Satisfies(const MeshContract& contract) const
 	{
 		for (const auto& req : contract.required)
 		{
@@ -81,7 +81,7 @@ namespace AnalyticalApproach::Spellcore
 		return true;
 	}
 
-	uint32_t MeshData::BeginInterleavedBinding(GPUBufferUsageType usageHint)
+	uint32_t SCGeometryData::BeginInterleavedBinding(GPUBufferUsageType usageHint)
 	{
 		MeshDataBuffer vb;
 		vb.packing = VertexPacking::Interleaved;
@@ -92,7 +92,7 @@ namespace AnalyticalApproach::Spellcore
 		return static_cast<uint32_t>(m_vbuffers.size() - 1);
 	}
 
-	void MeshData::AddInterleavedAttribute(uint32_t binding, ShaderDataType type,
+	void SCGeometryData::AddInterleavedAttribute(uint32_t binding, SCDataType type,
 		const std::string& name, bool normalized)
 	{
 		auto elems = m_vbuffers[binding].layout.GetElements(); // copy current list
@@ -100,7 +100,7 @@ namespace AnalyticalApproach::Spellcore
 		m_vbuffers[binding].layout = GPUBufferLayout{ elems };  // recompute offsets/stride
 	}
 
-	void MeshData::AdoptInterleavedBytes(uint32_t binding, std::vector<uint8_t>&& bytesMove,
+	void SCGeometryData::AdoptInterleavedBytes(uint32_t binding, std::vector<uint8_t>&& bytesMove,
 		uint32_t inVertexCount)
 	{
 		auto& vb = m_vbuffers[binding];
@@ -114,7 +114,7 @@ namespace AnalyticalApproach::Spellcore
 		vb.AdoptBytes(std::move(bytesMove));
 	}
 
-	uint32_t MeshData::AddInterleavedBindingMove(GPUBufferLayout layout,
+	uint32_t SCGeometryData::AddInterleavedBindingMove(GPUBufferLayout layout,
 		std::vector<uint8_t>&& bytesMove,
 		uint32_t inVertexCount,
 		GPUBufferUsageType usageHint)
@@ -125,7 +125,7 @@ namespace AnalyticalApproach::Spellcore
 		return b;
 	}
 
-	uint32_t MeshData::AddSeparateAttributeMove(ShaderDataType type, const std::string& name,
+	uint32_t SCGeometryData::AddSeparateAttributeMove(SCDataType type, const std::string& name,
 		std::vector<uint8_t>&& bytesMove,
 		uint32_t inVertexCount,
 		GPUBufferUsageType usageHint)
@@ -158,7 +158,7 @@ namespace AnalyticalApproach::Spellcore
 		return static_cast<uint32_t>(m_vbuffers.size() - 1);
 	}
 
-	void MeshData::AdoptIndices(std::vector<uint16_t>&& idx,
+	void SCGeometryData::AdoptIndices(std::vector<uint16_t>&& idx,
 		GPUBufferUsageType usageHint) noexcept
 	{
 		m_indexType = IndexType::UInt16;
@@ -169,7 +169,7 @@ namespace AnalyticalApproach::Spellcore
 		m_indices32.shrink_to_fit();
 	}
 
-	void MeshData::AdoptIndices(std::vector<uint32_t>&& idx,
+	void SCGeometryData::AdoptIndices(std::vector<uint32_t>&& idx,
 		GPUBufferUsageType usageHint) noexcept
 	{
 		m_indexType = IndexType::UInt32;
@@ -180,7 +180,7 @@ namespace AnalyticalApproach::Spellcore
 		m_indices16.shrink_to_fit();
 	}
 
-	void MeshData::AllocateInterleaved(uint32_t binding, uint32_t inVertexCount)
+	void SCGeometryData::AllocateInterleaved(uint32_t binding, uint32_t inVertexCount)
 	{
 		m_vertexCount = inVertexCount;
 		auto& vb = m_vbuffers[binding];
@@ -188,7 +188,7 @@ namespace AnalyticalApproach::Spellcore
 		vb.bytes.resize(static_cast<size_t>(stride) * m_vertexCount);
 	}
 
-	void MeshData::ClearMemory()
+	void SCGeometryData::ClearMemory()
 	{
 		m_indices16.clear(); m_indices16.shrink_to_fit();
 		m_indices32.clear(); m_indices32.shrink_to_fit();

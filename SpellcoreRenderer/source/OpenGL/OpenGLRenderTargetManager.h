@@ -6,8 +6,8 @@ namespace AnalyticalApproach::Spellcore
 	{
 	public:
 
-		SCRTHandle CreateRenderTarget(const SCRTDescription& scrtDescription) override;
-		bool DestroyRenderTarget(SCRTHandle& scrtHandle) override;
-		bool UseRenderTarget(const SCRTHandle& scrtHandle) override; 
+		SCRenderTargetHandle CreateRenderTarget(const SCRTDescription& scrtDescription) override;
+		bool DestroyRenderTarget(SCRenderTargetHandle& scrtHandle) override;
+		bool UseRenderTarget(const SCRenderTargetHandle& scrtHandle) override; 
 	};
 }
