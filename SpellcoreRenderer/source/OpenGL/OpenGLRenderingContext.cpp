@@ -26,7 +26,7 @@ namespace AnalyticalApproach::Spellcore
         int pixelFormat = ChoosePixelFormat(_deviceContext, &pfd);
         if (pixelFormat == 0 || !SetPixelFormat(_deviceContext, pixelFormat, &pfd))
         {
-            LOG_ERROR("❌ Failed to choose or set pixel format.");
+            LOG_ERROR("Failed to choose or set pixel format.");
             return false;
         }
 
@@ -34,14 +34,14 @@ namespace AnalyticalApproach::Spellcore
         HGLRC dummyContext = wglCreateContext(_deviceContext);
         if (!dummyContext || !wglMakeCurrent(_deviceContext, dummyContext))
         {
-            LOG_ERROR("❌ Failed to create or activate dummy OpenGL context.");
+            LOG_ERROR("Failed to create or activate dummy OpenGL context.");
             return false;
         }
 
         // Step 3: Init GLEW to access wgl extensions
         if (glewInit() != GLEW_OK)
         {
-            LOG_ERROR("❌ glewInit failed on dummy context.");
+            LOG_ERROR("glewInit failed on dummy context.");
             return false;
         }
 
@@ -51,7 +51,7 @@ namespace AnalyticalApproach::Spellcore
 
         if (!wglCreateContextAttribsARB)
         {
-            LOG_ERROR("❌ wglCreateContextAttribsARB not available.");
+            LOG_ERROR("wglCreateContextAttribsARB not available.");
             return false;
         }
 
@@ -66,7 +66,7 @@ namespace AnalyticalApproach::Spellcore
         HGLRC modernContext = wglCreateContextAttribsARB(_deviceContext, nullptr, attribs);
         if (!modernContext)
         {
-            LOG_ERROR("❌ Failed to create modern OpenGL context.");
+            LOG_ERROR("Failed to create modern OpenGL context.");
             return false;
         }
 
@@ -75,13 +75,13 @@ namespace AnalyticalApproach::Spellcore
         wglDeleteContext(dummyContext);
         if (!wglMakeCurrent(_deviceContext, modernContext))
         {
-            LOG_ERROR("❌ Failed to activate modern context.");
+            LOG_ERROR("Failed to activate modern context.");
             return false;
         }
 
         if (glewInit() != GLEW_OK)
         {
-            LOG_ERROR("❌ glewInit failed on real context.");
+            LOG_ERROR("glewInit failed on real context.");
             return -1;
         }
 
@@ -116,7 +116,7 @@ namespace AnalyticalApproach::Spellcore
 
     bool OpenGLRenderingContext::BeginFrame()
     {
-        glClearColor(0.1f, 0.3f, 0.3f, 1.0f);
+        glClearColor(1.0, 0.835, 0.725, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         return true;
     }
@@ -136,17 +136,17 @@ namespace AnalyticalApproach::Spellcore
         const char *renderer = reinterpret_cast<const char *>(glGetString(GL_RENDERER));
         const char *glslVer = reinterpret_cast<const char *>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-        LOG_INFO(std::string("🎉 OpenGL Version: ") + (version ? std::string(version) : "Unknown"));
-        LOG_INFO(std::string("🏭 GPU Vendor: ") + (vendor ? std::string(vendor) : "Unknown"));
-        LOG_INFO(std::string("🖼️  GPU Renderer: ") + (renderer ? std::string(renderer) : "Unknown"));
-        LOG_INFO(std::string("📜 GLSL Version: ") + (glslVer ? std::string(glslVer) : "Unknown"));
+        LOG_INFO(std::string("OpenGL Version: ") + (version ? std::string(version) : "Unknown"));
+        LOG_INFO(std::string("GPU Vendor: ") + (vendor ? std::string(vendor) : "Unknown"));
+        LOG_INFO(std::string("GPU Renderer: ") + (renderer ? std::string(renderer) : "Unknown"));
+        LOG_INFO(std::string("GLSL Version: ") + (glslVer ? std::string(glslVer) : "Unknown"));
 
         GLint numExtensions = 0;
         glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
 
         if (numExtensions > 0 && glGetStringi != nullptr)
         {
-            LOG_INFO(std::string("🔍 Listing OpenGL extensions (core profile):"));
+            LOG_INFO(std::string("Listing OpenGL extensions (core profile):"));
             for (GLint i = 0; i < numExtensions; ++i)
             {
                 const char *ext = reinterpret_cast<const char *>(glGetStringi(GL_EXTENSIONS, i));
@@ -159,7 +159,7 @@ namespace AnalyticalApproach::Spellcore
             const char *extensions = reinterpret_cast<const char *>(glGetString(GL_EXTENSIONS));
             if (extensions)
             {
-                LOG_INFO(std::string("🔍 Listing OpenGL extensions (compatibility profile):"));
+                LOG_INFO(std::string("Listing OpenGL extensions (compatibility profile):"));
                 std::istringstream extStream(extensions);
                 std::string ext;
                 while (extStream >> ext)
@@ -169,7 +169,7 @@ namespace AnalyticalApproach::Spellcore
             }
             else
             {
-                LOG_INFO(std::string("⚠️  No extensions string available."));
+                LOG_INFO(std::string("No extensions string available."));
             }
         }
 
