@@ -1,4 +1,4 @@
-#include <core/components/MeshData.h>
+#include <core/components/SCGEometryData.h>
 #include "ObjLoaderTest.h"
 #include <Editor/Core/ResourceManager.h>
 
@@ -12,12 +12,12 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_objLoader = new ObjLoader(); 
 	}
 
-	GeometryData* ObjLoaderTest::GetConeMesh()
+	SCGeometryData* ObjLoaderTest::GetConeMesh()
 	{
 		return _objLoader->Load(CONE_OBJ_PATH, std::optional<bool>(true), VertexPacking::Interleaved);
 	}
 
-	GeometryData* ObjLoaderTest::GetCubeMesh()
+	SCGeometryData* ObjLoaderTest::GetCubeMesh()
 	{
 		return _objLoader->Load(CUBE_OBJ_PATH, std::optional<bool>(true), VertexPacking::Interleaved);
 	}

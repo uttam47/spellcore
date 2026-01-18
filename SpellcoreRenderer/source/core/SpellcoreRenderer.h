@@ -3,7 +3,7 @@
 #include <core/components/RenderingSurfaceCreateInfo.h>
 #include <core/systems/SpellcoreRenderPipeline.h>
 #include <RHI/IRenderingContext.h>
-#include <core/components/Mesh.h>
+#include <core/components/SCGeometryData.h>
 #include <core/SpellcoreShader.h>
 #include <core/systems/SpellcoreRenderGraph.h> 
 
@@ -42,7 +42,7 @@ namespace AnalyticalApproach::Spellcore
 		/// <param name="mesh">
 		/// Pointer to the mesh object to be submitted. Must remain valid the rendering pass consumes it.
 		/// </param>
-		static void SubmitMesh(const std::string& renderPassName, MeshArr* mesh);
+		static void SubmitMesh(const std::string& renderPassKey);
 
 		/// <summary>
 		/// To excluded a Mesh from the current rendering pass, without clearing the whole Render Command.  
@@ -50,7 +50,7 @@ namespace AnalyticalApproach::Spellcore
 		/// <param name="mesh">
 		/// Pointer to the mesh object to be submitted. Must remain valid the rendering pass consumes it.
 		/// </param>
-		static void RemoveMesh(MeshArr* mesh);
+		static void RemoveMesh();
 
 		/// <devnote>
 		/// Clear states set for last Rendering pass?!

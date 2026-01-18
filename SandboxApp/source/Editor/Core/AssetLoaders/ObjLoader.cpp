@@ -123,11 +123,11 @@ namespace AnalyticalApproach::SpellcoreEditor
     // ------------------------------
     //              Load
     // ------------------------------
-    GeometryData* ObjLoader::Load(const std::string& objPath,
+    SCGeometryData* ObjLoader::Load(const std::string& objPath,
                              std::optional<bool> forceIndexed,
                              VertexPacking packing) const
     {
-        GeometryData* out = new GeometryData();                    // final product (move-only, big buffers adopted)
+        SCGeometryData* out = new SCGeometryData();                    // final product (move-only, big buffers adopted)
         out->SetUsage(GPUBufferUsageType::STATIC);
 
         // ---- 1) Slurp file into memory (simple text read) ----
@@ -423,7 +423,7 @@ namespace AnalyticalApproach::SpellcoreEditor
                     // Simple way: create a new MeshData and swap… but to keep it direct:
                     // Add another binding and ignore the previous one (or rebuild a new MeshData).
                     // Here, for simplicity, we rebuild a fresh MeshData:
-                    GeometryData* expanded = new GeometryData(); 
+                    SCGeometryData* expanded = new SCGeometryData();
                     expanded->SetUsage(out->Usage());
                     expanded->AddSeparateAttributeMove(SCDataType::Float3, "a_Position",
                                                       std::move(bytes), expandedCount);

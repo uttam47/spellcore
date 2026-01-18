@@ -82,7 +82,7 @@ namespace AnalyticalApproach::Spellcore
         if (glewInit() != GLEW_OK)
         {
             LOG_ERROR("❌ glewInit failed on real context.");
-            return -1;
+            return false;
         }
 
         PrintGLStatus(); 

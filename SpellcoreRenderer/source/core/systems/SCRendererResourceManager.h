@@ -105,9 +105,9 @@ namespace AnalyticalApproach::Spellcore
 
         SCMaterialHandle CreateSpellcoreMaterial(); 
 
-        SCTextureHandle CreateTexture(const SCTextureDesc& scTextureDesc);
-        SCTextureHandle CreateTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData);
-        bool UpdateTexture(SCTextureHandle scTextureHandle, const SCImageData* imageData);
+        SCTextureHandle CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc);
+        SCTextureHandle CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData);
+        bool UpdateSpellcoreTexture(SCTextureHandle scTextureHandle, const SCImageData* imageData);
 
         //TODO: Pull Bifurcate Render Pipeline and Shader Manager into two different entities. 
         SCShaderHandle CreateSpellcoreShader();

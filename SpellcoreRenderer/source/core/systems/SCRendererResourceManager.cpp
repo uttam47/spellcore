@@ -57,30 +57,34 @@ namespace AnalyticalApproach::Spellcore
 
     bool SCRendererResourceManager::UpdateSpellcoreGeometry(const SCGeometryData& meshData)
     {
-
+        return false; 
     }
 
     bool SCRendererResourceManager::DestroySpellcoreGeometry(SCGeometryHandle& scGeometryHandle)
     {
 
+        return false;
     }
 
-	SCImageHandle    SCRendererResourceManager::CreateSpellcoreImage()
+    SCTextureHandle SCRendererResourceManager::CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc)
 	{
+        return 0; 
 	}
 
-	SCTextureHandle  SCRendererResourceManager::CreateSpellcoreTexture()
+	SCTextureHandle SCRendererResourceManager::CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData)
 	{
+        return 0;
 	}
 
 	SCMaterialHandle SCRendererResourceManager::CreateSpellcoreMaterial()
 	{
-
+        return 0; 
 	}
 
     //TODO: Pull Bifurcate Render Pipeline and Shader Manager into two different entities. 
 	SCShaderHandle   SCRendererResourceManager::CreateSpellcoreShader()
 	{
+        return 0; 
 	}
 
 }

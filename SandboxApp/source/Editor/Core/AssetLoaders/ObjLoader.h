@@ -7,7 +7,7 @@
 #include <array>
 #include <limits>
 
-#include <core/components/MeshData.h>         
+#include <core/components/SCGeometryData.h>         
 #include <core/components/GPUBufferLayout.h>     
 
 namespace AnalyticalApproach::SpellcoreEditor
@@ -28,7 +28,7 @@ namespace AnalyticalApproach::SpellcoreEditor
         // Load from path into MeshData.
         //  - packing: Interleaved (single AoS binding) or Separate (one SoA binding per attribute).
         //  - forceIndexed: override heuristic. true=force indexed, false=force expanded, nullopt=use heuristic.
-        AnalyticalApproach::Spellcore::GeometryData*
+        AnalyticalApproach::Spellcore::SCGeometryData*
         Load(const std::string& objPath,
             std::optional<bool> forceIndexed = std::nullopt,
             AnalyticalApproach::Spellcore::VertexPacking packing =

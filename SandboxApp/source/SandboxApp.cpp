@@ -1,7 +1,6 @@
 #include <filesystem>
 #include <core/components/RenderingSurfaceCreateInfo.h>
-#include <core/components/MeshData.h>
-#include <core/components/Mesh.h>
+#include <core/components/SCGeometryData.h>
 
 #include <SandboxApp.h>
 
@@ -26,11 +25,11 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		_objLoaderTest = new ObjLoaderTest(); 
 
-		_testMesh = new MeshArr(); 
+	/*	_testMesh = new MeshArr(); 
 		GeometryData* meshData = _objLoaderTest->GetCubeMesh(); 
 		Material* material = new Material(_testShader);
 		Mesh* submesh = new Mesh(meshData, material);
-		_testMesh->submeshes.push_back(submesh);
+		_testMesh->submeshes.push_back(submesh);*/
 
 	}
 
@@ -80,7 +79,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		{
 			_windowSystem.PollEvents();
 			SpellcoreRenderer::BeginFrame();
-			SpellcoreRenderer::SubmitMesh("",_testMesh);
+			//SpellcoreRenderer::SubmitMesh("",_testMesh);
 			SpellcoreRenderer::RenderFrame(); 
 			_imguiTest.Render();
 			SpellcoreRenderer::EndFrame();
@@ -102,6 +101,6 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_windowSystem.DestroyAppWindow(_windowHandle);
 
 		delete _objLoaderTest; 
-		delete _testMesh; 
+		//delete _testMesh; 
 	}
 }
