@@ -22,6 +22,11 @@ add_library(SpellcoreRenderer STATIC ${PROJECT_SOURCES})
 target_include_directories(SpellcoreRenderer PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/source
 )
+
+# Include directories
+target_include_directories(SpellcoreRenderer PRIVATE
+    ${THIRD_PARTY_LIBS_DIR}/glm
+)
     
 add_library(glew STATIC IMPORTED)
 set_target_properties(glew PROPERTIES

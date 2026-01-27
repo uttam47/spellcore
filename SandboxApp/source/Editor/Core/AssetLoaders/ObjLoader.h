@@ -88,7 +88,10 @@ namespace AnalyticalApproach::SpellcoreEditor
                                   bool hasTex, bool hasNorm);
 
         // Utility: true if value fits in 16-bit index.
-        static bool FitsInU16(std::uint32_t v) { return v <= std::numeric_limits<std::uint16_t>::max(); }
+        static bool FitsInU16(std::uint32_t v)
+        {
+            return v <= (std::numeric_limits<std::uint16_t>::max)();
+        }
 
     private:
         double m_indexifyThreshold; // Heuristic cutoff for keeping indexed geometry

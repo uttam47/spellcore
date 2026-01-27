@@ -25,11 +25,9 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 		_objLoaderTest = new ObjLoaderTest(); 
 
-	/*	_testMesh = new MeshArr(); 
-		GeometryData* meshData = _objLoaderTest->GetCubeMesh(); 
-		Material* material = new Material(_testShader);
-		Mesh* submesh = new Mesh(meshData, material);
-		_testMesh->submeshes.push_back(submesh);*/
+		_geometryCPUCache = _objLoaderTest->GetCubeMesh();
+		_testMeshHandle = SpellcoreRenderer::UploadGeometry(*_geometryCPUCache);
+
 
 	}
 
@@ -79,7 +77,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		{
 			_windowSystem.PollEvents();
 			SpellcoreRenderer::BeginFrame();
-			//SpellcoreRenderer::SubmitMesh("",_testMesh);
+			SpellcoreRenderer::SubmitMesh(_testMeshHandle,"BASE");
 			SpellcoreRenderer::RenderFrame(); 
 			_imguiTest.Render();
 			SpellcoreRenderer::EndFrame();
@@ -100,7 +98,9 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_windowEventChannel->on_window_closed.unsubscribe(&SandboxApp::CloseApp, this);
 		_windowSystem.DestroyAppWindow(_windowHandle);
 
+		SpellcoreRenderer::ReleaseGeometry(_testMeshHandle); 
+
+		delete _geometryCPUCache; 
 		delete _objLoaderTest; 
-		//delete _testMesh; 
 	}
 }

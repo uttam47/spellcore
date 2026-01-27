@@ -33,6 +33,8 @@ namespace AnalyticalApproach::SpellcoreEditor
         WindowSystem::WindowEventChannel* _windowEventChannel = nullptr;
         ResourceManager* _resourceManager; 
 
+        SCGeometryHandle _testMeshHandle; 
+        SCGeometryData* _geometryCPUCache; 
         //Test only
         ImguiTest _imguiTest;
         ObjLoaderTest* _objLoaderTest = nullptr; 

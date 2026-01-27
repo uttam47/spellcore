@@ -9,10 +9,12 @@
 #include <core/components/SpellcoreRenderDataTypes.h>
 #include <core/components/GPUBufferLayout.h>
 
+#include <glm/glm.hpp>
+
 namespace AnalyticalApproach::Spellcore
 {
     // Packing style of a vertex binding
-    enum class VertexPacking { Interleaved, Separate };
+    enum class VertexPacking { Interleaved, NonInterleaved };
 
     // Index type used by this mesh
     enum class IndexType : uint8_t { None = 0, UInt16, UInt32 };
@@ -129,7 +131,7 @@ namespace AnalyticalApproach::Spellcore
         uint32_t              m_indexCount = 0;
         std::vector<uint16_t> m_indices16;  // used if m_indexType == UInt16
         std::vector<uint32_t> m_indices32;  // used if m_indexType == UInt32
-
+        std::vector<glm::ivec2> submeshRanges; 
         // ------------ Vertices -----------
         uint32_t                     m_vertexCount = 0;
         std::vector<MeshDataBuffer> m_vbuffers;

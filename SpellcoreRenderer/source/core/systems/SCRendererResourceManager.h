@@ -83,11 +83,13 @@ namespace AnalyticalApproach::Spellcore
     };
 
 
-
     class SCRendererResourceManager
     {
 
     private:
+
+        static SCRendererResourceManager* STATIC_INSTANCE;
+        SCRendererResourceManager(); 
 
         IRendererBackendFactory* _renderingBackend;
 
@@ -97,11 +99,12 @@ namespace AnalyticalApproach::Spellcore
        
     public:
 
-        SCRendererResourceManager(); 
+        static SCRendererResourceManager* GetInstance();
+
         //TODO: Check whether it's possible to pass this as const or not, keeping it as it for now. 
         SCGeometryHandle CreateSpellcoreGeometry(const SCGeometryData& meshData);
-        bool UpdateSpellcoreGeometry(const SCGeometryData& meshData);
-        bool DestroySpellcoreGeometry(SCGeometryHandle& scMeshHandle);
+        bool UpdateSpellcoreGeometry(const SCGeometryHandle& scGeoHandle, const SCGeometryData& meshData);
+        bool DestroySpellcoreGeometry(SCGeometryHandle& scGeoHandle);
 
         SCMaterialHandle CreateSpellcoreMaterial(); 
 
@@ -111,7 +114,11 @@ namespace AnalyticalApproach::Spellcore
 
         //TODO: Pull Bifurcate Render Pipeline and Shader Manager into two different entities. 
         SCShaderHandle CreateSpellcoreShader();
+
+        static void DestroyInstance();
     };
+
+    using RenderResourceRegistry = SCRendererResourceManager; 
 }
 
 

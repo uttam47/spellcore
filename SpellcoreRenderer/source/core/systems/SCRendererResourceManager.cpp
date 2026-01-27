@@ -6,6 +6,28 @@
 
 namespace AnalyticalApproach::Spellcore
 {
+    SCRendererResourceManager* SCRendererResourceManager::STATIC_INSTANCE = nullptr;
+
+    SCRendererResourceManager* SCRendererResourceManager::GetInstance()
+    {
+        if (STATIC_INSTANCE == nullptr)
+        {
+            STATIC_INSTANCE = new SCRendererResourceManager(); 
+        }
+
+        return STATIC_INSTANCE; 
+    }
+
+    void SCRendererResourceManager::DestroyInstance()
+    {
+        if (STATIC_INSTANCE != nullptr)
+        {
+            delete STATIC_INSTANCE;
+        }
+
+        STATIC_INSTANCE = nullptr; 
+    }
+
     SCRendererResourceManager::SCRendererResourceManager()
     {
         _renderingBackend = SpellcoreRenderingBackend::Get(); 
@@ -55,12 +77,12 @@ namespace AnalyticalApproach::Spellcore
     }
 
 
-    bool SCRendererResourceManager::UpdateSpellcoreGeometry(const SCGeometryData& meshData)
+    bool SCRendererResourceManager::UpdateSpellcoreGeometry(const SCGeometryHandle& scGeoHandle, const SCGeometryData& scGeoData)
     {
         return false; 
     }
 
-    bool SCRendererResourceManager::DestroySpellcoreGeometry(SCGeometryHandle& scGeometryHandle)
+    bool SCRendererResourceManager::DestroySpellcoreGeometry(SCGeometryHandle& scGeoHandle)
     {
 
         return false;

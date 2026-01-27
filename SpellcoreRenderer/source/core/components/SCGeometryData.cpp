@@ -131,7 +131,7 @@ namespace AnalyticalApproach::Spellcore
 		GPUBufferUsageType usageHint)
 	{
 		MeshDataBuffer vb;
-		vb.packing = VertexPacking::Separate;
+		vb.packing = VertexPacking::NonInterleaved;
 		vb.layout.gpuBufferType = GPUBufferType::VERTEX_DATA_BUFFER;
 		vb.layout.gpuBufferSubType = GPUBufferSubType::VERTEX_DATA;
 		vb.layout.gpuBufferUsageType = usageHint;
