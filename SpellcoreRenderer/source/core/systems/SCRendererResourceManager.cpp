@@ -72,8 +72,10 @@ namespace AnalyticalApproach::Spellcore
         indexBuffer->SetLayout(bufferLayout);
 
         geometryBuffer->AddIndexBuffer(indexBuffer);
+        SCGeometryHandle geometryHandle = geometryBuffer->GetId(); 
+        _geometryBuffers[geometryHandle] = geometryBuffer;
 
-        _geometryBuffers[geometryBuffer->GetId()] = geometryBuffer; 
+        return geometryHandle; 
     }
 
 

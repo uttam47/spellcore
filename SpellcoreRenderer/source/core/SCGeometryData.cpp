@@ -1,4 +1,4 @@
-#include "SCGeometryData.h"
+#include "components/SCGeometryData.h"
 #include <cassert>
 #include <utility> // std::move
 

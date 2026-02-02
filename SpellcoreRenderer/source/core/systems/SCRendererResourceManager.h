@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 #include <core/components/SpellcoreRenderDataTypes.h>
-#include <core/components/SCGeometryData.cpp>
+#include <core/components/SCGeometryData.h>
 #include <core/SpellcoreRenderingBackend.h>
 
 
