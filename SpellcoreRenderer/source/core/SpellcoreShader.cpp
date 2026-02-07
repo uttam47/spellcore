@@ -8,6 +8,7 @@ namespace AnalyticalApproach::Spellcore
     SpellcoreShader::SpellcoreShader(std::string shaderPath)
     {
         FileSystem::FileReader shaderFileReader(shaderPath); 
+        _shaderSourcePath = shaderPath; 
         _shaderSource = shaderFileReader.getContent(); 
     }
 
@@ -15,9 +16,9 @@ namespace AnalyticalApproach::Spellcore
     {
     }
 
-    const std::string &SpellcoreShader::GetSourcePath()
+    const std::string& SpellcoreShader::GetSourcePath()
     {
-        return ""; 
+        return _shaderSourcePath;
     }
 
     const std::string& SpellcoreShader::GetShaderSource()

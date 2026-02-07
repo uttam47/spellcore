@@ -1,19 +1,17 @@
 #include <algorithm>
 #include <OpenGL/OpenGLRenderQueue.h>
-
+#include <OpenGL/OpenGLTypeUtility.h> 
 
 namespace AnalyticalApproach::Spellcore
 {
-	void OpenGLRenderQueue::Submit(const SCRenderPassHandle& scrpHandle, const RenderCommand& cmd)
+	void OpenGLRenderQueue::Submit( const RenderCommand& cmd)
 	{
-		_renderPassBuckets[scrpHandle].push_back(cmd);
+		_commands.push_back(cmd);
 	}
 
-	void OpenGLRenderQueue::Execute(const SCRenderPassHandle& scrpHandle)
+	void OpenGLRenderQueue::Execute()
 	{
-		auto& commands = _renderPassBuckets[scrpHandle];
-
-		std::sort(commands.begin(), commands.end(),
+		std::sort(_commands.begin(), _commands.end(),
 			[](const RenderCommand& a, const RenderCommand& b)
 			{
 				return a.sortKey < b.sortKey;
@@ -22,7 +20,7 @@ namespace AnalyticalApproach::Spellcore
 		GLuint lastProgram = 0;
 		GLuint lastVAO = 0;
 
-		for (const auto& cmd : commands)
+		for (const auto& cmd : _commands)
 		{
 			if (cmd.elementCount == 0)
 				continue;
@@ -52,37 +50,16 @@ namespace AnalyticalApproach::Spellcore
 			}
 		}
 
-		commands.clear();
+		_commands.clear();
 	}
+
 	void OpenGLRenderQueue::Clear()
 	{
-		for (auto& [_, commands] : _renderPassBuckets)
-			commands.clear();
+		_commands.clear();
 	}
 
-	GLenum OpenGLRenderQueue::ToGLIndexType(SCDataType t)
+	void OpenGLRenderQueue::Sort()
 	{
-		switch (t)
-		{
-		case SCDataType::UShort: return GL_UNSIGNED_SHORT;
-		case SCDataType::UInt:   return GL_UNSIGNED_INT;
-		default:                     return 0;
-		}
+		//sort. 
 	}
-	GLenum OpenGLRenderQueue::ToGLPrimitiveType(SCPrimitive primitive)
-	{
-		switch (primitive)
-		{
-		case SCPrimitive::TRIANGLES: return GL_TRIANGLES;
-		case SCPrimitive::TRIANGLE_STRIP: return GL_TRIANGLE_STRIP;
-		case SCPrimitive::TRIANGLE_FAN: return GL_TRIANGLE_FAN;
-		case SCPrimitive::LINES: return GL_LINES;
-		case SCPrimitive::LINE_STRIP: return GL_LINE_STRIP;
-		case SCPrimitive::LINE_LOOP: return GL_LINE_LOOP;
-		case SCPrimitive::POINTS: return GL_POINTS;
-		case SCPrimitive::PATCHES: return GL_PATCHES;
-		}
-		return GL_TRIANGLES;
-	}
-
 }

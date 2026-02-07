@@ -111,7 +111,7 @@ namespace AnalyticalApproach::Spellcore
     {
         if (s_RenderQueue)
         {
-            
+            //s_RenderQueue->Submit(); 
         }
     }
 
@@ -125,16 +125,16 @@ namespace AnalyticalApproach::Spellcore
 
     uint32_t SpellcoreRenderer::UploadGeometry(const SCGeometryData& scGeometryData)
     {
-       return s_RenderResourceRegistry->CreateSpellcoreGeometry(scGeometryData);
+       return s_RenderResourceRegistry->CreateGeometryResource(scGeometryData);
     }
 
     bool SpellcoreRenderer::UpdateGeometry(const SCGeometryHandle& scGeoHandle, const SCGeometryData& scGeoemtryData)
     {
-        return s_RenderResourceRegistry->UpdateSpellcoreGeometry(scGeoHandle, scGeoemtryData);
+        return s_RenderResourceRegistry->UpdateGeometryResource(scGeoHandle, scGeoemtryData);
     }
 
     void SpellcoreRenderer::ReleaseGeometry(SCGeometryHandle& scGeoHandle)
     {
-        s_RenderResourceRegistry->DestroySpellcoreGeometry(scGeoHandle);
+        s_RenderResourceRegistry->DestroyGeometryResource(scGeoHandle);
     }
 }

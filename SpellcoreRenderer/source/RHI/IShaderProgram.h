@@ -1,19 +1,10 @@
 #pragma once
 
 #include <string> 
+#include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {    
-    enum class ShaderType
-    {
-        Vertex,
-        Fragment,
-        Geometry,
-        TessControl,
-        TessEvaluation,
-        Compute
-    }; 
-
     class IShaderProgram
     {
     public:

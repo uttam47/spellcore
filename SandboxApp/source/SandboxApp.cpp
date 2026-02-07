@@ -28,6 +28,8 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_geometryCPUCache = _objLoaderTest->GetCubeMesh();
 		_testMeshHandle = SpellcoreRenderer::UploadGeometry(*_geometryCPUCache);
 
+		SpellcoreRenderer::SubmitMesh(_testMeshHandle, "Base_Layer");
+
 
 	}
 

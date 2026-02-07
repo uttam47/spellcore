@@ -9,14 +9,11 @@ namespace AnalyticalApproach::Spellcore
     class OpenGLRenderQueue : public RenderQueue
     {
     private: 
-        std::unordered_map<SCRenderPassHandle, std::vector<RenderCommand>> _renderPassBuckets; 
+        std::vector<RenderCommand> _commands; 
     public:
-        void Submit(const SCRenderPassHandle& scrpHandle, const RenderCommand &renderCommand) override;
-        void Execute(const SCRenderPassHandle& scrpHandle) override;
+        void Submit(const RenderCommand &renderCommand) override;
+        void Execute() override;
         void Clear() override; 
-
-        GLenum ToGLPrimitiveType(SCPrimitive primitive);
-        GLenum ToGLIndexType(SCDataType shaderIndexType); 
-
+        void Sort() override; 
     };
 }

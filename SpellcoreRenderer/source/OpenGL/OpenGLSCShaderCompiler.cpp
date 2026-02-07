@@ -4,6 +4,7 @@
 #include <RHI/IShaderProgram.h>
 #include <OpenGL/OpenGLShaderProgram.h>
 
+#include <assert.h>
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
@@ -68,6 +69,8 @@ namespace AnalyticalApproach::Spellcore
                 {
                         return it->second(spellcoreShader->GetSource());
                 }
+                assert(false && "Couldn't extract source for Shader type. ");
+                return ""; 
         }
 
         std::string OpenGLSCShaderCompiler::GenerateVertexShader(const std::string &src)

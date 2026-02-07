@@ -1,7 +1,8 @@
+#include <assert.h>
 #include <core/components/GPUBufferLayout.h>
 #include <core/SpellcoreRenderingBackend.h>
-#include <core/systems/SCRendererResourceManager.h>
 #include <core/components/SCGeometryData.h>
+#include <core/systems/SCRendererResourceManager.h>
 #include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
@@ -29,11 +30,13 @@ namespace AnalyticalApproach::Spellcore
     }
 
     SCRendererResourceManager::SCRendererResourceManager()
-    {
+    { 
         _renderingBackend = SpellcoreRenderingBackend::Get(); 
+        _renderResourceManager = SpellcoreRenderingBackend::Get()->CreateRenderResourceManager();
+
     }
 
-    SCGeometryHandle SCRendererResourceManager::CreateSpellcoreGeometry(const SCGeometryData& meshData)
+    SCGeometryHandle SCRendererResourceManager::CreateGeometryResource(const SCGeometryData& meshData)
     {
         auto geometryBuffer = _renderingBackend->CreateGeometryBuffer();
         const auto& vertexAttribBuffers = meshData.GetMeshDataBuffers();
@@ -79,23 +82,23 @@ namespace AnalyticalApproach::Spellcore
     }
 
 
-    bool SCRendererResourceManager::UpdateSpellcoreGeometry(const SCGeometryHandle& scGeoHandle, const SCGeometryData& scGeoData)
+    bool SCRendererResourceManager::UpdateGeometryResource(const SCGeometryHandle& scGeoHandle, const SCGeometryData& scGeoData)
     {
         return false; 
     }
 
-    bool SCRendererResourceManager::DestroySpellcoreGeometry(SCGeometryHandle& scGeoHandle)
+    bool SCRendererResourceManager::DestroyGeometryResource(SCGeometryHandle& scGeoHandle)
     {
 
         return false;
     }
 
-    SCTextureHandle SCRendererResourceManager::CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc)
+    SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureDesc& scTextureDesc)
 	{
         return 0; 
 	}
 
-	SCTextureHandle SCRendererResourceManager::CreateSpellcoreTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData)
+	SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData)
 	{
         return 0;
 	}
@@ -111,4 +114,57 @@ namespace AnalyticalApproach::Spellcore
         return 0; 
 	}
 
+    SCRenderTargetHandle SCRendererResourceManager::CreateRenderTarget(const SCRTDescription& renderTargetDesc)
+    {
+        auto scrtHandle = _renderResourceManager->CreateRenderTarget(renderTargetDesc);
+        _renderTargets[scrtHandle] = renderTargetDesc;
+        return scrtHandle;
+    }
+
+    bool SCRendererResourceManager::DestroyRenderTarget(SCRenderTargetHandle handle)
+    {
+        auto it = _renderTargets.find(handle);
+
+        if (it != _renderTargets.end())
+        {
+            _renderResourceManager->DestroyRenderTarget(handle);
+            _renderTargets.erase(it);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool SCRendererResourceManager::UseRenderTarget(const SCRenderTargetHandle& scrtHandle)
+    {
+
+        auto it = _renderTargets.find(scrtHandle);
+
+        if (it != _renderTargets.end())
+        {
+            _renderResourceManager->UseRenderTarget(scrtHandle);
+            return true;
+        }
+
+        return false;
+    }
+
+    const SCRTDescription* SCRendererResourceManager::GetRenderTargetDesc(const SCRenderTargetHandle& handle) const
+    {
+        auto it = _renderTargets.find(handle);
+        if (it != _renderTargets.end())
+        {
+            return &it->second;
+        }
+        
+        return nullptr; 
+    }
+
+    SCRendererResourceManager::~SCRendererResourceManager()
+    {
+        if (_renderResourceManager)
+        {
+            delete _renderResourceManager;
+        }
+    }
 }

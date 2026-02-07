@@ -1,43 +1,12 @@
 #include <GL/glew.h>
 #include <cassert>
 
+#include <OpenGL/OpenGLTypeUtility.h>
 #include <OpenGL/OpenGLGeometryBuffer.h>
 #include <core/components/GPUBufferLayout.h>
 
 namespace AnalyticalApproach::Spellcore
 {
-    static GLenum ShaderDataTypeToOpenGLBaseType(SCDataType type)
-    {
-        switch (type)
-        {
-        case SCDataType::Float:
-            return GL_FLOAT;
-        case SCDataType::Float2:
-            return GL_FLOAT;
-        case SCDataType::Float3:
-            return GL_FLOAT;
-        case SCDataType::Float4:
-            return GL_FLOAT;
-        case SCDataType::Mat3:
-            return GL_FLOAT;
-        case SCDataType::Mat4:
-            return GL_FLOAT;
-        case SCDataType::Int:
-            return GL_INT;
-        case SCDataType::Int2:
-            return GL_INT;
-        case SCDataType::Int3:
-            return GL_INT;
-        case SCDataType::Int4:
-            return GL_INT;
-        case SCDataType::Bool:
-            return GL_BOOL;
-        }
-
-        assert(false && "Unknown ShaderDataType!");
-        return 0;
-    }
-
     SCGeometryHandle OpenGLGeometryBuffer::GetId()
     {
         return _geometryHandle;

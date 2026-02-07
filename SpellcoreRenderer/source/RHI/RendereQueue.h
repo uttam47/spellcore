@@ -85,9 +85,10 @@ namespace AnalyticalApproach::Spellcore
     class RenderQueue
     {
     public:
-        virtual void Submit(const SCRenderPassHandle& scrtHandle, const RenderCommand &renderCommand) = 0;
-        virtual void Execute(const SCRenderPassHandle& scrtHandle) = 0;
+        virtual void Submit(const RenderCommand &renderCommand) = 0;
+        virtual void Execute() = 0;
         virtual void Clear() = 0;
+        virtual void Sort() = 0; 
         virtual ~RenderQueue() = default;
     };
 }

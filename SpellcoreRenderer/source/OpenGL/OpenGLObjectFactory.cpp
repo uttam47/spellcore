@@ -5,7 +5,7 @@
 #include <OpenGL/OpenGLGpuBuffer.h>
 #include <OpenGL/OpenGLGeometryBuffer.h>
 #include <OpenGL/OpenGLRenderQueue.h>
-#include <OpenGL/OpenGLRenderTargetManager.h>
+#include <OpenGL/OpenGLRenderResourceManager.h>
 
 namespace AnalyticalApproach::Spellcore
 {
@@ -39,8 +39,8 @@ namespace AnalyticalApproach::Spellcore
         return new OpenGLRenderQueue(); 
     }
 
-    IRenderTargetManager* OpenGLObjectFactory::CreateRenderTargetManager()
+    IRenderResourceManager* OpenGLObjectFactory::CreateRenderResourceManager()
     {
-        return new OpenGLRenderTargetManager(); 
+        return new OpenGLRenderResourceManager(); 
     }
 }

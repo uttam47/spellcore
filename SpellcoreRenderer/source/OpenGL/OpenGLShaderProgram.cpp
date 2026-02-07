@@ -1,4 +1,5 @@
 #include <OpenGL/OpenGLShaderProgram.h>
+#include <OpenGL/OpenGLTypeUtility.h>
 #include <stdexcept>
 #include <iostream>
 #include <vector>
@@ -32,26 +33,6 @@ namespace AnalyticalApproach::Spellcore
             glDeleteProgram(_programHandle);
             _programHandle = 0;
         }
-    }
-
-    GLenum OpenGLShaderProgram::GetShaderType(ShaderType shaderType)
-    {
-        switch (shaderType)
-        {
-        case ShaderType::Vertex:
-            return GL_VERTEX_SHADER;
-        case ShaderType::Fragment:
-            return GL_FRAGMENT_SHADER;
-        case ShaderType::Geometry:
-            return GL_GEOMETRY_SHADER;
-        case ShaderType::TessControl:
-            return GL_TESS_CONTROL_SHADER;
-        case ShaderType::TessEvaluation:
-            return GL_TESS_EVALUATION_SHADER;
-        case ShaderType::Compute:
-            return GL_COMPUTE_SHADER; 
-        }
-        return GL_VERTEX_SHADER; 
     }
 
     void OpenGLShaderProgram::Compile()

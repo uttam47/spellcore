@@ -8,28 +8,6 @@
 namespace AnalyticalApproach::Spellcore
 {
 
-    enum class GPUBufferType
-    {
-        VERTEX_DATA_BUFFER = 0, 
-        UNIFORM_DATA_BUFFER,
-        SHADER_STORAGE_DATA_BUFFER, 
-    }; 
-
-    enum class GPUBufferSubType
-    {
-        VERTEX_DATA =0,
-        INDEX_DATA, 
-        NONE
-    }; 
-
-    enum class GPUBufferUsageType
-    {
-        STATIC=0, 
-        STREAM,
-        DYNAMIC, 
-        NONE
-    }; 
-
     struct GPUBufferElement
     {
         bool normalized;

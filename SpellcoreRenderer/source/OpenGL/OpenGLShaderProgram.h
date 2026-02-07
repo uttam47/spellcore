@@ -14,8 +14,6 @@ namespace AnalyticalApproach::Spellcore
         static const std::unordered_map<ShaderType, std::string> _shaderTypeNames; 
         unsigned int _programHandle;
 
-        GLenum GetShaderType(ShaderType shaderType);
-
     public:
         void Attach() override;
         void Detach() override;

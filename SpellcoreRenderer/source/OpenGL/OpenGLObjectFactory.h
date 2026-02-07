@@ -15,6 +15,6 @@ namespace AnalyticalApproach::Spellcore
         ISCShaderCompiler *CreateSCShaderCompiler() override;
         IShaderProgram *CreateShaderProgram() override;
         RenderQueue* CreateRenderQueue() override;
-        IRenderTargetManager* CreateRenderTargetManager() override;
+        IRenderResourceManager* CreateRenderResourceManager() override;
     };
 }

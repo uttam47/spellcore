@@ -11,6 +11,7 @@ namespace AnalyticalApproach::Spellcore
             GPUBufferLayout _layout;
             uint32_t _shaderHandle; 
             std::string _shaderSource; 
+            std::string _shaderSourcePath; 
 
         public:
 

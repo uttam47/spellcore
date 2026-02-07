@@ -35,7 +35,7 @@ namespace AnalyticalApproach::Spellcore
     };
 
 
-    enum class SCDataType
+    enum class SCDataType: uint8_t
     {
         None = 0,
         Float, Float2, Float3, Float4,
@@ -46,7 +46,127 @@ namespace AnalyticalApproach::Spellcore
         Bool
     };
 
-    static uint32_t ShaderDataTypeSize(SCDataType type)
+    enum class SCImageUsage : uint32_t
+    {
+        ColorAttachment = 1 << 0,
+        DepthStencil = 1 << 1,
+        Sampled = 1 << 2,
+        Storage = 1 << 3,
+        CopySrc = 1 << 4,
+        CopyDst = 1 << 5,
+        None
+    };
+
+    enum class SCRTFormat : uint8_t
+    {
+        Unknown = 0,
+
+        // 8-bit normalized color formats
+        R8_UNorm,
+        RG8_UNorm,
+        RGB8_UNorm,
+        RGBA8_UNorm,
+
+        // 8-bit sRGB formats (shader-visible gamma correction)
+        RGB8_sRGB,
+        RGBA8_sRGB,
+
+        // 16-bit normalized
+        R16_UNorm,
+        RG16_UNorm,
+        RGB16_UNorm,
+        RGBA16_UNorm,
+
+        // 16-bit float (HDR / lighting)
+        R16F,
+        RG16F,
+        RGB16F,
+        RGBA16F,
+
+        // 32-bit float (G-buffer, compute, storage images)
+        R32F,
+        RG32F,
+        RGB32F,
+        RGBA32F,
+
+        // Depth / stencil
+        D16,
+        D24S8,
+        D32F,
+    };
+
+    enum class SCRTAttachmentType : uint8_t
+    {
+        Color = 0,
+        Depth,
+        Stencil
+    };
+
+    enum class SCRTSampleCount : uint8_t
+    {
+        x1,
+        x2,
+        x4,
+        x8,
+        x16
+    };
+
+
+    
+    //TODO: Move these data description in their specific files. 
+
+    enum class SCPixelFormat : uint8_t
+    {
+        Unknown = 0,
+
+        // 8-bit normalized integer formats (most common for images)
+        R8,
+        RG8,
+        RGB8,
+        RGBA8,
+
+        // 16-bit integer formats
+        R16,
+        RG16,
+        RGB16,
+        RGBA16,
+
+        // 16-bit float formats (HDR pipelines)
+        R16F,
+        RG16F,
+        RGB16F,
+        RGBA16F,
+
+        // 32-bit float formats (rare, heavy)
+        R32F,
+        RG32F,
+        RGB32F,
+        RGBA32F,
+
+        // Special / utility
+        BGRA8,      // common on Windows image loaders
+    };
+
+    enum class SCTextureFilters : uint8_t
+    {
+        Nearest = 0,
+        Linear,
+
+        NearestMipmapNearest,
+        LinearMipmapNearest,
+        NearestMipmapLinear,
+        LinearMipmapLinear
+    };
+
+    enum class SCTextureWrap : uint8_t
+    {
+        Repeat = 0,
+        MirroredRepeat,
+        ClampToEdge,
+        ClampToBorder
+    };
+    
+    inline uint8_t ShaderDataTypeSize(SCDataType type)
     {
         switch (type)
         {
@@ -67,7 +187,7 @@ namespace AnalyticalApproach::Spellcore
         }
     }
 
-    static uint32_t GetShaderDataTypeComponentCount(SCDataType type)
+    inline uint8_t GetShaderDataTypeComponentCount(SCDataType type)
     {
         switch (type)
         {
@@ -85,4 +205,38 @@ namespace AnalyticalApproach::Spellcore
         default: return 0;
         }
     }
+
+    enum class ShaderType
+    {
+        Vertex,
+        Fragment,
+        Geometry,
+        TessControl,
+        TessEvaluation,
+        Compute
+    }; 
+
+
+    enum class GPUBufferType
+    {
+        VERTEX_DATA_BUFFER = 0,
+        UNIFORM_DATA_BUFFER,
+        SHADER_STORAGE_DATA_BUFFER,
+    };
+
+    enum class GPUBufferSubType
+    {
+        VERTEX_DATA = 0,
+        INDEX_DATA,
+        NONE
+    };
+
+    enum class GPUBufferUsageType
+    {
+        STATIC = 0,
+        STREAM,
+        DYNAMIC,
+        NONE
+    };
+
 }
