@@ -1,7 +1,8 @@
 #pragma once
 
 #include <unordered_map>
-#include <RHI/IRenderResourceManager.h>
+#include <RHI/ITexture.h>
+#include <RHI/IRenderTarget.h>
 #include <core/components/SCRenderTarget.h>
 #include <core/SpellcoreRenderingBackend.h>
 #include <core/components/SpellcoreRenderDataTypes.h>
@@ -17,10 +18,9 @@ namespace AnalyticalApproach::Spellcore
         SCRendererResourceManager(); 
         ~SCRendererResourceManager(); 
 
-        IRendererBackendFactory* _renderingBackend;
-        IRenderResourceManager* _renderResourceManager;
+        IRendererBackendFactory* _renderingBackendFactory; 
 
-        std::unordered_map <SCTextureHandle, uint32_t> _textures; 
+        std::unordered_map<SCTextureHandle, ITexture*> _textures; 
         std::unordered_map<SCShaderHandle, SpellcoreShader*> _shaders; 
         std::unordered_map<SCGeometryHandle, GeometryBuffer*> _geometryBuffers; 
         std::unordered_map<SCRenderTargetHandle, SCRTDescription> _renderTargets;
@@ -34,10 +34,9 @@ namespace AnalyticalApproach::Spellcore
         bool UpdateGeometryResource(const SCGeometryHandle& scGeoHandle, const SCGeometryData& meshData); 
         bool DestroyGeometryResource(SCGeometryHandle& scGeoHandle); 
 
-        SCMaterialHandle CreateSpellcoreMaterial(); 
 
-        SCTextureHandle CreateTexture(const SCTextureDesc& scTextureDesc); 
-        SCTextureHandle CreateTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData); 
+        SCTextureHandle CreateTexture(const SCTextureImageDesc& scTextureDesc); 
+        SCTextureHandle CreateTexture(const SCTextureImageDesc& scTextureDesc, const SCImageData* initialData); 
         bool UpdateTexture(SCTextureHandle scTextureHandle, const SCImageData* imageData); 
 
         SCRenderTargetHandle CreateRenderTarget(const SCRTDescription& renderTargetDesc); 
@@ -46,6 +45,7 @@ namespace AnalyticalApproach::Spellcore
         bool UseRenderTarget(const SCRenderTargetHandle& h); 
 
         // TODO: Pull Bifurcate Render Pipeline and Shader Manager into two different entities.
+        SCMaterialHandle CreateSpellcoreMaterial(); 
         SCShaderHandle CreateSpellcoreShader(); 
 
         static void DestroyInstance();

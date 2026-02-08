@@ -5,7 +5,7 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    using SCRenderTargetHandle = std::uint8_t;
+    using SCRenderTargetHandle = std::uint32_t;
     using SCRenderPassHandle = std::uint8_t;
     using SCMaterialHandle = std::uint32_t; 
     using SCTextureHandle = std::uint32_t; 
@@ -53,8 +53,7 @@ namespace AnalyticalApproach::Spellcore
         Sampled = 1 << 2,
         Storage = 1 << 3,
         CopySrc = 1 << 4,
-        CopyDst = 1 << 5,
-        None
+        CopyDst = 1 << 5
     };
 
     enum class SCRTFormat : uint8_t
@@ -237,6 +236,28 @@ namespace AnalyticalApproach::Spellcore
         STREAM,
         DYNAMIC,
         NONE
+    };
+
+    enum class SCMipLevels : uint8_t
+    {
+        Auto = 0,
+
+        L1 = 1,
+        L2 = 2,
+        L3 = 3,
+        L4 = 4,
+        L5 = 5,
+        L6 = 6,
+        L7 = 7,
+        L8 = 8,
+        L9 = 9,
+        L10 = 10,
+        L11 = 11,
+        L12 = 12,
+        L13 = 13,
+        L14 = 14,
+        L15 = 15,
+        L16 = 16, // enough for up to 65536 textures
     };
 
 }

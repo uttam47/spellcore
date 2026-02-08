@@ -7,7 +7,7 @@
 
 namespace AnalyticalApproach::Spellcore
 {
-    SCGeometryHandle OpenGLGeometryBuffer::GetId()
+    SCGeometryHandle OpenGLGeometryBuffer::GetHandle()
     {
         return _geometryHandle;
     }
@@ -22,6 +22,7 @@ namespace AnalyticalApproach::Spellcore
     {
 
         glDeleteVertexArrays(1, &_geometryHandle);
+        _geometryHandle = 0; 
 
         for (auto& vertexBuffer : _vertexBuffer)
         {

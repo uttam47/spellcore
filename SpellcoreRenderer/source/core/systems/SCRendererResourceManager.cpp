@@ -1,7 +1,8 @@
 #include <assert.h>
-#include <core/components/GPUBufferLayout.h>
 #include <core/SpellcoreRenderingBackend.h>
 #include <core/components/SCGeometryData.h>
+#include <core/components/SCRenderTarget.h>
+#include <core/components/GPUBufferLayout.h>
 #include <core/systems/SCRendererResourceManager.h>
 #include <core/components/SpellcoreRenderDataTypes.h>
 
@@ -31,26 +32,25 @@ namespace AnalyticalApproach::Spellcore
 
     SCRendererResourceManager::SCRendererResourceManager()
     { 
-        _renderingBackend = SpellcoreRenderingBackend::Get(); 
-        _renderResourceManager = SpellcoreRenderingBackend::Get()->CreateRenderResourceManager();
+        _renderingBackendFactory = SpellcoreRenderingBackend::Get(); 
 
     }
 
     SCGeometryHandle SCRendererResourceManager::CreateGeometryResource(const SCGeometryData& meshData)
     {
-        auto geometryBuffer = _renderingBackend->CreateGeometryBuffer();
+        auto geometryBuffer = _renderingBackendFactory->CreateGeometryBuffer();
         const auto& vertexAttribBuffers = meshData.GetMeshDataBuffers();
 
         for (const auto& vaBuffer : vertexAttribBuffers)
         {
-            GPUBuffer* gpuBuffer = _renderingBackend->CreateGPUBuffer();
+            GPUBuffer* gpuBuffer = _renderingBackendFactory->CreateGPUBuffer();
 
-            gpuBuffer->SetBufferData<byte>(vaBuffer.bytes, 0);
+            gpuBuffer->SetBufferData<uint8_t>(vaBuffer.bytes, 0);
             gpuBuffer->SetLayout(vaBuffer.layout);
             geometryBuffer->AddAttributeBuffer(gpuBuffer);
         }
 
-        GPUBuffer* indexBuffer = _renderingBackend->CreateGPUBuffer();
+        GPUBuffer* indexBuffer = _renderingBackendFactory->CreateGPUBuffer();
 
         GPUBufferElement gpuBufferElement;
         gpuBufferElement.name = "Vertex_Index";
@@ -75,10 +75,8 @@ namespace AnalyticalApproach::Spellcore
         indexBuffer->SetLayout(bufferLayout);
 
         geometryBuffer->AddIndexBuffer(indexBuffer);
-        SCGeometryHandle geometryHandle = geometryBuffer->GetId(); 
-        _geometryBuffers[geometryHandle] = geometryBuffer;
-
-        return geometryHandle; 
+        _geometryBuffers[geometryBuffer->GetHandle()] = geometryBuffer; 
+        return geometryBuffer->GetHandle();
     }
 
 
@@ -89,16 +87,25 @@ namespace AnalyticalApproach::Spellcore
 
     bool SCRendererResourceManager::DestroyGeometryResource(SCGeometryHandle& scGeoHandle)
     {
+        auto it = _geometryBuffers.find(scGeoHandle); 
 
-        return false;
+        if (it == _geometryBuffers.end())
+        {
+            return false; 
+
+        }
+
+        _geometryBuffers.erase(scGeoHandle); 
+        delete it->second;
+        return true;
     }
 
-    SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureDesc& scTextureDesc)
+    SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureImageDesc& scTextureDesc)
 	{
         return 0; 
 	}
 
-	SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureDesc& scTextureDesc, const SCImageData* initialData)
+	SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureImageDesc& scTextureDesc, const SCImageData* initialData)
 	{
         return 0;
 	}
@@ -116,9 +123,9 @@ namespace AnalyticalApproach::Spellcore
 
     SCRenderTargetHandle SCRendererResourceManager::CreateRenderTarget(const SCRTDescription& renderTargetDesc)
     {
-        auto scrtHandle = _renderResourceManager->CreateRenderTarget(renderTargetDesc);
-        _renderTargets[scrtHandle] = renderTargetDesc;
-        return scrtHandle;
+        IRenderTarget* renderTarget  = _renderingBackendFactory->CreateRenderTarget(); 
+
+        return renderTarget->GetRenderTargetHandle();
     }
 
     bool SCRendererResourceManager::DestroyRenderTarget(SCRenderTargetHandle handle)
@@ -127,7 +134,7 @@ namespace AnalyticalApproach::Spellcore
 
         if (it != _renderTargets.end())
         {
-            _renderResourceManager->DestroyRenderTarget(handle);
+           // _renderResourceManager->DestroyRenderTarget(handle);
             _renderTargets.erase(it);
             return true;
         }
@@ -142,7 +149,6 @@ namespace AnalyticalApproach::Spellcore
 
         if (it != _renderTargets.end())
         {
-            _renderResourceManager->UseRenderTarget(scrtHandle);
             return true;
         }
 
@@ -162,9 +168,6 @@ namespace AnalyticalApproach::Spellcore
 
     SCRendererResourceManager::~SCRendererResourceManager()
     {
-        if (_renderResourceManager)
-        {
-            delete _renderResourceManager;
-        }
+      
     }
 }

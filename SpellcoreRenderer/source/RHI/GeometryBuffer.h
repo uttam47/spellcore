@@ -12,6 +12,6 @@ namespace AnalyticalApproach::Spellcore
         virtual void Unbind() const = 0; 
         virtual void AddAttributeBuffer(GPUBuffer*) = 0;
         virtual void AddIndexBuffer(GPUBuffer*) = 0; 
-        virtual SCGeometryHandle GetId() = 0; 
+        virtual SCGeometryHandle GetHandle() = 0; 
     };
 }

@@ -20,7 +20,7 @@ namespace AnalyticalApproach::Spellcore
         
         void AddAttributeBuffer(GPUBuffer* vertexBuffer) override; 
         void AddIndexBuffer(GPUBuffer* indexBuffer) override; 
-        SCGeometryHandle GetId() override;
+        SCGeometryHandle GetHandle() override;
         
     private:
         SCGeometryHandle _geometryHandle;
