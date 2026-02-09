@@ -33,7 +33,6 @@ namespace AnalyticalApproach::Spellcore
     SCRendererResourceManager::SCRendererResourceManager()
     { 
         _renderingBackendFactory = SpellcoreRenderingBackend::Get(); 
-
     }
 
     SCGeometryHandle SCRendererResourceManager::CreateGeometryResource(const SCGeometryData& meshData)

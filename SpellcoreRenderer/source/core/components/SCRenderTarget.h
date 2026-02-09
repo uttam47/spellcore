@@ -2,45 +2,95 @@
 
 #include <vector>
 #include <string>
+#include <optional>   
+#include <cstdint>
+
 #include "SpellcoreRenderDataTypes.h"
 
 namespace AnalyticalApproach::Spellcore
 {
-    //For CPU Readback. 
     struct SCImageData
     {
         uint32_t width = 0, height = 0;
-        SCPixelFormat format = SCPixelFormat::RGBA8; // distinct from render formats if you want
+        SCPixelFormat format = SCPixelFormat::RGBA8;
         std::vector<uint8_t> bytes;
     };
 
-    struct SCRenderImageDesc
+    // Storage description (backend-agnostic)
+    struct SCImageDesc
     {
-        uint32_t width = 0, height = 0;
-        SCRTAttachmentType attachmentType = SCRTAttachmentType::Color; 
-        SCRTFormat  renderFormat = SCRTFormat::RGBA16F;
-        SCImageUsage usage = SCImageUsage::ColorAttachment;// | SCImageUsage::Sampled;
-        SCRTSampleCount sampleCount; 
-        uint8_t attachmentIndex = 0; 
+        SCImageType type = SCImageType::Tex2D;
+
+        uint32_t width = 0;
+        uint32_t height = 0;
+
+        // For Tex3D: depth > 1
+        uint32_t depth = 1;
+
+        // For arrays/cubes: layers > 1 (cube must be multiple of 6)
+        uint32_t layers = 1;
+
+        SCRTFormat format = SCRTFormat::RGBA16F;
+        SCImageUsage usage = SCImageUsage::ColorAttachment;
+        SCRTSampleCount sampleCount = SCRTSampleCount::x1;
+        SCMipLevels mipLevels = SCMipLevels::Auto;
     };
 
-    struct SCTextureImageDesc: SCRenderImageDesc
+    // Sampler description (separate entity; maps well to VkSampler)
+    struct SCSamplerDesc
     {
-        bool generateMips = true;
         SCTextureFilters minFilter = SCTextureFilters::LinearMipmapLinear;
         SCTextureFilters magFilter = SCTextureFilters::Linear;
-        SCTextureWrap wrapU = SCTextureWrap::Repeat;
-        SCTextureWrap wrapV = SCTextureWrap::Repeat;
-        SCMipLevels mipLevels = SCMipLevels::Auto; 
+        SCTextureWrap wrapU = SCTextureWrap::ClampToEdge;
+        SCTextureWrap wrapV = SCTextureWrap::ClampToEdge;
+        bool compareEnable = false;
+    };
+
+    // What the pass wants conceptually
+    struct SCAttachmentDesc
+    {
+        SCRTAttachmentType attachmentType = SCRTAttachmentType::Color;
+        uint8_t attachmentIndex = 0;  // only for Color
+        SCImageDesc image;
+
+        bool generateMips = false;                // if the output should have mip chain generated after rendering
+        std::optional<SCSamplerDesc> sampler;     // if it will be sampled later
     };
 
     struct SCRTDescription
     {
-        uint32_t width = 0;
-        uint32_t height = 0;
-
+        uint32_t width = 0, height = 0;
         std::string name = "RenderTarget";
-        std::vector<SCRenderImageDesc> scImages; 
+        std::vector<SCAttachmentDesc> attachments;
     };
-    
+
+    // Slot key (attachment identity, independent of handle)
+    struct SCAttachmentSlot
+    {
+        SCRTAttachmentType type = SCRTAttachmentType::Color;
+        uint32_t index = 0; // Color index; ignored for Depth/Stencil
+    };
+
+    // View/subresource selection for attaching (Vulkan-style concept)
+    struct SCImageViewDesc
+    {
+        uint32_t mipLevel = 0;
+
+        // For array/cube: layer index (face = layer for cube)
+        uint32_t layer = 0;
+
+        // For 3D: slice (z) index, if you model 3D as slices
+        uint32_t slice = 0;
+
+        // If true: attach as "layered" (all layers), enabling layered rendering
+        bool layered = false;
+    };
+
+    struct SCRTAttachmentBinding
+    {
+        SCAttachmentSlot slot;
+        SCImageHandle imageHandle = 0;
+        SCImageViewDesc view{};
+    };
+
 } // namespace AnalyticalApproach::Spellcore

@@ -110,7 +110,16 @@ namespace AnalyticalApproach::Spellcore
         x16
     };
 
-
+    enum class SCImageType : uint8_t
+    {
+        Tex1D,
+        Tex2D,
+        Tex3D,
+        Tex1DArray,
+        Tex2DArray,
+        TexCube,
+        TexCubeArray
+    };
     
     //TODO: Move these data description in their specific files. 
 

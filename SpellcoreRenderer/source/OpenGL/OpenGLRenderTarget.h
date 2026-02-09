@@ -1,48 +1,95 @@
 #pragma once
-#include <RHI\IRenderTarget.h>
-#include <OpenGL/OpenGLRenderBufferObject.h>
-#include <OpenGL/OpenGLTextureImage.h>
+
+#include <RHI/IRenderTarget.h>
+
 #include <unordered_map>
+#include <vector>
 
 namespace AnalyticalApproach::Spellcore
 {
-	class OpenGLRenderTarget : public IRenderTarget
-	{
-	private: 
+    class OpenGLRenderTarget final : public IRenderTarget
+    {
+    public:
+        OpenGLRenderTarget();
+        ~OpenGLRenderTarget() override;
 
-		struct Attachment
-		{
-			bool   isRenderbuffer;    
-			SCRTAttachmentType attachment; 
-			uint32_t colorIndex = 0;
-			SCImageHandle handle;            
-		};
+        void Bind() override;
+        void Unbind() override;
 
+        bool IsValid() const override;
+        void SetSize(glm::ivec2 size) override;
 
-	public:
-		OpenGLRenderTarget();
-		~OpenGLRenderTarget(); 
-		void Bind() override;
-		void Unbind() override;
-		bool IsValid() override; 
+        SCRenderTargetHandle GetRenderTargetHandle() const override;
 
-		void AddRenderAttachment(const SCImageHandle& imageHandle, const SCRenderImageDesc& renderImageDesc) override;
-		void AddRenderAttachment(const SCImageHandle& imageHandle, const SCTextureImageDesc& textureImageDesc) override;
-		void RemoveAttachment(const SCImageHandle& imageHnadle) override; 
-		SCRenderTargetHandle GetRenderTargetHandle() override; 
+        void SetDescription(const SCRTDescription& desc) override;
+        const SCRTDescription& GetDescription() const override;
 
+        void ClearAttachments() override;
+        void Attach(const SCRTAttachmentBinding& binding) override;
+        void Detach(const SCAttachmentSlot& slot) override;
 
-	private: 
+        void Build(const SCRTDescription& desc, const std::vector<SCRTAttachmentBinding>& bindings) override;
 
-		bool _isValid = false;
-		SCRTDescription scrtDescription; 
-		SCRenderTargetHandle _fboHandle = 0;
-		
-		void UpdateDrawBuffers();
-		void ValidateFramebufferComplete();
+    private:
+        struct SlotKey
+        {
+            SCRTAttachmentType type = SCRTAttachmentType::Color;
+            uint32_t index = 0;
 
-		std::unordered_map<SCImageHandle, Attachment> _bindings; 
+            bool operator==(const SlotKey& o) const noexcept
+            {
+                return type == o.type && index == o.index;
+            }
+        };
 
+        struct SlotKeyHash
+        {
+            std::size_t operator()(const SlotKey& k) const noexcept
+            {
+                return (static_cast<std::size_t>(k.index) << 8) ^ static_cast<std::size_t>(k.type);
+            }
+        };
 
-	};
-} // namespace AnalyticalApproach
+        bool _isValid = false;
+        bool _needsRebuild = false;
+
+        // Logical description (backend-agnostic)
+        SCRTDescription _desc{};
+
+        // Desired render-target size (declarative)
+        glm::ivec2 _size{ 0, 0 };
+
+        // Actual GL framebuffer name (store as GLuint-sized)
+        unsigned int _fboGL = 0;
+
+        // Current bindings, keyed by attachment slot (portable and replacement-friendly)
+        std::unordered_map<SlotKey, SCRTAttachmentBinding, SlotKeyHash> _slotBindings;
+
+    private:
+        // Helpers
+        static bool IsDepthStencilFormat(SCRTFormat fmt);
+        const SCAttachmentDesc* FindAttachmentDesc(const SCAttachmentSlot& slot) const;
+
+        void DetachGLAttachmentForSlot(const SCAttachmentSlot& slot);
+        void UpdateDrawBuffers();
+        void ValidateFramebufferComplete(bool assertOnFail);
+
+        // Attach helpers
+        void AttachRenderbuffer(unsigned int rb, unsigned int glAttachment);
+        void AttachTexture(const SCAttachmentDesc& attDesc,
+            unsigned int tex,
+            unsigned int glAttachment,
+            const SCImageViewDesc& view);
+
+        // Size validation (OpenGL-side query)
+        bool QueryTextureLevelSize(unsigned int tex, uint32_t mipLevel, int& outW, int& outH) const;
+        bool QueryRenderbufferSize(unsigned int rb, int& outW, int& outH) const;
+        void ValidateAttachmentSizeAgainstTarget(int attW, int attH);
+
+        // Handle classification
+        static bool IsGLTexture(unsigned int name);
+        static bool IsGLRenderbuffer(unsigned int name);
+        
+    };
+
+} // namespace AnalyticalApproach::Spellcore
