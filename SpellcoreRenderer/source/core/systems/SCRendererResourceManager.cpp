@@ -99,12 +99,12 @@ namespace AnalyticalApproach::Spellcore
         return true;
     }
 
-    SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureImageDesc& scTextureDesc)
+    SCImageHandle SCRendererResourceManager::CreateTexture(const SCImageDesc& scTextureDesc)
 	{
         return 0; 
 	}
 
-	SCTextureHandle SCRendererResourceManager::CreateTexture(const SCTextureImageDesc& scTextureDesc, const SCImageData* initialData)
+    SCImageHandle SCRendererResourceManager::CreateTexture(const SCImageDesc& scTextureDesc, const SCImageData* initialData)
 	{
         return 0;
 	}

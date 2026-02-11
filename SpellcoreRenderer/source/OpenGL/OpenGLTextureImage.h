@@ -9,7 +9,7 @@ namespace AnalyticalApproach::Spellcore
         SCImageHandle _textureImageHandle;
 
     public:
-        OpenGLTextureImage(const SCTextureImageDesc& textureImageDesc);
+        OpenGLTextureImage(const SCImageDesc& textureImageDesc);
         ~OpenGLTextureImage();
         SCImageHandle GetTextureHandle(); 
     }; 

@@ -8,7 +8,7 @@ namespace AnalyticalApproach::Spellcore
     using SCRenderTargetHandle = std::uint32_t;
     using SCRenderPassHandle = std::uint8_t;
     using SCMaterialHandle = std::uint32_t; 
-    using SCTextureHandle = std::uint32_t; 
+    using SCTextureHandle = std::uint32_t;
     using SCShaderHandle = std::uint16_t; 
     using SCImageHandle = std::uint32_t; 
     using SCGeometryHandle = std::uint32_t; 

@@ -5,14 +5,14 @@
 namespace AnalyticalApproach::Spellcore
 {
     
-    OpenGLTextureImage::OpenGLTextureImage(const SCTextureImageDesc& textureImageDesc)
+    OpenGLTextureImage::OpenGLTextureImage(const SCImageDesc& textureImageDesc)
         : _textureImageHandle(0)
     {
         assert(textureImageDesc.width  > 0);
         assert(textureImageDesc.height > 0);
 
         // If your struct uses a different name than renderFormat, change this line:
-        const GLenum internalFormat = ToGLInternalFormat(textureImageDesc.renderFormat);
+        const GLenum internalFormat = ToGLInternalFormat(textureImageDesc.format);
         assert(internalFormat != 0);
 
         const int samples = ToGLSampleCount(textureImageDesc.sampleCount);

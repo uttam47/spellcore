@@ -11,6 +11,6 @@ namespace AnalyticalApproach::Spellcore
         virtual bool Shutdown() =0; 
         virtual bool BeginFrame() =0; 
         virtual bool EndFrame() =0; 
-        virtual ~IRenderingContext(); 
+        virtual ~IRenderingContext() = default; 
     }; 
 }

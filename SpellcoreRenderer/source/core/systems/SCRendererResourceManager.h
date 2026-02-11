@@ -20,7 +20,7 @@ namespace AnalyticalApproach::Spellcore
 
         IRendererBackendFactory* _renderingBackendFactory; 
 
-        std::unordered_map<SCTextureHandle, ITexture*> _textures; 
+        std::unordered_map<SCTextureHandle, ITexture*> _textures;
         std::unordered_map<SCShaderHandle, SpellcoreShader*> _shaders; 
         std::unordered_map<SCGeometryHandle, GeometryBuffer*> _geometryBuffers; 
         std::unordered_map<SCRenderTargetHandle, SCRTDescription> _renderTargets;
@@ -34,10 +34,9 @@ namespace AnalyticalApproach::Spellcore
         bool UpdateGeometryResource(const SCGeometryHandle& scGeoHandle, const SCGeometryData& meshData); 
         bool DestroyGeometryResource(SCGeometryHandle& scGeoHandle); 
 
-
-        SCTextureHandle CreateTexture(const SCTextureImageDesc& scTextureDesc); 
-        SCTextureHandle CreateTexture(const SCTextureImageDesc& scTextureDesc, const SCImageData* initialData); 
-        bool UpdateTexture(SCTextureHandle scTextureHandle, const SCImageData* imageData); 
+        SCImageHandle CreateTexture(const SCImageDesc& scTextureDesc);
+        SCImageHandle CreateTexture(const SCImageDesc& scTextureDesc, const SCImageData* initialData);
+        bool UpdateTexture(SCImageHandle scTextureHandle, const SCImageData* imageData);
 
         SCRenderTargetHandle CreateRenderTarget(const SCRTDescription& renderTargetDesc); 
         const SCRTDescription* GetRenderTargetDesc(const SCRenderTargetHandle& handle) const; 

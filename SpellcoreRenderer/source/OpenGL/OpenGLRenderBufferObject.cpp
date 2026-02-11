@@ -5,13 +5,13 @@
 namespace AnalyticalApproach::Spellcore
 {
 
-    OpenGLRenderBufferObject::OpenGLRenderBufferObject(const SCRenderImageDesc& renderImgDescription)
+    OpenGLRenderBufferObject::OpenGLRenderBufferObject(const SCImageDesc& renderImgDescription)
         : _rboHandle(0)
     {
         assert(renderImgDescription.width > 0);
         assert(renderImgDescription.height > 0);
 
-        const GLenum internalFormat = ToGLInternalFormat(renderImgDescription.renderFormat);
+        const GLenum internalFormat = ToGLInternalFormat(renderImgDescription.format);
 
         assert(internalFormat != 0);
 

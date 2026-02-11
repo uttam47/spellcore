@@ -163,7 +163,7 @@ namespace AnalyticalApproach::Spellcore
         return fmt == SCRTFormat::D24S8;
     }
 
-    static inline uint32_t ToGLAttachmentPoint(const SCRenderImageDesc& desc)
+    static inline uint32_t ToGLAttachmentPoint(const SCAttachmentDesc& desc)
     {
         switch (desc.attachmentType)
         {
@@ -172,11 +172,11 @@ namespace AnalyticalApproach::Spellcore
 
         case SCRTAttachmentType::Depth:
             // If format contains stencil, use combined attachment
-            return IsDepthStencilFormat(desc.renderFormat) ? GL_DEPTH_STENCIL_ATTACHMENT : GL_DEPTH_ATTACHMENT;
+            return IsDepthStencilFormat(desc.image.format) ? GL_DEPTH_STENCIL_ATTACHMENT : GL_DEPTH_ATTACHMENT;
 
         case SCRTAttachmentType::Stencil:
             // If format contains depth too, prefer combined attachment
-            return IsDepthStencilFormat(desc.renderFormat) ? GL_DEPTH_STENCIL_ATTACHMENT : GL_STENCIL_ATTACHMENT;
+            return IsDepthStencilFormat(desc.image.format) ? GL_DEPTH_STENCIL_ATTACHMENT : GL_STENCIL_ATTACHMENT;
 
         default:
             break;

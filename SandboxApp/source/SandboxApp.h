@@ -21,7 +21,6 @@ namespace AnalyticalApproach::SpellcoreEditor
         ~SandboxApp();
 
         void CloseApp(); 
-
         void InitRenderer(); 
         void InitAppWindow(); 
         int Run();

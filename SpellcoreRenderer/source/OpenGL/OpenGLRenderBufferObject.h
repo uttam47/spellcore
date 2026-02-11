@@ -9,7 +9,7 @@ namespace AnalyticalApproach::Spellcore
         SCImageHandle _rboHandle;
 
     public:
-        OpenGLRenderBufferObject(const SCRenderImageDesc& renderImgDescription);
+        OpenGLRenderBufferObject(const SCImageDesc& renderImgDescription);
         ~OpenGLRenderBufferObject();
         SCImageHandle GetRBOHandle(); 
     }; 
