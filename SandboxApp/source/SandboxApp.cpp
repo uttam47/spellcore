@@ -12,7 +12,9 @@ namespace AnalyticalApproach::SpellcoreEditor
 
 	SandboxApp::SandboxApp(std::vector<std::string> appParameters)
 	{
-		_resourceManager = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
+		_resourceRegistry = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
+		_renderResourceRegistry = RenderResourceRegistry::GetInstance(); 
+
 		InitAppWindow(); 
 		InitRenderer();		
 		TestingHelper(); 
@@ -26,7 +28,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_objLoaderTest = new ObjLoaderTest(); 
 
 		_geometryCPUCache = _objLoaderTest->GetCubeMesh();
-		_testMeshHandle = SpellcoreRenderer::UploadGeometry(*_geometryCPUCache);
+		_testMeshHandle = _renderResourceRegistry->CreateGeometryResource(*_geometryCPUCache);
 
 		SpellcoreRenderer::SubmitMesh(_testMeshHandle, "Base_Layer");
 
@@ -63,7 +65,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		//This way, shader object life time management will be responsiblilty of the SpellcoreRenderer not of Application. 
 
 		//Then there's another concern relating to Resource management. 
-		std::string shaderPath = _resourceManager->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
+		std::string shaderPath = _resourceRegistry->GetExecutionDir() + "/Resources/DefaultShaders/BasicSpellcoreShader.scsh";
 		_testShader = SpellcoreRenderer::LoadShader(shaderPath);
 		SpellcoreRenderer::UseShader(_testShader);
 	}
@@ -100,7 +102,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_windowEventChannel->on_window_closed.unsubscribe(&SandboxApp::CloseApp, this);
 		_windowSystem.DestroyAppWindow(_windowHandle);
 
-		SpellcoreRenderer::ReleaseGeometry(_testMeshHandle); 
+		_renderResourceRegistry->DestroyGeometryResource(_testMeshHandle); 
 
 		delete _geometryCPUCache; 
 		delete _objLoaderTest; 

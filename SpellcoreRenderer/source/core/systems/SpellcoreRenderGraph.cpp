@@ -2,6 +2,12 @@
 
 namespace AnalyticalApproach::Spellcore
 {
+
+    SpellcoreRenderGraph::SpellcoreRenderGraph()
+    {
+        _renderResourceRegistry = RenderResourceRegistry::GetInstance();
+    }
+
     bool SpellcoreRenderGraph::AddPass(const SCRenderPassNode& scrpNode)
     {
         return false; 
@@ -10,7 +16,6 @@ namespace AnalyticalApproach::Spellcore
     bool SpellcoreRenderGraph::Resolve()
     {
         return false; 
-
     }
 
     const std::vector<SCRenderPassHandle> SpellcoreRenderGraph::GetRenderPassExecutionOrder() const

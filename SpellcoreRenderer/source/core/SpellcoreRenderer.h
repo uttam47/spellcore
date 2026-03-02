@@ -1,5 +1,7 @@
 #pragma once
 
+#include <unordered_map>
+
 #include <core/SpellcoreShader.h>
 #include <RHI/IRenderingContext.h>
 #include <core/components/SCGeometryData.h>
@@ -16,7 +18,18 @@ namespace AnalyticalApproach::Spellcore
 		static IRenderingContext* s_RenderingContext;
 		static SpellcoreRenderPipeline* s_RenderPipeline;
 		static RenderResourceRegistry* s_RenderResourceRegistry;
-		static RenderQueue* s_RenderQueue; 
+		static SpellcoreRenderGraph* s_SCRenderGraph; 
+
+
+		using RenderPassExeInfo = SCRenderPassNode; 
+		struct RenderPass
+		{
+			RenderPassExeInfo exeInfo;
+			RenderQueue* queue; 
+		};
+
+		static std::unordered_map< SCRenderPassHandle, RenderPass> _renderQeues;
+
 
 	public:
 
@@ -32,10 +45,6 @@ namespace AnalyticalApproach::Spellcore
 		static void AddRenderPass(const std::string& renderPassName); 
 		static void SubmitMesh(const SCGeometryHandle& scGeoHandle, const std::string& renderPassKey);
 		static void RemoveMesh(const SCGeometryHandle& scGeoHandle, const std::string& renderPasskey);
-
-		static uint32_t UploadGeometry(const SCGeometryData& scGeometryData);
-		static bool UpdateGeometry(const SCGeometryHandle& scGeoHandle, const SCGeometryData& scGeoemtryData);
-		static void ReleaseGeometry(SCGeometryHandle& scGeoHandle);
 	};
 
 }

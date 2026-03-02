@@ -9,6 +9,8 @@
 #include "Tests/IMGUITest/ImguiTest.h"
 #include "Tests/ModelLoadingTest/ObjLoaderTest.h"
 #include "Editor/Core/ResourceManager.h"
+#include <core/systems/SCRendererResourceManager.h>
+
 
 namespace AnalyticalApproach::SpellcoreEditor
 {
@@ -30,7 +32,8 @@ namespace AnalyticalApproach::SpellcoreEditor
         WindowSystem::GLFWWindowSystem _windowSystem;
         WindowSystem::WindowHandle _windowHandle;
         WindowSystem::WindowEventChannel* _windowEventChannel = nullptr;
-        ResourceManager* _resourceManager; 
+        ResourceManager* _resourceRegistry; 
+        RenderResourceRegistry* _renderResourceRegistry; 
 
         SCGeometryHandle _testMeshHandle; 
         SCGeometryData* _geometryCPUCache; 
