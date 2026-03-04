@@ -1,10 +1,9 @@
 #pragma once
 #include <Logger.h>
-#include <RHI/IRendererBackendFactory.h>
-#include <OpenGL/OpenGLObjectFactory.h>
 
 namespace AnalyticalApproach::Spellcore
 {
+    class IRendererBackendFactory; 
     enum class GraphicsApi
     {
         OpenGL,
@@ -14,33 +13,11 @@ namespace AnalyticalApproach::Spellcore
 
     class SpellcoreRenderingBackend
     {
-        inline static IRendererBackendFactory *_instance = nullptr;
+        static IRendererBackendFactory *_instance;
 
     public:
-        static void Initialize(GraphicsApi api)
-        {
-            switch (api)
-            {
-            case GraphicsApi::OpenGL:
-                //_instance = new OpenGLFactory();
-                _instance = new OpenGLObjectFactory(); 
-                break;
-            case GraphicsApi::Vulkan:
-                break;
-            case GraphicsApi::DirectX12:
-                break;
-            default:
-                LOG_ERROR("Unsupported graphics API");
-                break;
-            }
-        }
-
-        static IRendererBackendFactory *Get() { return _instance; }
-
-        static void Shutdown()
-        {
-            delete _instance;
-            _instance = nullptr;
-        }
+        static void Initialize(GraphicsApi api); 
+        static IRendererBackendFactory* Get(); 
+        static void Shutdown();
     };
 }

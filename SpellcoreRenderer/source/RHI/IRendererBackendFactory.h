@@ -12,7 +12,6 @@ namespace AnalyticalApproach::Spellcore
     class IRendererBackendFactory
     {
     public:
-        virtual ~IRendererBackendFactory() = default;
         virtual IRenderingContext* CreateRenderingContext() = 0;
         virtual GPUBuffer* CreateGPUBuffer() = 0;
         virtual GeometryBuffer* CreateGeometryBuffer() = 0; 

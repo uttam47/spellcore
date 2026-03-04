@@ -1,14 +1,20 @@
 #pragma once
 
 #include <unordered_map>
-#include <RHI/ITexture.h>
-#include <RHI/IRenderTarget.h>
-#include <core/components/SCRenderTarget.h>
-#include <core/SpellcoreRenderingBackend.h>
 #include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {
+    class ITexture; 
+    class IRendererBackendFactory; 
+    class SCRenderTarget; 
+    class SCRTDescription; 
+    class SCGeometryData; 
+    class SCImageDesc; 
+    class SpellcoreShader; 
+    class GeometryBuffer; 
+    class SCImageData; 
+
     class SCRendererResourceManager
     {
 

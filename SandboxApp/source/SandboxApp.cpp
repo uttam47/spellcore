@@ -13,7 +13,6 @@ namespace AnalyticalApproach::SpellcoreEditor
 	SandboxApp::SandboxApp(std::vector<std::string> appParameters)
 	{
 		_resourceRegistry = new ResourceManager(std::filesystem::path(appParameters[0]).parent_path().string());
-		_renderResourceRegistry = RenderResourceRegistry::GetInstance(); 
 
 		InitAppWindow(); 
 		InitRenderer();		
@@ -58,6 +57,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		};
 
 		SpellcoreRenderer::Initialize(renderingSurfaceInfo);
+		_renderResourceRegistry = RenderResourceRegistry::GetInstance();
 
 		//TODO: Re-fix abuse of abstraction: 
 		//Per se, SpellcoreShader is an internal object to the SpellcoreRenderer, so it shouldn't be exposed to the Application layer. 

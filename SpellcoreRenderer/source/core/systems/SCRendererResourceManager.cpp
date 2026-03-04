@@ -1,4 +1,12 @@
 #include <assert.h>
+
+#include <Logger.h>
+
+#include <RHI/ITexture.h>
+#include <RHI/IRenderTarget.h>
+#include <RHI/IRendererBackendFactory.h>
+#include <RHI/GPUBuffer.h>
+
 #include <core/SpellcoreRenderingBackend.h>
 #include <core/components/SCGeometryData.h>
 #include <core/components/SCRenderTarget.h>

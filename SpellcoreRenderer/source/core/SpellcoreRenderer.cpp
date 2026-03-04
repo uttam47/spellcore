@@ -11,7 +11,7 @@ namespace AnalyticalApproach::Spellcore
     IRenderingContext* SpellcoreRenderer::s_RenderingContext = nullptr;
     SpellcoreRenderPipeline* SpellcoreRenderer::s_RenderPipeline = nullptr;
     RenderResourceRegistry* SpellcoreRenderer::s_RenderResourceRegistry = nullptr;
-
+    SpellcoreRenderGraph* SpellcoreRenderer::s_SCRenderGraph = nullptr; 
 
     bool SpellcoreRenderer::Initialize(const RenderingSurfaceCreateInfo &surfaceInfo)
     {

@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 
+#include <RHI/IRendererBackendFactory.h>
 #include <RHI/IShaderProgram.h>
 #include <RHI/ISCShaderCompiler.h>
 #include <core/SpellcoreShader.h>

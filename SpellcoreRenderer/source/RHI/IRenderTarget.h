@@ -1,11 +1,15 @@
 #pragma once
 
-#include <core/components/SCRenderTarget.h>
-#include <glm/glm.hpp>
 #include <vector>
+#include <glm/glm.hpp>
+#include <core/components/SpellcoreRenderDataTypes.h>
 
 namespace AnalyticalApproach::Spellcore
 {
+    struct SCAttachmentSlot; 
+    struct SCRTAttachmentBinding; 
+    struct SCRTDescription; 
+
     class IRenderTarget
     {
     public:

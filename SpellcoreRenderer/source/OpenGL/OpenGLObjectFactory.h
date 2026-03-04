@@ -8,7 +8,6 @@ namespace AnalyticalApproach::Spellcore
     class OpenGLObjectFactory : public IRendererBackendFactory
     {
     public:
-        ~OpenGLObjectFactory() = default;
         IRenderingContext *CreateRenderingContext() override;
         GPUBuffer *CreateGPUBuffer() override;
         GeometryBuffer *CreateGeometryBuffer() override; 

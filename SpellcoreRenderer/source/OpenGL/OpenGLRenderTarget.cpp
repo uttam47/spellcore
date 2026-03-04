@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <cassert>
 #include <vector>
+#include <RHI/IRenderTarget.h>
+#include <core/components/SCRenderTarget.h>
 
 namespace AnalyticalApproach::Spellcore
 {
