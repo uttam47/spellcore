@@ -29,7 +29,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		_geometryCPUCache = _objLoaderTest->GetCubeMesh();
 		_testMeshHandle = _renderResourceRegistry->CreateGeometryResource(*_geometryCPUCache);
 
-		SpellcoreRenderer::SubmitMesh(_testMeshHandle, "Base_Layer");
+		//SpellcoreRenderer::SubmitRenderCommand(_testMeshHandle, "Base_Layer");
 
 
 	}
@@ -81,7 +81,7 @@ namespace AnalyticalApproach::SpellcoreEditor
 		{
 			_windowSystem.PollEvents();
 			SpellcoreRenderer::BeginFrame();
-			SpellcoreRenderer::SubmitMesh(_testMeshHandle,"BASE");
+			//SpellcoreRenderer::SubmitRenderCommand(_testMeshHandle,"BASE");
 			SpellcoreRenderer::RenderFrame(); 
 			_imguiTest.Render();
 			SpellcoreRenderer::EndFrame();

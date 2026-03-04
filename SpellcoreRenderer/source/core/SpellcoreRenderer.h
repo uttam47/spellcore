@@ -42,9 +42,9 @@ namespace AnalyticalApproach::Spellcore
 		static void EndFrame();
 		static void Shutdown();
 		static void RenderFrame(); 
-		static void AddRenderPass(const std::string& renderPassName); 
-		static void SubmitMesh(const SCGeometryHandle& scGeoHandle, const std::string& renderPassKey);
-		static void RemoveMesh(const SCGeometryHandle& scGeoHandle, const std::string& renderPasskey);
+		static void AddRenderPass(const SCRenderPassHandle& scrpHandle, const RenderPass& renderPass);
+		static void RemoveRenderPass(const SCRenderPassHandle& scrpHandle);
+		static void SubmitRenderCommand(const RenderCommand& scGeoHandle, const SCRenderPassHandle& scrpHandle);
 	};
 
 }
